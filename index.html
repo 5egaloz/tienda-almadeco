@@ -84,6 +84,10 @@ nav.main a:hover,nav.main a[aria-current="page"]{border-bottom-color:var(--ink)}
 /* campaña (carrusel) */
 .campaign{position:relative;overflow:hidden}
 .track{display:flex;transition:transform .7s cubic-bezier(.65,0,.35,1)}
+/* movimiento reducido: fundido suave en vez de deslizar (el carrusel igual avanza) */
+.campaign.fade .track{display:grid;transform:none!important}
+.campaign.fade .tile{grid-area:1/1;opacity:0;visibility:hidden;transition:opacity .9s ease,visibility 0s linear .9s!important}
+.campaign.fade .tile.on{opacity:1;visibility:visible;transition:opacity .9s ease,visibility 0s!important}
 .tile{flex:0 0 100%;position:relative;min-height:clamp(520px,72vh,720px);background:var(--tile-bg);color:var(--tile-fg);overflow:hidden}
 .tile .prod{position:absolute;right:max(var(--gut),calc((100vw - var(--max))/2 + var(--gut)));top:3%;height:94%;width:auto;max-width:58%;aspect-ratio:1;object-fit:contain}
 .tile .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--pos,right center)}
@@ -1046,10 +1050,11 @@ function goSlide(i){
   carI = (i + TILES.length) % TILES.length;
   const tr = $("#track"); if(!tr) return;
   tr.style.transform = `translateX(-${carI*100}%)`;
+  tr.querySelectorAll(".tile").forEach((t,k)=>t.classList.toggle("on", k===carI));
   document.querySelectorAll("[data-dot]").forEach(d=>d.setAttribute("aria-current", +d.dataset.dot===carI));
   $("#dots").style.setProperty("--dot", TILES[carI].fg);
 }
-function startCar(){ stopCar(); if(!reduce) carTimer = setInterval(()=>goSlide(carI+1), 6000); }
+function startCar(){ stopCar(); carTimer = setInterval(()=>goSlide(carI+1), 6000); }
 function stopCar(){ clearInterval(carTimer); carTimer = null; }
 
 /* ---------- router ---------- */
@@ -1060,7 +1065,7 @@ function route(){
   stopCar(); closeAll();
   let nav = h;
   if(h==="inicio" || h==="inicio-faq" || h===""){
-    app.innerHTML = viewHome(); goSlide(0); startCar(); nav = "inicio";
+    app.innerHTML = viewHome(); if(reduce) $("#carousel").classList.add("fade"); goSlide(0); startCar(); nav = "inicio";
     const c = $("#carousel"); c.addEventListener("mouseenter", stopCar); c.addEventListener("mouseleave", startCar);
     if(h==="inicio-faq") $("#faq").scrollIntoView();
   } else if(h.startsWith("tienda")){
