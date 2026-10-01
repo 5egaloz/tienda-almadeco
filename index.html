@@ -1,0 +1,822 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Demo de tienda en línea para textiles hechos a mano en Coyhaique.">
+<meta name="robots" content="noindex">
+<style>img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Tienda Trama</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&display=swap">
+<style>
+/* Layout: barra utilitaria, nav blanca, campaña a todo el ancho, catálogo en grilla plana sobre gris "soft cloud". */
+:root{
+  --canvas:#ffffff; --cloud:#f5f5f5; --ink:#111111; --charcoal:#39393b; --mute:#707072; --stone:#9e9ea0;
+  --hair:#cacacb; --hair-soft:#e5e5e5; --sale:#d30005; --success:#007d48; --on-ink:#ffffff;
+  --photo:#f5f5f5; --tape:#f2c230; --tape-ink:#111111; --accent:#111111; --wa:#1f8a50;
+  --display:"Anton", "Arial Narrow", Impact, sans-serif;
+  --ui:"Helvetica Neue", Helvetica, Arial, sans-serif;
+  --max:1440px; --gut:clamp(16px,3.5vw,48px);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{overflow-x:clip}
+body{background:var(--canvas);color:var(--ink);font:400 16px/1.5 var(--ui);margin:0}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+h1,h2,h3{margin:0;font-weight:500;line-height:1.2;text-wrap:balance}
+.wrap{max-width:var(--max);margin-inline:auto;padding-inline:var(--gut)}
+.mute{color:var(--mute)}
+
+/* botones: píldora o círculo, nada más */
+.pill{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:12px 28px;border-radius:30px;border:0;font-weight:500;text-decoration:none;white-space:nowrap;transition:transform .12s,opacity .12s}
+.pill:active{transform:scale(.97);opacity:.8}
+.pill.black{background:var(--ink);color:var(--on-ink)}
+.pill.black:hover{background:#3a3a3a}
+.pill.cloud{background:var(--cloud);color:var(--ink)}
+.pill.cloud:hover{background:var(--hair-soft)}
+.pill.white{background:var(--canvas);color:var(--ink);min-height:40px;padding:8px 22px}
+.pill.white:hover{background:var(--hair-soft)}
+.pill.outline{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--hair)}
+.pill.outline:hover{box-shadow:inset 0 0 0 1.5px var(--ink)}
+.pill.block{width:100%}
+.circ{width:40px;height:40px;border-radius:50%;border:0;background:var(--cloud);display:grid;place-items:center;padding:0}
+.circ:hover{background:var(--hair-soft)}
+.circ svg{width:20px;height:20px}
+
+/* barra utilitaria + nav */
+.utility{background:var(--cloud);font-size:12px;font-weight:500}
+.utility .wrap{display:flex;justify-content:space-between;gap:16px;min-height:36px;align-items:center}
+.utility .links{display:flex;gap:14px}
+.utility .links span+span::before{content:"|";margin-right:14px;color:var(--stone)}
+@media (max-width:720px){.utility .links{display:none}.utility .wrap{justify-content:center;text-align:center}}
+header.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--canvas);box-shadow:inset 0 -1px 0 var(--hair-soft)}
+.nav .wrap{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;min-height:60px;gap:16px}
+.logo{font-family:var(--display);font-size:30px;line-height:1;text-decoration:none;letter-spacing:.01em;text-transform:uppercase}
+nav.main{display:flex;gap:4px}
+nav.main a{text-decoration:none;font-weight:500;padding:18px 10px;border-bottom:2px solid transparent;white-space:nowrap}
+nav.main a:hover,nav.main a[aria-current="page"]{border-bottom-color:var(--ink)}
+.nav .right{display:flex;justify-content:flex-end;align-items:center;gap:8px}
+.search{display:flex;align-items:center;gap:6px;background:var(--cloud);border-radius:24px;padding:0 6px 0 14px;height:40px;width:190px;max-width:100%}
+.search:focus-within{background:var(--canvas);box-shadow:0 0 0 2px var(--ink),0 0 0 12px var(--cloud)}
+.search input{border:0;background:transparent;font:inherit;width:100%;min-width:0;outline:none}
+.search svg{width:18px;height:18px;flex:0 0 18px}
+.bag{position:relative;background:transparent}
+.bag-count{position:absolute;top:9px;left:0;right:0;text-align:center;font-size:10px;font-weight:700;pointer-events:none}
+.burger{display:none;background:transparent}
+@media (max-width:960px){
+  .nav .wrap{grid-template-columns:auto 1fr auto}
+  nav.main{display:none}
+  .burger{display:grid}
+  .logo{justify-self:center}
+  .search{display:none}
+}
+.drawer-nav{position:fixed;inset:0 auto 0 0;width:min(340px,88%);background:var(--canvas);z-index:55;padding:calc(20px + env(safe-area-inset-top,0px)) 24px 24px;display:flex;flex-direction:column;gap:4px;transform:translateX(-100%);transition:transform .3s}
+.drawer-nav.on{transform:none}
+.drawer-nav a{text-decoration:none;font-size:24px;font-weight:500;padding:12px 0}
+.drawer-nav .circ{align-self:flex-end;margin-bottom:12px}
+
+/* campaña (carrusel) */
+.campaign{position:relative;overflow:hidden}
+.track{display:flex;transition:transform .7s cubic-bezier(.65,0,.35,1)}
+.tile{flex:0 0 100%;position:relative;min-height:clamp(520px,72vh,720px);background:var(--tile-bg);color:var(--tile-fg);overflow:hidden}
+.tile .prod{position:absolute;right:max(var(--gut),calc((100vw - var(--max))/2 + var(--gut)));top:3%;height:94%;width:auto;max-width:58%;aspect-ratio:1;object-fit:contain}
+.tile .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--pos,right center)}
+.tile .scrim{position:absolute;inset:0;background:linear-gradient(90deg,var(--scrim,rgba(0,0,0,.45)) 0%,transparent 60%)}
+.tile .obj{position:absolute;right:max(var(--gut),calc((100vw - var(--max))/2 + var(--gut)));top:6%;height:88%;width:auto;max-width:58%;aspect-ratio:1;filter:drop-shadow(0 30px 34px rgba(0,0,0,.28))}
+.tile .copy{position:absolute;left:max(var(--gut),calc((100vw - var(--max))/2 + var(--gut)));bottom:clamp(72px,10vh,104px);right:var(--gut);display:grid;gap:16px;justify-items:start;max-width:min(760px,90%)}
+.tile .kicker{font-weight:500;font-size:16px}
+.tile h1,.tile h2{font-family:var(--display);font-weight:400;font-size:clamp(52px,8.4vw,112px);line-height:.9;text-transform:uppercase;letter-spacing:-.005em}
+.tile p{margin:0;font-size:16px;max-width:42ch}
+.tile .ctas{display:flex;gap:8px;flex-wrap:wrap}
+.paddles{position:absolute;right:max(var(--gut),calc((100vw - var(--max))/2 + var(--gut)));bottom:28px;display:flex;gap:8px;z-index:3}
+.paddles .circ{background:var(--canvas)}
+.dots{position:absolute;left:max(var(--gut),calc((100vw - var(--max))/2 + var(--gut)));bottom:36px;display:flex;gap:6px;z-index:3}
+.dots button{width:28px;height:3px;padding:0;border:0;background:currentColor;opacity:.3;color:var(--dot,#111)}
+.dots button[aria-current="true"]{opacity:1}
+@media (max-width:720px){
+  .tile{min-height:620px}
+  .tile .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--pos,right center)}
+.tile .scrim{position:absolute;inset:0;background:linear-gradient(90deg,var(--scrim,rgba(0,0,0,.45)) 0%,transparent 60%)}
+.tile .obj{top:4%;right:50%;transform:translateX(50%);height:46%;max-width:none}
+  .tile .copy{bottom:84px}
+  .tile .bg{object-position:var(--pos-m,72% center)}
+  .tile .prod{top:2%;right:50%;transform:translateX(50%);height:54%;max-width:none}
+  .tile .scrim{background:linear-gradient(0deg,var(--scrim,rgba(0,0,0,.55)) 0%,transparent 70%)}
+}
+
+/* secciones */
+section.sec{padding-block:48px 0}
+.sec-head{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:20px;flex-wrap:wrap}
+.sec-head h2{font-size:clamp(22px,2.4vw,32px)}
+.sec-head .tools{display:flex;gap:8px;align-items:center}
+.sec-head a.link{font-weight:500}
+
+/* tarjeta de producto: la foto es la tarjeta */
+.grid{display:grid;grid-template-columns:repeat(var(--cols,4),minmax(0,1fr));gap:40px 12px}
+@media (max-width:1023px){.grid{--cols:3}}
+@media (max-width:760px){.grid{--cols:2;gap:28px 8px}}
+.rail{display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 36px)/4);gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-bottom:4px}
+.rail::-webkit-scrollbar{display:none}
+.rail > *{scroll-snap-align:start}
+@media (max-width:1023px){.rail{grid-auto-columns:calc((100% - 12px)/2.4)}}
+@media (max-width:599px){.rail{grid-auto-columns:72%}}
+.card{display:flex;flex-direction:column;gap:2px;min-width:0}
+.card .ph{position:relative;display:block;aspect-ratio:1;max-width:100%;background:var(--cloud);overflow:hidden;margin-bottom:10px}
+.card .ph-link{display:block;width:100%;height:100%}
+.card .ph svg,.card .ph img{width:100%;height:100%;display:block;object-fit:cover}
+.card .ph .quick{position:absolute;left:12px;right:12px;bottom:12px;opacity:0;transform:translateY(6px);transition:.2s}
+.card:hover .ph .quick,.card .ph .quick:focus-visible{opacity:1;transform:none}
+@media (hover:none){.card .ph .quick{opacity:1;transform:none}}
+.badge{position:absolute;top:12px;left:12px;background:var(--canvas);border-radius:30px;padding:4px 12px;font-size:12px;font-weight:500}
+.card .dots-row{display:flex;gap:6px;margin-bottom:4px}
+.card .dots-row i{width:12px;height:12px;border-radius:50%;overflow:hidden;display:block;box-shadow:0 0 0 1px var(--hair)}
+.card .dots-row i svg{width:100%;height:100%;display:block}
+.card a.name{text-decoration:none;font-weight:500}
+.card .sub{font-size:14px;color:var(--mute)}
+.price{font-weight:500;font-variant-numeric:tabular-nums;margin-top:6px}
+.price .sale{color:var(--sale)}
+.price s{color:var(--mute);font-weight:400;margin-left:6px}
+.price .off{color:var(--sale);margin-left:6px}
+
+/* compra por colección */
+.cat{position:relative;display:block;aspect-ratio:4/5;max-width:100%;overflow:hidden;background:var(--cat-bg)}
+.cat img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cat svg{position:absolute;inset:8% 8% 18%;width:84%;height:74%;filter:drop-shadow(0 18px 20px rgba(0,0,0,.2))}
+.cat .pill{position:absolute;left:16px;bottom:16px}
+
+/* campaña media (tela del mes) */
+.feature{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);background:var(--feat-bg);min-height:520px}
+.feature .sw{position:relative;overflow:hidden;min-height:320px}
+.feature .sw img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.feature .copy{padding:clamp(28px,5vw,64px);display:grid;align-content:end;gap:16px;justify-items:start}
+.feature h2{font-family:var(--display);font-weight:400;font-size:clamp(48px,6.4vw,96px);line-height:.9;text-transform:uppercase}
+.feature p{margin:0;max-width:40ch}
+@media (max-width:760px){.feature{grid-template-columns:1fr}}
+
+/* detalles: fotos recortadas de las fotos de producto */
+.details{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.detail{display:grid;gap:4px;align-content:start;min-width:0}
+.detail img{width:100%;aspect-ratio:4/5;max-width:100%;object-fit:cover;background:var(--cloud);display:block;margin-bottom:10px}
+.detail b{font-weight:500}
+.detail span{font-size:14px;color:var(--mute)}
+.detail a{font-size:14px;font-weight:500;margin-top:4px}
+.made-line{margin:24px 0 0;color:var(--charcoal)}
+@media (max-width:760px){.details{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:72%;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}.detail{scroll-snap-align:start}}
+
+/* reseñas como listado de tienda */
+.rev-list{max-width:960px}
+.rev{display:grid;grid-template-columns:88px minmax(0,1fr);gap:20px;padding:24px 0;border-bottom:1px solid var(--hair)}
+.rev:first-child{border-top:1px solid var(--hair)}
+.rev img{width:88px;height:88px;object-fit:cover;background:var(--cloud);display:block}
+.rev .stars{font-size:14px;letter-spacing:1px}
+.rev h3{font-size:16px;margin:4px 0 2px}
+.rev p{margin:0}
+.rev .meta{font-size:14px;color:var(--mute);margin-top:6px}
+.rev .meta a{color:var(--mute)}
+
+/* acordeones (faq y ficha) */
+.rows details{border-bottom:1px solid var(--hair)}
+.rows details:first-child{border-top:1px solid var(--hair)}
+.rows summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:24px 0;font-weight:500;font-size:18px}
+.rows summary::-webkit-details-marker{display:none}
+.rows summary::after{content:"";width:10px;height:10px;border-right:2px solid var(--ink);border-bottom:2px solid var(--ink);transform:rotate(45deg) translateY(-3px);transition:transform .2s;flex:0 0 auto}
+.rows details[open] summary::after{transform:rotate(-135deg)}
+.rows .body{padding:0 0 24px;display:grid;gap:12px;color:var(--charcoal)}
+.rows .body p{margin:0}
+
+/* tienda */
+.subnav{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;padding-block:24px 20px}
+.subnav h1{font-size:clamp(22px,2.4vw,28px)}
+.subnav .crumbs{font-size:14px;color:var(--mute)}
+.subnav .crumbs a{color:var(--mute);text-decoration:none}
+.subnav .tools{display:flex;gap:20px;align-items:center}
+.ghost-btn{background:none;border:0;font-weight:500;display:flex;gap:8px;align-items:center;padding:8px 0}
+.ghost-btn svg{width:22px;height:22px}
+select.sort{font:inherit;font-weight:500;border:0;background:transparent;padding:8px 4px;color:var(--ink)}
+.plp{display:grid;grid-template-columns:220px minmax(0,1fr);gap:28px;padding-bottom:24px}
+.plp.nofilter{grid-template-columns:minmax(0,1fr)}
+.plp.nofilter aside.filters{display:none}
+.plp .grid{--cols:3}
+@media (max-width:1023px){.plp .grid{--cols:2}}
+aside.filters{display:grid;gap:4px;align-content:start;position:sticky;top:84px;max-height:calc(100vh - 100px);overflow-y:auto}
+aside.filters a{text-decoration:none;font-weight:500;padding:6px 0}
+aside.filters a[aria-current="page"]{text-decoration:underline;text-underline-offset:4px}
+aside.filters h3{font-size:16px;padding:18px 0 8px;border-top:1px solid var(--hair);margin-top:12px}
+aside.filters label{display:flex;gap:10px;align-items:center;padding:5px 0;cursor:pointer}
+aside.filters input{width:18px;height:18px;accent-color:#111}
+aside.filters label i{width:16px;height:16px;border-radius:50%;overflow:hidden;display:block;box-shadow:0 0 0 1px var(--hair)}
+aside.filters label i svg{width:100%;height:100%;display:block}
+@media (max-width:860px){
+  .plp{grid-template-columns:minmax(0,1fr)}
+  aside.filters{position:static;max-height:none;grid-template-columns:1fr 1fr;column-gap:16px}
+  aside.filters h3{grid-column:1/-1}
+}
+.empty-plp{padding:40px 0;color:var(--mute)}
+
+/* ficha de producto */
+.pdp{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:clamp(24px,4vw,48px);padding-block:32px 24px}
+.pdp > *{min-width:0}
+.gallery{display:grid;grid-template-columns:64px minmax(0,1fr);gap:16px;align-self:start;position:sticky;top:84px}
+.thumbs{display:flex;flex-direction:column;gap:8px}
+.thumbs button{padding:0;border:0;background:var(--cloud);aspect-ratio:1;border-radius:4px;overflow:hidden;opacity:.6}
+.thumbs button[aria-pressed="true"],.thumbs button:hover{opacity:1}
+.thumbs svg,.thumbs img{width:100%;height:100%;display:block;object-fit:cover}
+.main-ph{background:var(--cloud);aspect-ratio:1;max-width:100%;overflow:hidden;border-radius:4px}
+.main-ph svg,.main-ph img{width:100%;height:100%;display:block;object-fit:cover}
+.main-ph{position:relative}
+.ph-note{position:absolute;left:12px;bottom:12px;background:var(--canvas);border-radius:30px;padding:4px 12px;font-size:12px;font-weight:500}
+@media (max-width:860px){.pdp{grid-template-columns:minmax(0,1fr)}.gallery{position:static;grid-template-columns:minmax(0,1fr)}.thumbs{flex-direction:row;order:2}.thumbs button{width:56px}}
+.info{display:grid;gap:28px;align-content:start;max-width:480px}
+.info h1{font-size:clamp(24px,2.4vw,28px)}
+.info .sub{color:var(--mute)}
+.info .big-price{font-size:18px;font-weight:500;margin-top:10px;font-variant-numeric:tabular-nums}
+.opt-head{display:flex;justify-content:space-between;gap:12px;font-weight:500;margin-bottom:12px}
+.opt-head span{color:var(--mute);font-weight:400}
+.colorways{display:flex;flex-wrap:wrap;gap:8px}
+.cw{width:72px;height:72px;padding:0;border:0;border-radius:4px;overflow:hidden;background:var(--cloud);box-shadow:inset 0 0 0 1px transparent}
+.cw svg{width:100%;height:100%;display:block}
+.cw{border-radius:50%;width:56px;height:56px}
+.cw[aria-pressed="true"]{box-shadow:0 0 0 2px var(--canvas),0 0 0 4px var(--ink)}
+.cw:hover{box-shadow:0 0 0 1px var(--ink)}
+.sizes{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:8px}
+.size{border:0;box-shadow:inset 0 0 0 1px var(--hair);background:var(--canvas);border-radius:4px;padding:14px 8px;font-weight:500}
+.size:hover{box-shadow:inset 0 0 0 1px var(--ink)}
+.size[aria-pressed="true"]{box-shadow:inset 0 0 0 2px var(--ink)}
+.buy{display:grid;gap:12px}
+.buy .pill{min-height:60px;font-size:16px}
+.qty-line{display:flex;align-items:center;gap:12px}
+.qty{display:flex;align-items:center;gap:4px;background:var(--cloud);border-radius:30px;padding:4px}
+.qty button{width:36px;height:36px;border-radius:50%;border:0;background:var(--canvas);font-size:18px;line-height:1}
+.qty output{min-width:26px;text-align:center;font-weight:500;font-variant-numeric:tabular-nums}
+.made{font-size:14px;color:var(--success);font-weight:500}
+.tape{display:block;width:100%;height:auto}
+.related{padding-block:24px 0}
+
+/* carro */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:50;opacity:0;transition:opacity .25s}
+.overlay.on{opacity:1}
+aside.cart{position:fixed;top:0;right:0;bottom:0;width:min(440px,100%);background:var(--canvas);z-index:60;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .3s cubic-bezier(.3,0,.2,1);padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+aside.cart.on{transform:none}
+.cart-head{display:flex;justify-content:space-between;align-items:center;padding:20px 24px}
+.cart-head h2{font-size:24px}
+.cart-body{flex:1;overflow-y:auto;padding:0 24px}
+.line{display:grid;grid-template-columns:96px minmax(0,1fr) auto;gap:14px;padding:18px 0;border-bottom:1px solid var(--hair-soft);align-items:start}
+.line .ph{background:var(--cloud);aspect-ratio:1}
+.line .ph svg,.line .ph img{width:100%;height:100%;display:block;object-fit:cover}
+.line h3{font-size:16px}
+.line .var{font-size:14px;color:var(--mute)}
+.line .qty{margin-top:10px;width:max-content}
+.line .qty button{width:30px;height:30px;font-size:15px}
+.line .rm{background:none;border:0;color:var(--mute);font-size:14px;text-decoration:underline;padding:0;margin-top:8px}
+.cart-foot{padding:20px 24px;border-top:1px solid var(--hair-soft);display:grid;gap:10px}
+.row{display:flex;justify-content:space-between;gap:8px}
+.row.total{font-weight:500;font-size:18px;border-top:1px solid var(--hair-soft);padding-top:12px;margin-top:4px}
+.cart-foot label{font-size:14px;font-weight:500;display:grid;gap:6px}
+.cart-foot select{font:inherit;border:0;box-shadow:inset 0 0 0 1px var(--hair);border-radius:4px;padding:12px;background:var(--canvas);color:var(--ink)}
+.empty{padding:48px 0;display:grid;gap:16px;justify-items:start}
+.checkout-msg{background:var(--cloud);padding:14px;font-size:14px}
+
+/* pie */
+footer.foot{margin-top:64px;border-top:1px solid var(--hair);padding-block:40px 28px;font-size:14px}
+.foot .cols{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
+.foot h4{margin:0 0 12px;font-size:16px;font-weight:500}
+.foot a{display:block;text-decoration:none;color:var(--mute);padding:4px 0}
+.foot a:hover{color:var(--ink)}
+.foot .fine{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:40px;padding-top:20px;border-top:1px solid var(--hair-soft);font-size:12px;color:var(--mute)}
+@media (max-width:760px){.foot .cols{grid-template-columns:1fr 1fr}}
+
+/* whatsapp + aviso */
+.wa{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:40;width:56px;height:56px;border-radius:50%;border:0;background:var(--wa);color:#fff;display:grid;place-items:center;box-shadow:0 6px 18px rgba(0,0,0,.2)}
+.wa svg{width:28px;height:28px}
+.wa-pop{position:fixed;right:18px;bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:40;width:min(300px,calc(100% - 36px));background:var(--canvas);box-shadow:0 0 0 1px var(--hair-soft),0 12px 30px rgba(0,0,0,.15);padding:16px;font-size:14px;display:grid;gap:6px}
+.toast{position:fixed;left:50%;top:calc(76px + env(safe-area-inset-top,0px));transform:translate(-50%,-10px);background:var(--ink);color:var(--on-ink);padding:12px 22px;border-radius:30px;font-weight:500;z-index:70;opacity:0;transition:.25s;pointer-events:none;max-width:calc(100% - 32px)}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<div class="utility"><div class="wrap">
+  <span>Demo navegable: fotos generadas con IA, productos, precios y reseñas de ejemplo</span>
+  <div class="links"><span>Despacho a todo Chile</span><span>Retiro en el taller</span><span>Ayuda</span></div>
+</div></div>
+
+<header class="nav"><div class="wrap">
+  <button class="circ burger" id="burger" aria-label="Abrir menú"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <a class="logo" href="#inicio">Trama</a>
+  <nav class="main" aria-label="Principal">
+    <a href="#tienda" data-nav="tienda">Novedades</a>
+    <a href="#tienda-cocina" data-nav="tienda-cocina">Cocina</a>
+    <a href="#tienda-mesa" data-nav="tienda-mesa">Mesa y hogar</a>
+    <a href="#tienda-llevar" data-nav="tienda-llevar">Para llevar</a>
+    <a href="#tienda-regalos" data-nav="tienda-regalos">Regalos</a>
+  </nav>
+  <div class="right">
+    <label class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><input id="navq" type="search" placeholder="Buscar" aria-label="Buscar productos"></label>
+    <button class="circ bag" id="openCart" aria-label="Abrir carro"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5.5 8.5h13l-1 12h-11z"/><path d="M9 8.5V7a3 3 0 0 1 6 0v1.5"/></svg><span class="bag-count" id="cartCount"></span></button>
+  </div>
+</div></header>
+
+<nav class="drawer-nav" id="drawerNav" aria-label="Menú" aria-hidden="true">
+  <button class="circ" id="closeNav" aria-label="Cerrar menú">×</button>
+  <a href="#tienda">Novedades</a><a href="#tienda-cocina">Cocina</a><a href="#tienda-mesa">Mesa y hogar</a><a href="#tienda-llevar">Para llevar</a><a href="#tienda-regalos">Regalos</a><a href="#inicio-faq">Ayuda</a>
+</nav>
+
+<main id="app"></main>
+
+<footer class="foot"><div class="wrap">
+  <div class="cols">
+    <div><h4>Tienda</h4><a href="#tienda-cocina">Cocina</a><a href="#tienda-mesa">Mesa y hogar</a><a href="#tienda-llevar">Para llevar</a><a href="#tienda-regalos">Packs para regalar</a></div>
+    <div><h4>Ayuda</h4><a href="#inicio-faq">Estado del pedido</a><a href="#inicio-faq">Despachos</a><a href="#inicio-faq">Cambios y devoluciones</a><a href="#inicio-faq">Medios de pago</a></div>
+    <div><h4>El taller</h4><a href="#inicio">Quiénes somos</a><a href="#inicio">Cómo se hace tu pieza</a><a href="#inicio">Telas de la temporada</a></div>
+    <div><h4>Contacto</h4><a href="#inicio">Coyhaique, Aysén</a><a href="#inicio">WhatsApp</a><a href="#inicio">Instagram</a></div>
+  </div>
+  <div class="fine"><span>© 2026 Trama. Demo de ejemplo.</span><span>Términos · Privacidad · Políticas de despacho</span></div>
+</div></footer>
+
+<div class="overlay" id="overlay" hidden></div>
+<aside class="cart" id="cart" aria-label="Carro de compras" aria-hidden="true">
+  <div class="cart-head"><h2>Carro</h2><button class="circ" id="closeCart" aria-label="Cerrar carro">×</button></div>
+  <div class="cart-body" id="cartBody"></div>
+  <div class="cart-foot" id="cartFoot"></div>
+</aside>
+
+<button class="wa" id="waBtn" aria-label="Escribir por WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.4.8 3.2.6a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.2-.2-.4-.3z"/></svg>
+</button>
+<div class="wa-pop" id="waPop" hidden><b>Hablemos por WhatsApp</b><span>En la tienda real, este botón abre WhatsApp con un mensaje listo para el taller.</span></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ---------- datos de ejemplo ---------- */
+const FABRICS = {
+  hojas:    {name:"Hojas de lenga", note:"Lino-algodón", bg:"#dfe3d6", w:40, h:40,
+             d:'<ellipse cx="10" cy="10" rx="7" ry="3" fill="#a8322d" transform="rotate(35 10 10)"/><ellipse cx="30" cy="28" rx="7" ry="3" fill="#6d7b52" transform="rotate(-30 30 28)"/><ellipse cx="28" cy="8" rx="4" ry="1.8" fill="#6d7b52" transform="rotate(60 28 8)"/><ellipse cx="9" cy="31" rx="4" ry="1.8" fill="#a8322d" transform="rotate(-50 9 31)"/>'},
+  cuadrille:{name:"Cuadrillé rojo techo", note:"Algodón tejido", bg:"#f3f2ee", w:24, h:24,
+             d:'<rect width="12" height="24" fill="#a8322d" opacity=".38"/><rect width="24" height="12" fill="#a8322d" opacity=".38"/>'},
+  rayas:    {name:"Rayas marineras", note:"Lona de algodón", bg:"#ebede8", w:16, h:16,
+             d:'<rect width="5" height="16" fill="#344e5c"/><rect x="9.5" width="1.5" height="16" fill="#344e5c" opacity=".55"/>'},
+  lunares:  {name:"Lunares noche", note:"Popelina de algodón", bg:"#2f4856", w:20, h:20,
+             d:'<circle cx="5" cy="5" r="2.4" fill="#eef1ee"/><circle cx="15" cy="15" r="2.4" fill="#eef1ee"/>'},
+  ondas:    {name:"Ondas del Simpson", note:"Lino lavado", bg:"#d8e6e4", w:32, h:16,
+             d:'<path d="M0 8 Q8 2 16 8 T32 8" fill="none" stroke="#3b6b78" stroke-width="2.2"/>'},
+  mostaza:  {name:"Liso lupino", note:"Gabardina de algodón", bg:"#a23a6c", w:8, h:8,
+             d:'<path d="M0 0L8 8M8 0L0 8" stroke="#8a2c5a" stroke-width=".8"/>'}
+};
+const COLS = {
+  cocina:{name:"Cocina", art:["delantal","hojas"]},
+  mesa:{name:"Mesa y hogar", art:["cojin","ondas"]},
+  llevar:{name:"Para llevar", art:["tote","rayas"]},
+  regalos:{name:"Packs para regalar", art:["packcocina","hojas"]}
+};
+const PRODUCTS = [
+  {id:"delantal", cm:[70,50], name:"Delantal de cocina", col:"cocina", price:24990, badge:"Más vendido",
+   fabrics:["hojas","cuadrille","rayas","mostaza"], sizes:[["Adulto",0],["Niño",-6000]],
+   lead:"Delantal con peto regulable, tiras largas para amarrar adelante y bolsillo doble para el paño y el teléfono.",
+   material:"Lino-algodón 55/45, costuras dobles y tiras reforzadas.", medidas:"Adulto 70 × 85 cm · Niño 50 × 60 cm.", cuidado:"Lavar a 30 °C del revés. Planchar tibio."},
+  {id:"cojin", cm:[40,45,50], name:"Funda de cojín", col:"mesa", price:15990, badge:"Nuevo",
+   fabrics:["ondas","hojas","lunares","mostaza","cuadrille"], sizes:[["40 × 40 cm",0],["45 × 45 cm",2000],["50 × 50 cm",4000]],
+   lead:"Funda con cierre escondido y terminación de vivo. El relleno se vende aparte.",
+   material:"Lino lavado o algodón, según la tela elegida.", medidas:"Tres medidas: 40, 45 y 50 cm por lado.", cuidado:"Lavar a máquina a 30 °C con el cierre cerrado."},
+  {id:"tote", cm:[40], name:"Bolso tote", col:"llevar", price:18990, badge:"",
+   fabrics:["rayas","hojas","lunares","ondas"], sizes:[["Único",0]],
+   lead:"Bolso amplio con forro interior, bolsillo para llaves y asas largas para llevar al hombro.",
+   material:"Lona de algodón 12 oz con forro de crudo.", medidas:"40 × 38 × 12 cm · asas de 60 cm.", cuidado:"Lavar a mano en agua fría. Secar a la sombra."},
+  {id:"neceser", cm:[22,28], name:"Neceser con cierre", col:"llevar", price:12990, badge:"",
+   fabrics:["lunares","rayas","mostaza","hojas"], sizes:[["Mediano",0],["Grande",3000]],
+   lead:"Neceser forrado con tela impermeable por dentro, para maquillaje, remedios o cables.",
+   material:"Algodón exterior, forro de PUL lavable.", medidas:"Mediano 22 × 14 cm · Grande 28 × 18 cm.", cuidado:"Limpiar el forro con paño húmedo. Lavar a mano."},
+  {id:"individuales", cm:[45,45], name:"Individuales (set de 4)", col:"mesa", price:21990, badge:"",
+   fabrics:["cuadrille","rayas","ondas","mostaza"], sizes:[["Set de 4",0],["Set de 6",9000]],
+   lead:"Individuales de doble faz con entretela, para que no se arruguen con el uso diario.",
+   material:"Algodón tejido doble faz.", medidas:"45 × 33 cm cada uno.", cuidado:"Lavar a 40 °C. Planchar por ambos lados."},
+  {id:"pano", cm:[50], name:"Paños de cocina (par)", col:"cocina", price:9990, badge:"",
+   fabrics:["cuadrille","rayas","hojas"], sizes:[["Par",0]],
+   lead:"Paños absorbentes con colgador de cinta. Se ponen más suaves con cada lavado.",
+   material:"Lino-algodón de alta absorción.", medidas:"50 × 70 cm cada uno.", cuidado:"Lavar a 60 °C. No usar suavizante."},
+  {id:"panera", cm:[26], name:"Panera de tela", col:"cocina", price:11990, badge:"Nuevo",
+   fabrics:["hojas","cuadrille","mostaza","lunares"], sizes:[["Único",0]],
+   lead:"Panera estructurada que se dobla plana. Mantiene el pan tibio en la mesa del once.",
+   material:"Algodón con entretela firme.", medidas:"26 × 18 × 9 cm armada.", cuidado:"Lavar a mano. Secar estirada."},
+  {id:"bolsapan", cm:[30], name:"Bolsa para el pan", col:"cocina", price:8990, badge:"",
+   fabrics:["rayas","ondas","hojas"], sizes:[["Única",0]],
+   lead:"Bolsa con cordón para guardar la marraqueta sin plástico. Deja respirar el pan.",
+   material:"Lino crudo con cordón de algodón.", medidas:"30 × 40 cm.", cuidado:"Lavar a 40 °C y sacudir las migas a diario."}
+];
+PRODUCTS.push(
+  {id:"packcocina", before:34980, name:"Set cocina: delantal + paños", col:"regalos", price:31990, badge:"Precio de pack",
+   fabrics:["hojas","cuadrille","rayas"], sizes:[["Único",0]],
+   lead:"Delantal adulto y par de paños en la misma tela, listos para regalar. Ahorras $2.990 frente a comprarlos por separado.",
+   material:"Lino-algodón 55/45.", medidas:"Delantal 70 × 85 cm · paños 50 × 70 cm.", cuidado:"Lavar a 30 °C. Planchar tibio."},
+  {id:"packonce", before:20980, name:"Set once: panera + bolsa del pan", col:"regalos", price:18990, badge:"Precio de pack",
+   fabrics:["hojas","cuadrille","rayas"], sizes:[["Único",0]],
+   lead:"Para la mesa de la once: panera de tela y bolsa para guardar la marraqueta. Ahorras $1.990.",
+   material:"Algodón y lino crudo.", medidas:"Panera 26 × 18 cm · bolsa 30 × 40 cm.", cuidado:"Lavar a mano. Secar estirada."},
+  {id:"packviaje", before:31980, name:"Set viaje: tote + neceser", col:"regalos", price:28990, badge:"Precio de pack",
+   fabrics:["rayas","lunares","hojas"], sizes:[["Único",0]],
+   lead:"Bolso tote y neceser mediano a juego. Ahorras $2.990.",
+   material:"Lona de algodón y forro lavable.", medidas:"Tote 40 × 38 cm · neceser 22 × 14 cm.", cuidado:"Lavar a mano en agua fría."}
+);
+const SHIPPING = [
+  ["coyhaique","Coyhaique · despacho propio",3500],
+  ["aysen","Puerto Aysén y Chacabuco",4500],
+  ["chile","Resto de Chile · Starken",6900],
+  ["retiro","Retiro en el taller",0]
+];
+
+/* ---------- ilustraciones de producto ---------- */
+let uid = 0;
+const INK = "#5b4636";
+const SHAPES = {
+  packcocina:F=>`<g transform="translate(-34 18) scale(.86)">${SHAPES.delantal(F)}</g><g transform="translate(150 96) scale(.62)">${SHAPES.pano(F)}</g>`,
+  packonce:F=>`<g transform="translate(-20 36) scale(.78)">${SHAPES.panera(F)}</g><g transform="translate(150 70) scale(.66)">${SHAPES.bolsapan(F)}</g>`,
+  packviaje:F=>`<g transform="translate(-26 10) scale(.86)">${SHAPES.tote(F)}</g><g transform="translate(140 118) scale(.6)">${SHAPES.neceser(F)}</g>`,
+  delantal:F=>`<path d="M118 112c-30 6-50 10-70 4M182 112c30 6 50 10 70 4" stroke="${INK}" stroke-width="3" fill="none"/><path d="M112 46h76v34c0 8 34 18 44 30l8 144c1 14-9 24-23 24H83c-14 0-24-10-23-24l8-144c10-12 44-22 44-30z" ${F}/><path d="M112 46c-6-22 4-32 38-32s44 10 38 32" fill="none" stroke="${INK}" stroke-width="3"/><rect x="104" y="172" width="92" height="44" rx="4" ${F}/><path d="M150 172v44" stroke="rgba(60,40,25,.35)" stroke-width="2"/>`,
+  cojin:F=>`<path d="M58 72Q150 56 242 72Q256 150 242 228Q150 244 58 228Q44 150 58 72Z" ${F}/><path d="M72 86Q150 72 228 86" stroke="rgba(60,40,25,.3)" fill="none" stroke-width="2" stroke-dasharray="4 4"/>`,
+  tote:F=>`<path d="M108 122V84a42 42 0 0 1 84 0v38" fill="none" stroke="${INK}" stroke-width="7"/><path d="M72 118h156l-8 152H80z" ${F}/><path d="M76 134h148" stroke="rgba(60,40,25,.3)" stroke-width="2"/>`,
+  neceser:F=>`<rect x="56" y="118" width="188" height="120" rx="34" ${F}/><path d="M78 140h144" stroke="${INK}" stroke-width="3" stroke-dasharray="2 3"/><rect x="212" y="132" width="14" height="24" rx="3" fill="#c8a35a"/>`,
+  individuales:F=>`<rect x="72" y="66" width="190" height="135" rx="6" ${F} transform="rotate(-7 167 133)"/><rect x="42" y="106" width="190" height="135" rx="6" ${F}/>`,
+  pano:F=>`<circle cx="150" cy="34" r="8" fill="none" stroke="${INK}" stroke-width="3"/><path d="M150 42v16" stroke="${INK}" stroke-width="3"/><path d="M92 58h116l6 210H86z" ${F}/><path d="M89 236h122" stroke="rgba(60,40,25,.3)" stroke-width="5"/>`,
+  panera:F=>`<path d="M48 156c20-44 60-54 102-34 42-20 82-10 102 34" ${F}/><ellipse cx="150" cy="150" rx="72" ry="22" fill="#d49d5c"/><path d="M110 142q8-10 16 0M140 140q8-10 16 0M170 142q8-10 16 0" stroke="#a96c33" stroke-width="2.5" fill="none"/><path d="M48 156h204l-22 102c-2 8-8 12-16 12H86c-8 0-14-4-16-12z" ${F}/>`,
+  bolsapan:F=>`<path d="M92 92h116l12 172c0 6-4 10-10 10H90c-6 0-10-4-10-10z" ${F}/><path d="M96 114c30 10 78 10 108 0" stroke="${INK}" stroke-width="3" fill="none"/><path d="M204 114c12 14 10 36-2 46M204 114c18 8 24 28 18 42" stroke="${INK}" stroke-width="3" fill="none"/>`
+};
+function pat(fk, id, scale=1){
+  const f = FABRICS[fk];
+  return `<pattern id="${id}" patternUnits="userSpaceOnUse" width="${f.w}" height="${f.h}" patternTransform="scale(${scale})"><rect width="${f.w}" height="${f.h}" fill="${f.bg}"/>${f.d}</pattern>`;
+}
+function art(shape, fk, {bg=true}={}){
+  const id = "p" + (++uid);
+  const F = `fill="url(#${id})" stroke="rgba(60,40,25,.4)" stroke-width="2" stroke-linejoin="round"`;
+  return `<svg viewBox="0 0 300 300" aria-hidden="true"><defs>${pat(fk,id)}</defs>${bg?'<rect width="300" height="300" style="fill:var(--photo)"/>':''}<ellipse cx="150" cy="284" rx="100" ry="9" fill="rgba(60,40,25,.16)"/>${SHAPES[shape](F)}</svg>`;
+}
+function swatch(fk, scale=1.4){
+  const id = "s" + (++uid);
+  return `<svg viewBox="0 0 60 60" aria-hidden="true"><defs>${pat(fk,id,scale)}</defs><rect width="60" height="60" fill="url(#${id})"/></svg>`;
+}
+function bgPattern(fk){
+  const id = "b" + (++uid);
+  return `<svg class="bgpat" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs>${pat(fk,id,2.2)}</defs><rect width="100%" height="100%" fill="url(#${id})"/></svg>`;
+}
+
+/* ---------- iconos ---------- */
+const I = {
+  hand:'<path d="M7 11V6.5a1.5 1.5 0 0 1 3 0V11m0-5V4.5a1.5 1.5 0 0 1 3 0V11m0-4.5a1.5 1.5 0 0 1 3 0V12m0-3a1.5 1.5 0 0 1 3 0v5a7 7 0 0 1-7 7h-.5a6 6 0 0 1-5.1-2.9L4 14.6a1.5 1.5 0 0 1 2.4-1.8L7 14"/>',
+  truck:'<path d="M3 6h11v10H3zM14 9h4l3 3v4h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/>',
+  card:'<rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="M3 10h18M7 15h4"/>',
+  swap:'<path d="M4 8h13l-3-3M20 16H7l3 3"/>',
+  thread:'<path d="M8 3h8M8 21h8M9 3v18M15 3v18"/><path d="M9 7l6 3M9 11l6 3M9 15l6 3"/>',
+  ruler:'<rect x="2.5" y="8" width="19" height="8" rx="1.5"/><path d="M6.5 8v3M10 8v4.5M13.5 8v3M17 8v4.5"/>',
+  wash:'<path d="M3 7l2 12h14l2-12"/><path d="M3 7c1.5 1.5 3 1.5 4.5 0s3-1.5 4.5 0 3 1.5 4.5 0 3-1.5 4.5 0"/><text x="12" y="16.5" font-size="6" text-anchor="middle" fill="currentColor" stroke="none" font-family="Karla,sans-serif" font-weight="700">30</text>',
+  check:'<path d="M5 12.5l4.5 4.5L19 7.5"/>',
+  scissors:'<circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M8.2 8.2L20 20M8.2 15.8L20 4"/>',
+  needle:'<path d="M20 4L7 17"/><path d="M17.5 4.2a1.6 1.6 0 1 1 2.3 2.3"/><path d="M7 17c-3 1-4 4-1.5 4 2.8 0 5-4 8.5-2.5"/>',
+  swatchI:'<rect x="4" y="4" width="16" height="16" rx="1"/><path d="M4 9h16M4 14h16M9 4v16M14 4v16"/>'
+};
+const icon = (k) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${I[k]}</svg>`;
+
+const clp = n => "$" + n.toLocaleString("es-CL");
+const byId = id => PRODUCTS.find(p => p.id === id);
+const $ = s => document.querySelector(s);
+
+
+
+/* ---------- fotos: cada producto en su tela principal ---------- */
+const PHOTOS = {delantal:1, cojin:1, tote:1, neceser:1, individuales:1, pano:1, panera:1, bolsapan:1, packcocina:1, packonce:1, packviaje:1};
+function hasPhoto(p, fab){ return PHOTOS[p.id] && fab === p.fabrics[0]; }
+function photo(p, fab, eager){
+  return hasPhoto(p, fab)
+    ? `<img src="img/${p.id}.jpg" alt="${p.name} en ${FABRICS[fab].name}" ${eager?"":'loading="lazy"'} width="900" height="900">`
+    : art(p.id, fab);
+}
+
+/* ---------- precios ---------- */
+function minPrice(p){ return p.price + Math.min(...p.sizes.map(s=>s[1])); }
+function priceHTML(p, extra=0){
+  const now = p.price + extra;
+  if(p.before){
+    const off = Math.round((p.before - p.price) / p.before * 100);
+    return `<div class="price"><span class="sale">${clp(now)}</span><s>${clp(p.before)}</s><span class="off">${off}% menos</span></div>`;
+  }
+  return `<div class="price">${p.sizes.some(s=>s[1]>0)&&!extra?"Desde ":""}${clp(extra?now:minPrice(p))}</div>`;
+}
+
+/* ---------- vistas ---------- */
+function cardHTML(p, fab){
+  const f = fab || p.fabrics[0];
+  const dots = p.fabrics.slice(0,5).map(x=>`<i title="${FABRICS[x].name}">${swatch(x,1)}</i>`).join("");
+  return `<div class="card">
+    <div class="ph"><a class="ph-link" href="#p-${p.id}" aria-label="${p.name}">${photo(p, f)}</a>${p.badge?`<span class="badge">${p.badge}</span>`:""}
+      <button class="pill black block quick" data-add="${p.id}" data-addfab="${f}" aria-label="Agregar ${p.name} en ${FABRICS[f].name}">Agregar al carro</button></div>
+    <div class="dots-row">${dots}</div>
+    <a class="name" href="#p-${p.id}">${p.name}</a>
+    <span class="sub">${COLS[p.col].name} · ${p.fabrics.length} telas</span>
+    ${priceHTML(p)}
+  </div>`;
+}
+
+const TILES = [
+  {img:"delantal", bg:"#efefef", fg:"#111111", kicker:"Cosido a mano en Coyhaique", title:"Telas que se eligen una a una", text:"Delantales, cojines y bolsos hechos en el taller. Tú eliges la tela y nosotras la cosemos.", ctas:[["Comprar","#p-delantal","black"],["Ver cocina","#tienda-cocina","cloud"]], alt:"Delantal de cocina en tela Hojas de lenga"},
+  {img:"cojin", bg:"#f0f0f0", fg:"#111111", kicker:"Colección nueva", title:"Ondas del Simpson", text:"Lino lavado en el verde-azul del río, para el living y la mesa.", ctas:[["Comprar","#p-cojin","black"],["Ver mesa y hogar","#tienda-mesa","cloud"]], alt:"Funda de cojín en tela Ondas del Simpson"},
+  {img:"packcocina", bg:"#f1f1f1", fg:"#111111", kicker:"Packs para regalar", title:"Regalos que se usan todos los días", text:"Delantal y paños en la misma tela, con precio de pack: $31.990.", ctas:[["Comprar","#p-packcocina","black"],["Ver los packs","#tienda-regalos","cloud"]], alt:"Set cocina: delantal y paños en Hojas de lenga"}
+];
+const CATS = [["cocina","pano"],["mesa","cojin"],["llevar","tote"],["regalos","packcocina"]];
+
+function inner(svg){ return svg.replace(/^<svg[^>]*>|<\/svg>$/g,""); }
+
+function viewHome(){
+  const tiles = TILES.map((t,i)=>`<div class="tile" style="--tile-bg:${t.bg};--tile-fg:${t.fg}" role="group" aria-roledescription="diapositiva" aria-label="${i+1} de ${TILES.length}">
+      <img class="prod" src="img/${t.img}.jpg" alt="${t.alt}" ${i?'loading="lazy"':'fetchpriority="high"'}>
+      <div class="copy"><span class="kicker">${t.kicker}</span>${i===0?`<h1>${t.title}</h1>`:`<h2>${t.title}</h2>`}<p>${t.text}</p>
+        <div class="ctas">${t.ctas.map(c=>`<a class="pill ${c[2]}" href="${c[1]}">${c[0]}</a>`).join("")}</div></div>
+    </div>`).join("");
+  const dots = TILES.map((_,i)=>`<button data-dot="${i}" aria-label="Ir a la diapositiva ${i+1}"></button>`).join("");
+  const top = ["delantal","cojin","tote","panera","neceser","individuales"].map(id=>cardHTML(byId(id))).join("");
+  const cats = CATS.map(([k,id])=>`<a class="cat" href="#tienda-${k}" style="--cat-bg:#f5f5f5"><img src="img/${id}.jpg" alt="" loading="lazy"><span class="pill white">${COLS[k].name}</span></a>`).join("");
+  const spot = ["delantal","panera","packcocina","packonce"].map(id=>cardHTML(byId(id),"hojas")).join("");
+  const packs = PRODUCTS.filter(p=>p.col==="regalos").map(p=>cardHTML(p)).join("");
+  return `
+  <section class="campaign" id="carousel" aria-label="Destacados">
+    <div class="track" id="track">${tiles}</div>
+    <div class="dots" id="dots">${dots}</div>
+    <div class="paddles"><button class="circ" data-step="-1" aria-label="Anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 5l-7 7 7 7"/></svg></button><button class="circ" data-step="1" aria-label="Siguiente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg></button></div>
+  </section>
+
+  <section class="sec wrap">
+    <div class="sec-head"><h2>Lo más pedido</h2><div class="tools"><a class="link" href="#tienda">Ver todo</a></div></div>
+    <div class="rail">${top}</div>
+  </section>
+
+  <section class="sec wrap">
+    <div class="sec-head"><h2>Compra por colección</h2></div>
+    <div class="rail">${cats}</div>
+  </section>
+
+  <section class="sec">
+    <div class="feature" style="--feat-bg:#f5f5f5">
+      <div class="sw"><img src="img/tela-detalle.jpg" alt="Detalle de la tela Hojas de lenga en el delantal" loading="lazy"></div>
+      <div class="copy"><span class="kicker" style="font-weight:500">La tela del mes</span><h2>Hojas de lenga</h2><p>Lino-algodón con hojas en rojo otoño y verde bosque, como la lenga de Aysén en abril. Disponible en delantales, cojines y paneras.</p><a class="pill black" href="#p-delantal">Comprar en esta tela</a></div>
+    </div>
+  </section>
+
+  <section class="sec wrap">
+    <div class="sec-head"><h2>En Hojas de lenga</h2></div>
+    <div class="grid">${spot}</div>
+  </section>
+
+  <section class="sec wrap">
+    <div class="sec-head"><h2>Packs para regalar</h2><div class="tools"><a class="link" href="#tienda-regalos">Ver los packs</a></div></div>
+    <div class="grid" style="--cols:3">${packs}</div>
+  </section>
+
+  <section class="sec wrap">
+    <div class="sec-head"><h2>Hecho para durar</h2></div>
+    <div class="details">
+      <div class="detail"><img src="img/det-bolsillo.jpg" alt="Bolsillo del delantal con costura doble" loading="lazy"><b>Costura doble</b><span>Bolsillos y bordes con doble pespunte, para que aguanten el uso de todos los días.</span><a href="#p-delantal">Ver el delantal</a></div>
+      <div class="detail"><img src="img/det-asa.jpg" alt="Asa del bolso tote con costura reforzada en X" loading="lazy"><b>Asas reforzadas</b><span>Costura en X donde el asa se une al bolso, que es el punto que más se exige.</span><a href="#p-tote">Ver el bolso tote</a></div>
+      <div class="detail"><img src="img/det-vivo.jpg" alt="Esquina del cojín con terminación de vivo" loading="lazy"><b>Terminación con vivo</b><span>Los cojines llevan vivo en el borde y el cierre queda escondido.</span><a href="#p-cojin">Ver el cojín</a></div>
+    </div>
+    <p class="made-line">Cada pieza se corta y se cose en el taller de Coyhaique, en 3 a 5 días hábiles desde tu compra.</p>
+  </section>
+
+  <section class="sec wrap">
+    <div class="sec-head"><h2>Reseñas</h2><span class="mute" style="font-size:14px">Ejemplos para la demo</span></div>
+    <div class="rev-list">
+      <div class="rev"><img src="img/delantal.jpg" alt="" loading="lazy"><div><div class="stars" aria-label="5 de 5">★★★★★</div><h3>Las tiras son largas de verdad</h3><p>El delantal quedó precioso y se amarra adelante sin problema. Llegó a Puerto Aysén en dos días.</p><div class="meta">Camila R. · Puerto Aysén · <a href="#p-delantal">Delantal de cocina</a></div></div></div>
+      <div class="rev"><img src="img/cojin.jpg" alt="" loading="lazy"><div><div class="stars" aria-label="5 de 5">★★★★★</div><h3>El cierre no se ve</h3><p>Pedí tres fundas para el living. La costura es firme y el color es igual al de la foto.</p><div class="meta">Javiera M. · Coyhaique · <a href="#p-cojin">Funda de cojín</a></div></div></div>
+      <div class="rev"><img src="img/bolsapan.jpg" alt="" loading="lazy"><div><div class="stars" aria-label="4 de 5">★★★★☆</div><h3>La marraqueta dura más</h3><p>La guardo en la bolsa y sigue crujiente hasta la tarde. Le pondría un cordón un poco más largo.</p><div class="meta">Daniela P. · Santiago · <a href="#p-bolsapan">Bolsa para el pan</a></div></div></div>
+    </div>
+  </section>
+
+  <section class="sec wrap" id="faq">
+    <div class="sec-head"><h2>Preguntas frecuentes</h2></div>
+    <div class="rows">
+      <details><summary>¿Cuánto demora mi pedido?</summary><div class="body"><p>Las piezas en stock salen en 1 a 2 días hábiles. Si eliges una tela que hay que cortar y coser, el taller demora entre 3 y 5 días hábiles.</p></div></details>
+      <details><summary>¿Cuánto cuesta el despacho?</summary><div class="body"><p>Coyhaique $3.500 con despacho propio, Puerto Aysén y Chacabuco $4.500, resto de Chile por Starken $6.900. Retiro gratis en el taller.</p></div></details>
+      <details><summary>¿Puedo pedir una tela que no aparece?</summary><div class="body"><p>Sí. Escríbenos por WhatsApp y te mostramos las telas que hay en el taller esa semana.</p></div></details>
+      <details><summary>¿Cómo funcionan los cambios?</summary><div class="body"><p>Tienes 30 días para cambiar un producto sin uso. El despacho de vuelta es por nuestra cuenta en Coyhaique.</p></div></details>
+      <details><summary>¿Cómo puedo pagar?</summary><div class="body"><p>Débito, crédito o transferencia. En la tienda real el pago se hace con Webpay o Mercado Pago.</p></div></details>
+    </div>
+  </section>`;
+}
+
+let shopState = {q:"", sort:"dest", fabs:new Set(), hide:false};
+function viewShop(col){
+  const n = PRODUCTS.filter(p=>!col||p.col===col).length;
+  const colLinks = [["","Todos los productos"],...Object.entries(COLS).map(([k,c])=>[k,c.name])]
+    .map(([k,name])=>`<a href="#tienda${k?"-"+k:""}" ${(col||"")===k?'aria-current="page"':""}>${name}</a>`).join("");
+  const fabChecks = Object.entries(FABRICS).map(([k,f])=>`<label><input type="checkbox" data-ffab="${k}" ${shopState.fabs.has(k)?"checked":""}><i>${swatch(k,1)}</i>${f.name}</label>`).join("");
+  return `<div class="wrap">
+    <div class="subnav">
+      <div><div class="crumbs"><a href="#inicio">Inicio</a> / Tienda</div><h1>${col?COLS[col].name:"Todos los productos"} (${n})</h1></div>
+      <div class="tools">
+        <button class="ghost-btn" id="toggleFilters">${shopState.hide?"Mostrar filtros":"Ocultar filtros"}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg></button>
+        <select class="sort" id="sort" aria-label="Ordenar por"><option value="dest">Ordenar por: Destacados</option><option value="asc">Precio: menor a mayor</option><option value="desc">Precio: mayor a menor</option></select>
+      </div>
+    </div>
+    <div class="plp ${shopState.hide?"nofilter":""}" id="plp">
+      <aside class="filters" aria-label="Filtros">${colLinks}<h3>Tela</h3>${fabChecks}</aside>
+      <div class="grid" id="shopGrid"></div>
+    </div>
+  </div>`;
+}
+function fillShop(col){
+  let list = PRODUCTS.filter(p=>!col || p.col===col);
+  const q = shopState.q.trim().toLowerCase();
+  if(q) list = list.filter(p=>(p.name+" "+p.fabrics.map(f=>FABRICS[f].name).join(" ")).toLowerCase().includes(q));
+  if(shopState.fabs.size) list = list.filter(p=>p.fabrics.some(f=>shopState.fabs.has(f)));
+  if(shopState.sort==="asc") list = [...list].sort((a,b)=>minPrice(a)-minPrice(b));
+  if(shopState.sort==="desc") list = [...list].sort((a,b)=>minPrice(b)-minPrice(a));
+  const firstFab = p => [...shopState.fabs].find(f=>p.fabrics.includes(f));
+  $("#shopGrid").innerHTML = list.length ? list.map(p=>cardHTML(p, firstFab(p))).join("")
+    : `<p class="empty-plp">No hay productos con esos filtros. Prueba quitando alguno.</p>`;
+}
+
+let pdp = null;
+function viewProduct(p){
+  pdp = {p, fabric:p.fabrics[0], size:0, qty:1, view:"prod"};
+  const related = PRODUCTS.filter(x=>x.col===p.col && x.id!==p.id).concat(PRODUCTS.filter(x=>x.col!==p.col)).slice(0,6);
+  return `<div class="wrap">
+    <div class="pdp">
+      <div class="gallery"><div class="thumbs" id="thumbs"></div><div class="main-ph" id="mainPh"></div></div>
+      <div class="info">
+        <div><h1>${p.name}</h1><div class="sub">${COLS[p.col].name}</div><div class="big-price" id="pPrice"></div></div>
+        <div>
+          <div class="opt-head">Elige la tela <span id="fabName"></span></div>
+          <div class="colorways" role="group" aria-label="Elegir tela">
+            ${p.fabrics.map(f=>`<button class="cw" data-fab="${f}" aria-label="${FABRICS[f].name}" title="${FABRICS[f].name}">${swatch(f,1.3)}</button>`).join("")}
+          </div>
+        </div>
+        ${p.sizes.length>1?`<div><div class="opt-head">Elige la medida</div><div class="sizes" role="group" aria-label="Elegir medida">${p.sizes.map((s,i)=>`<button class="size" data-size="${i}">${s[0]}</button>`).join("")}</div></div>`:""}
+        <div class="buy">
+          <div class="qty-line"><span class="mute">Cantidad</span><div class="qty"><button data-q="-1" aria-label="Quitar uno">−</button><output id="qty">1</output><button data-q="1" aria-label="Agregar uno">+</button></div></div>
+          <button class="pill black block" id="addBtn">Agregar al carro</button>
+          <button class="pill outline block" id="waAsk">Consultar por WhatsApp</button>
+          <span class="made">Se cose en 3 a 5 días hábiles con la tela que elijas.</span>
+        </div>
+        <p style="margin:0">${p.lead}</p>
+        <div class="rows">
+          <details open><summary>Detalles del producto</summary><div class="body"><p>${p.material}</p></div></details>
+          ${p.cm?`<details open><summary>Medidas</summary><div class="body"><svg class="tape" id="tape" viewBox="0 0 820 54" role="img" aria-label="Cinta métrica"></svg><p id="tapeCap"></p><p>${p.medidas}</p></div></details>`:`<details><summary>Medidas</summary><div class="body"><p>${p.medidas}</p></div></details>`}
+          <details><summary>Cuidados</summary><div class="body"><p>${p.cuidado}</p></div></details>
+          <details><summary>Despacho y cambios</summary><div class="body"><p>Coyhaique $3.500 · Puerto Aysén $4.500 · Resto de Chile por Starken $6.900 · Retiro gratis en el taller. Cambios dentro de 30 días.</p></div></details>
+        </div>
+      </div>
+    </div>
+    <section class="related"><div class="sec-head"><h2>También te puede gustar</h2></div><div class="rail">${related.map(x=>cardHTML(x)).join("")}</div></section>
+  </div>`;
+}
+function paintProduct(){
+  const {p, fabric, size, qty, view} = pdp;
+  const f = FABRICS[fabric];
+  $("#mainPh").innerHTML = view==="prod"
+    ? photo(p, fabric, true) + (hasPhoto(p, fabric) ? "" : `<span class="ph-note">Vista ilustrativa en ${f.name}</span>`)
+    : swatch(fabric, 3.5);
+  $("#thumbs").innerHTML = `<button data-view="prod" aria-pressed="${view==="prod"}" aria-label="Ver producto">${photo(p,fabric)}</button><button data-view="tela" aria-pressed="${view==="tela"}" aria-label="Ver detalle de la tela">${swatch(fabric,1.6)}</button>`;
+  $("#fabName").textContent = f.name + " · " + f.note;
+  document.querySelectorAll(".cw").forEach(b=>b.setAttribute("aria-pressed", b.dataset.fab===fabric));
+  document.querySelectorAll(".size").forEach(b=>b.setAttribute("aria-pressed", +b.dataset.size===size));
+  $("#pPrice").innerHTML = p.before ? priceHTML(p) : `<div class="price">${clp(p.price + p.sizes[size][1])}</div>`;
+  $("#qty").textContent = qty;
+  if(p.cm) paintTape(p.cm[size] || p.cm[0], p.sizes[size][0]);
+}
+function paintTape(cm, label){
+  const max = 80, x0 = 10, k = 10;
+  let t = `<rect width="820" height="54" fill="var(--tape)" style="fill:var(--tape)"/>`;
+  t += `<rect x="${x0}" y="40" width="${cm*k}" height="8" style="fill:var(--ink)"/>`;
+  for(let c = 0; c <= max; c++){
+    const x = x0 + c*k, h = c%10===0 ? 20 : c%5===0 ? 14 : 8;
+    t += `<line x1="${x}" y1="0" x2="${x}" y2="${h}" style="stroke:var(--tape-ink)" stroke-width="${c%10===0?1.6:1}"/>`;
+    if(c%10===0 && c>0) t += `<text x="${x}" y="34" text-anchor="middle" font-size="13" font-weight="700" font-family="Helvetica Neue, Arial, sans-serif" style="fill:var(--tape-ink)">${c}</text>`;
+  }
+  t += `<line x1="${x0+cm*k}" y1="0" x2="${x0+cm*k}" y2="54" style="stroke:var(--sale)" stroke-width="3"/>`;
+  $("#tape").innerHTML = t;
+  $("#tapeCap").innerHTML = `Ancho real: <b>${cm} cm</b>${label && !/^(Único|Única|Par|Set)/.test(label) ? " · medida " + label : ""}`;
+}
+
+/* ---------- carro ---------- */
+let cart = [];
+let ship = "coyhaique";
+try { cart = JSON.parse(localStorage.getItem("trama-cart")) || []; } catch(e) { cart = []; }
+cart = cart.filter(it => byId(it.id) && FABRICS[it.fabric]);
+function saveCart(){ try { localStorage.setItem("trama-cart", JSON.stringify(cart)); } catch(e) {} }
+function unitPrice(it){ const p = byId(it.id); return p.price + p.sizes[it.size][1]; }
+function addToCart(id, fabric, size, qty){
+  const ex = cart.find(it=>it.id===id && it.fabric===fabric && it.size===size);
+  if(ex) ex.qty += qty; else cart.push({id, fabric, size, qty});
+  saveCart(); paintCart();
+}
+function paintCart(){
+  const n = cart.reduce((a,it)=>a+it.qty,0);
+  $("#cartCount").textContent = n || "";
+  if(!cart.length){
+    $("#cartBody").innerHTML = `<div class="empty"><p>No hay productos en tu carro.</p><a class="pill black" href="#tienda" data-close>Ir a la tienda</a></div>`;
+    $("#cartFoot").hidden = true; return;
+  }
+  $("#cartFoot").hidden = false;
+  $("#cartBody").innerHTML = cart.map((it,i)=>{
+    const p = byId(it.id);
+    return `<div class="line"><div class="ph">${photo(p,it.fabric)}</div>
+      <div style="min-width:0"><h3>${p.name}</h3><div class="var">${FABRICS[it.fabric].name}${p.sizes.length>1?" · "+p.sizes[it.size][0]:""}</div>
+        <div class="qty"><button data-cq="${i}:-1" aria-label="Quitar uno">−</button><output>${it.qty}</output><button data-cq="${i}:1" aria-label="Agregar uno">+</button></div>
+        <button class="rm" data-rm="${i}">Eliminar</button></div>
+      <div class="price" style="margin:0">${clp(unitPrice(it)*it.qty)}</div></div>`;
+  }).join("");
+  const sub = cart.reduce((a,it)=>a+unitPrice(it)*it.qty,0);
+  const s = SHIPPING.find(x=>x[0]===ship);
+  $("#cartFoot").innerHTML = `
+    <label for="ship">Despacho
+      <select id="ship">${SHIPPING.map(x=>`<option value="${x[0]}" ${x[0]===ship?"selected":""}>${x[1]} · ${x[2]?clp(x[2]):"gratis"}</option>`).join("")}</select>
+    </label>
+    <div class="row"><span>Subtotal</span><span>${clp(sub)}</span></div>
+    <div class="row"><span>Despacho</span><span>${s[2]?clp(s[2]):"Gratis"}</span></div>
+    <div class="row total"><span>Total</span><span>${clp(sub+s[2])}</span></div>
+    <button class="pill black block" id="payBtn">Ir a pagar</button>
+    <div class="checkout-msg" id="payMsg" hidden>Esto es una demo. En la tienda real aquí se paga con Webpay o Mercado Pago y llega el correo de confirmación.</div>`;
+}
+function openCart(){ $("#overlay").hidden = false; requestAnimationFrame(()=>{ $("#overlay").classList.add("on"); $("#cart").classList.add("on"); }); $("#cart").setAttribute("aria-hidden","false"); $("#closeCart").focus(); }
+function closeAll(){
+  $("#overlay").classList.remove("on"); $("#cart").classList.remove("on"); $("#drawerNav").classList.remove("on");
+  $("#cart").setAttribute("aria-hidden","true"); $("#drawerNav").setAttribute("aria-hidden","true");
+  setTimeout(()=>{ $("#overlay").hidden = true; }, 260);
+}
+function openNav(){ $("#overlay").hidden = false; requestAnimationFrame(()=>{ $("#overlay").classList.add("on"); $("#drawerNav").classList.add("on"); }); $("#drawerNav").setAttribute("aria-hidden","false"); }
+
+let toastT;
+function toast(msg){ const t=$("#toast"); t.textContent=msg; t.classList.add("on"); clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove("on"),2200); }
+
+/* ---------- carrusel ---------- */
+let carI = 0, carTimer = null;
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+function goSlide(i){
+  carI = (i + TILES.length) % TILES.length;
+  const tr = $("#track"); if(!tr) return;
+  tr.style.transform = `translateX(-${carI*100}%)`;
+  document.querySelectorAll("[data-dot]").forEach(d=>d.setAttribute("aria-current", +d.dataset.dot===carI));
+  $("#dots").style.setProperty("--dot", TILES[carI].fg);
+}
+function startCar(){ stopCar(); if(!reduce) carTimer = setInterval(()=>goSlide(carI+1), 6000); }
+function stopCar(){ clearInterval(carTimer); carTimer = null; }
+
+/* ---------- router ---------- */
+function curCol(){ const h = location.hash.slice(1); return h.startsWith("tienda-") ? h.split("-")[1] : ""; }
+function route(){
+  const h = (location.hash || "#inicio").slice(1);
+  const app = $("#app");
+  stopCar(); closeAll();
+  let nav = h;
+  if(h==="inicio" || h==="inicio-faq" || h===""){
+    app.innerHTML = viewHome(); goSlide(0); startCar(); nav = "inicio";
+    const c = $("#carousel"); c.addEventListener("mouseenter", stopCar); c.addEventListener("mouseleave", startCar);
+    if(h==="inicio-faq") $("#faq").scrollIntoView();
+  } else if(h.startsWith("tienda")){
+    const col = h.split("-")[1] || "";
+    if(col && !COLS[col]){ location.hash = "#tienda"; return; }
+    app.innerHTML = viewShop(col); $("#sort").value = shopState.sort; fillShop(col);
+  } else if(h.startsWith("p-") && byId(h.slice(2))){
+    app.innerHTML = viewProduct(byId(h.slice(2))); paintProduct(); nav = "tienda-" + byId(h.slice(2)).col;
+  } else { location.hash = "#inicio"; return; }
+  document.querySelectorAll("nav.main a").forEach(a=>{ if(a.dataset.nav===nav) a.setAttribute("aria-current","page"); else a.removeAttribute("aria-current"); });
+  if(h!=="inicio-faq") window.scrollTo(0,0);
+}
+
+/* ---------- eventos ---------- */
+document.addEventListener("click", e=>{
+  const t = e.target.closest("button, a"); if(!t) return;
+  if(t.dataset.add){ e.preventDefault(); const pr = byId(t.dataset.add), f = t.dataset.addfab || pr.fabrics[0]; addToCart(pr.id, f, 0, 1); toast(`Agregado: ${pr.name} en ${FABRICS[f].name}`); }
+  else if(t.dataset.step){ goSlide(carI + +t.dataset.step); startCar(); }
+  else if(t.dataset.dot){ goSlide(+t.dataset.dot); startCar(); }
+  else if(t.dataset.fab){ pdp.fabric = t.dataset.fab; paintProduct(); }
+  else if(t.dataset.size){ pdp.size = +t.dataset.size; paintProduct(); }
+  else if(t.dataset.view){ pdp.view = t.dataset.view; paintProduct(); }
+  else if(t.dataset.q){ pdp.qty = Math.max(1, pdp.qty + +t.dataset.q); paintProduct(); }
+  else if(t.id==="addBtn"){ addToCart(pdp.p.id, pdp.fabric, pdp.size, pdp.qty); toast(`Agregado: ${pdp.p.name} en ${FABRICS[pdp.fabric].name}`); openCart(); }
+  else if(t.id==="waAsk" || t.id==="waBtn"){ $("#waPop").hidden = !$("#waPop").hidden; }
+  else if(t.dataset.cq){ const [i,d] = t.dataset.cq.split(":").map(Number); cart[i].qty += d; if(cart[i].qty<1) cart.splice(i,1); saveCart(); paintCart(); }
+  else if(t.dataset.rm){ cart.splice(+t.dataset.rm,1); saveCart(); paintCart(); }
+  else if(t.id==="payBtn"){ $("#payMsg").hidden = false; }
+  else if(t.id==="openCart"){ openCart(); }
+  else if(t.id==="burger"){ openNav(); }
+  else if(t.id==="closeCart" || t.id==="closeNav" || t.hasAttribute("data-close")){ closeAll(); }
+  else if(t.id==="toggleFilters"){ shopState.hide = !shopState.hide; $("#plp").classList.toggle("nofilter", shopState.hide); t.firstChild.textContent = shopState.hide ? "Mostrar filtros" : "Ocultar filtros"; }
+});
+document.addEventListener("change", e=>{
+  if(e.target.id==="sort"){ shopState.sort = e.target.value; fillShop(curCol()); }
+  if(e.target.id==="ship"){ ship = e.target.value; paintCart(); }
+  if(e.target.dataset.ffab){ const k = e.target.dataset.ffab; e.target.checked ? shopState.fabs.add(k) : shopState.fabs.delete(k); fillShop(curCol()); }
+});
+$("#navq").addEventListener("keydown", e=>{
+  if(e.key==="Enter"){ shopState.q = e.target.value; if(location.hash.startsWith("#tienda")) fillShop(curCol()); else location.hash = "#tienda"; }
+});
+$("#overlay").addEventListener("click", closeAll);
+document.addEventListener("keydown", e=>{ if(e.key==="Escape"){ closeAll(); $("#waPop").hidden = true; } });
+window.addEventListener("hashchange", route);
+paintCart();
+route();
+</script>
+
+</body>
+</html>
