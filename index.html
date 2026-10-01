@@ -51,7 +51,9 @@ h1,h2,h3{margin:0;font-weight:500;line-height:1.2;text-wrap:balance}
 .utility{background:var(--cloud);font-size:12px;font-weight:500}
 .utility .wrap{display:flex;justify-content:space-between;gap:16px;min-height:36px;align-items:center}
 .utility .links{display:flex;gap:14px}
-.utility .links span+span::before{content:"|";margin-right:14px;color:var(--stone)}
+.utility .links a{text-decoration:none}
+.utility .links a:hover{text-decoration:underline}
+.utility .links a+a::before{content:"|";margin-right:14px;color:var(--stone);display:inline-block}
 @media (max-width:720px){.utility .links{display:none}.utility .wrap{justify-content:center;text-align:center}}
 header.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--canvas);box-shadow:inset 0 -1px 0 var(--hair-soft)}
 .nav .wrap{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;min-height:60px;gap:16px}
@@ -281,12 +283,18 @@ aside.cart.on{transform:none}
 .checkout-msg{background:var(--cloud);padding:14px;font-size:14px}
 
 /* pie */
-footer.foot{margin-top:64px;border-top:1px solid var(--hair);padding-block:40px 28px;font-size:14px}
-.foot .cols{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
+.newsband{margin-top:64px;background:var(--cloud);padding-block:48px}
+.newsband .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:end}
+.newsband h2{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(40px,5vw,72px);line-height:.92}
+.newsband p{margin:0}
+.newsband .field{background:var(--canvas)}
+@media (max-width:760px){.newsband .wrap{grid-template-columns:minmax(0,1fr)}}
+footer.foot{margin-top:0;border-top:1px solid var(--hair);padding-block:40px 28px;font-size:14px}
+.foot .cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;max-width:900px}
 .foot h4{margin:0 0 12px;font-size:16px;font-weight:500}
 .foot a{display:block;text-decoration:none;color:var(--mute);padding:4px 0}
 .foot a:hover{color:var(--ink)}
-.foot .fine{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:40px;padding-top:20px;border-top:1px solid var(--hair-soft);font-size:12px;color:var(--mute)}
+.foot .fine{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-top:40px;padding-top:20px;border-top:1px solid var(--hair-soft);font-size:12px;color:var(--mute)}
 @media (max-width:760px){.foot .cols{grid-template-columns:1fr 1fr}}
 
 /* whatsapp + aviso */
@@ -295,6 +303,71 @@ footer.foot{margin-top:64px;border-top:1px solid var(--hair);padding-block:40px 
 .wa-pop{position:fixed;right:18px;bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:40;width:min(300px,calc(100% - 36px));background:var(--canvas);box-shadow:0 0 0 1px var(--hair-soft),0 12px 30px rgba(0,0,0,.15);padding:16px;font-size:14px;display:grid;gap:6px}
 .toast{position:fixed;left:50%;top:calc(76px + env(safe-area-inset-top,0px));transform:translate(-50%,-10px);background:var(--ink);color:var(--on-ink);padding:12px 22px;border-radius:30px;font-weight:500;z-index:70;opacity:0;transition:.25s;pointer-events:none;max-width:calc(100% - 32px)}
 .toast.on{opacity:1;transform:translate(-50%,0)}
+/* páginas internas */
+.page{padding-block:32px 0}
+.page .crumbs{font-size:14px;color:var(--mute);margin-bottom:16px}
+.page .crumbs a{color:var(--mute);text-decoration:none}
+.page h1{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(44px,6vw,80px);line-height:.92;margin-bottom:28px;max-width:16ch}
+.page h2{font-size:22px;margin:36px 0 10px}
+.page p,.page li{color:var(--charcoal);max-width:68ch}
+.page ul{padding-left:1.2em;margin:0}
+.page li+li{margin-top:6px}
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:start}
+.split > *{min-width:0}
+.split .ph-box{background:var(--cloud);aspect-ratio:1;max-width:100%;overflow:hidden}
+.split .ph-box img,.split .ph-box svg{width:100%;height:100%;object-fit:cover;display:block}
+.split img.tall{width:100%;aspect-ratio:4/5;object-fit:cover;background:var(--cloud);display:block}
+@media (max-width:860px){.split{grid-template-columns:minmax(0,1fr)}}
+.note-ex{display:inline-block;font-size:13px;background:var(--cloud);padding:6px 12px;border-radius:30px;color:var(--mute)}
+.tbl-wrap{overflow-x:auto}
+table.tbl{width:100%;border-collapse:collapse;min-width:540px}
+.tbl th,.tbl td{text-align:left;padding:14px 16px 14px 0;border-bottom:1px solid var(--hair);vertical-align:top}
+.tbl thead th{font-weight:500;font-size:14px;color:var(--mute)}
+.tbl td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+.facts3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:48px}
+.facts3 div{border-top:1px solid var(--ink);padding-top:14px}
+.facts3 b{display:block;font-weight:500;margin-bottom:4px}
+.facts3 span{color:var(--charcoal);font-size:15px}
+@media (max-width:760px){.facts3{grid-template-columns:1fr}}
+
+/* formularios */
+.form{display:grid;gap:16px;max-width:620px}
+.form .two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+@media (max-width:560px){.form .two{grid-template-columns:minmax(0,1fr)}}
+.form label{display:grid;gap:6px;font-size:14px;font-weight:500}
+.form input,.form select,.form textarea,.field{font:inherit;font-weight:400;color:var(--ink);background:var(--canvas);border:0;box-shadow:inset 0 0 0 1px var(--hair);border-radius:8px;padding:13px 14px;width:100%;min-width:0}
+.form input:focus,.form select:focus,.form textarea:focus,.field:focus{outline:none;box-shadow:inset 0 0 0 2px var(--ink)}
+.form [aria-invalid="true"]{box-shadow:inset 0 0 0 2px var(--sale)}
+.err{color:var(--sale);font-size:13px;font-weight:400}
+.hint{font-weight:400;color:var(--mute);font-size:13px}
+.form-msg{margin:0;background:var(--cloud);padding:14px 16px;font-size:14px}
+.form-msg.bad{color:var(--sale);background:transparent;padding:0}
+.preview{white-space:pre-wrap;background:var(--cloud);padding:16px;font:14px/1.6 var(--ui);margin:8px 0 0}
+.estimate{display:flex;justify-content:space-between;align-items:baseline;gap:12px;border-top:1px solid var(--hair);padding-top:14px;font-weight:500}
+.estimate b{font-size:22px;font-weight:500;font-variant-numeric:tabular-nums}
+.aside-info{display:grid;gap:20px;align-content:start}
+.aside-info b{display:block;font-weight:500}
+.aside-info span{color:var(--charcoal)}
+.social{display:flex;gap:8px;margin-top:6px}
+.social a,.foot .social a{width:40px;height:40px;border-radius:50%;background:var(--cloud);display:grid;place-items:center;color:var(--ink);padding:0}
+.social a:hover{background:var(--hair-soft)}
+.social svg{width:20px;height:20px}
+.news{display:flex;gap:8px;margin-top:10px}
+.news .pill{min-height:46px;padding:8px 18px}
+
+/* carro: extras */
+.freebar{padding:4px 0 14px;font-size:14px;border-bottom:1px solid var(--hair-soft)}
+.freebar .bar{height:4px;background:var(--hair-soft);margin-top:8px}
+.freebar .bar i{display:block;height:100%;background:var(--success)}
+.cart-extras{display:grid;gap:12px;padding:18px 0}
+.coupon{display:flex;gap:8px}
+.coupon .pill{min-height:46px;padding:8px 18px}
+.cart-foot label.gift,.cart-extras label.gift{display:flex;gap:10px;align-items:center;font-size:14px;font-weight:500}
+.gift input{width:18px;height:18px;accent-color:#111;flex:0 0 auto}
+.row.disc span:last-child{color:var(--success)}
+.link-btn{background:none;border:0;padding:0;text-decoration:underline;font-size:13px;color:var(--mute)}
+.low{color:var(--sale);font-size:14px;font-weight:500}
+.pill[disabled]{opacity:.35;cursor:not-allowed}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
@@ -302,7 +375,7 @@ footer.foot{margin-top:64px;border-top:1px solid var(--hair);padding-block:40px 
 
 <div class="utility"><div class="wrap">
   <span>Demo navegable: fotos de referencia, productos, precios y reseñas de ejemplo</span>
-  <div class="links"><span>Despacho a todo Chile</span><span>Retiro en el taller</span><span>Ayuda</span></div>
+  <div class="links"><a href="#despachos">Despacho a todo Chile</a><a href="#encargo">Encargos a medida</a><a href="#contacto">Ayuda</a></div>
 </div></div>
 
 <header class="nav"><div class="wrap">
@@ -314,6 +387,7 @@ footer.foot{margin-top:64px;border-top:1px solid var(--hair);padding-block:40px 
     <a href="#tienda-mesa" data-nav="tienda-mesa">Mesa y hogar</a>
     <a href="#tienda-llevar" data-nav="tienda-llevar">Para llevar</a>
     <a href="#tienda-regalos" data-nav="tienda-regalos">Regalos</a>
+    <a href="#encargo" data-nav="encargo">A medida</a>
   </nav>
   <div class="right">
     <label class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><input id="navq" type="search" placeholder="Buscar" aria-label="Buscar productos"></label>
@@ -323,19 +397,24 @@ footer.foot{margin-top:64px;border-top:1px solid var(--hair);padding-block:40px 
 
 <nav class="drawer-nav" id="drawerNav" aria-label="Menú" aria-hidden="true">
   <button class="circ" id="closeNav" aria-label="Cerrar menú">×</button>
-  <a href="#tienda">Novedades</a><a href="#tienda-cocina">Cocina</a><a href="#tienda-mesa">Mesa y hogar</a><a href="#tienda-llevar">Para llevar</a><a href="#tienda-regalos">Regalos</a><a href="#inicio-faq">Ayuda</a>
+  <a href="#tienda">Novedades</a><a href="#tienda-cocina">Cocina</a><a href="#tienda-mesa">Mesa y hogar</a><a href="#tienda-llevar">Para llevar</a><a href="#tienda-regalos">Regalos</a><a href="#encargo">Encargos a medida</a><a href="#nosotros">Quiénes somos</a><a href="#contacto">Contacto</a>
 </nav>
 
 <main id="app"></main>
 
+<section class="newsband"><div class="wrap">
+  <h2>10% en tu primera compra</h2>
+  <div><p>Suscríbete y recibe las telas nuevas antes que nadie.</p>
+    <form class="news" id="newsForm" novalidate><input class="field" id="newsMail" type="email" required placeholder="tu@correo.cl" aria-label="Correo para suscribirte" autocomplete="email"><button class="pill black">Suscribirme</button></form>
+    <p class="form-msg" id="newsMsg" hidden style="margin-top:10px"></p></div>
+</div></section>
 <footer class="foot"><div class="wrap">
   <div class="cols">
-    <div><h4>Tienda</h4><a href="#tienda-cocina">Cocina</a><a href="#tienda-mesa">Mesa y hogar</a><a href="#tienda-llevar">Para llevar</a><a href="#tienda-regalos">Packs para regalar</a></div>
-    <div><h4>Ayuda</h4><a href="#inicio-faq">Estado del pedido</a><a href="#inicio-faq">Despachos</a><a href="#inicio-faq">Cambios y devoluciones</a><a href="#inicio-faq">Medios de pago</a></div>
-    <div><h4>El taller</h4><a href="#inicio">Quiénes somos</a><a href="#inicio">Cómo se hace tu pieza</a><a href="#inicio">Telas de la temporada</a></div>
-    <div><h4>Contacto</h4><a href="#inicio">Coyhaique, Aysén</a><a href="#inicio">WhatsApp</a><a href="#inicio">Instagram</a></div>
+    <div><h4>Tienda</h4><a href="#tienda-cocina">Cocina</a><a href="#tienda-mesa">Mesa y hogar</a><a href="#tienda-llevar">Para llevar</a><a href="#tienda-regalos">Packs para regalar</a><a href="#encargo">Encargos a medida</a></div>
+    <div><h4>Ayuda</h4><a href="#despachos">Despachos</a><a href="#despachos-cambios">Cambios y devoluciones</a><a href="#inicio-faq">Preguntas frecuentes</a><a href="#contacto">Contacto</a></div>
+    <div><h4>El taller</h4><a href="#nosotros">Quiénes somos</a><a href="#tienda">Telas de la temporada</a><a href="#legal">Términos y condiciones</a><a href="#legal-privacidad">Política de privacidad</a></div>
   </div>
-  <div class="fine"><span>© 2026 Trama. Demo de ejemplo.</span><span>Términos · Privacidad · Políticas de despacho</span></div>
+  <div class="fine"><span>© 2026 Trama · Coyhaique, Aysén</span><div class="social" style="margin:0"><a href="#contacto" aria-label="Instagram (ejemplo)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg></a><a href="#contacto" aria-label="Facebook (ejemplo)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9v2.3H7.9v3h2.6V21z"/></svg></a><a href="#contacto" aria-label="TikTok (ejemplo)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.6 3c.4 2.3 1.9 3.8 4.2 4v3.1c-1.5.1-2.9-.4-4.2-1.2v6.2a5.6 5.6 0 1 1-5.6-5.6c.3 0 .6 0 .9.1v3.2a2.5 2.5 0 1 0 1.6 2.3V3z"/></svg></a></div><span><a href="#legal" style="display:inline">Términos</a> · <a href="#legal-privacidad" style="display:inline">Privacidad</a> · <a href="#despachos" style="display:inline">Despachos</a></span></div>
 </div></footer>
 
 <div class="overlay" id="overlay" hidden></div>
@@ -402,7 +481,7 @@ const PRODUCTS = [
    fabrics:["hojas","cuadrille","mostaza","lunares"], sizes:[["Único",0]],
    lead:"Panera estructurada que se dobla plana. Mantiene el pan tibio en la mesa del once.",
    material:"Algodón con entretela firme.", medidas:"26 × 18 × 9 cm armada.", cuidado:"Lavar a mano. Secar estirada."},
-  {id:"bolsapan", cm:[30], name:"Bolsa para el pan", col:"cocina", price:8990, badge:"",
+  {id:"bolsapan", stock:3, cm:[30], name:"Bolsa para el pan", col:"cocina", price:8990, badge:"",
    fabrics:["rayas","ondas","hojas"], sizes:[["Única",0]],
    lead:"Bolsa con cordón para guardar la marraqueta sin plástico. Deja respirar el pan.",
    material:"Lino crudo con cordón de algodón.", medidas:"30 × 40 cm.", cuidado:"Lavar a 40 °C y sacudir las migas a diario."}
@@ -416,7 +495,7 @@ PRODUCTS.push(
    fabrics:["hojas","cuadrille","rayas"], sizes:[["Único",0]],
    lead:"Para la mesa de la once: panera de tela y bolsa para guardar la marraqueta. Ahorras $1.990.",
    material:"Algodón y lino crudo.", medidas:"Panera 26 × 18 cm · bolsa 30 × 40 cm.", cuidado:"Lavar a mano. Secar estirada."},
-  {id:"packviaje", before:31980, name:"Set viaje: tote + neceser", col:"regalos", price:28990, badge:"Precio de pack",
+  {id:"packviaje", stock:0, before:31980, name:"Set viaje: tote + neceser", col:"regalos", price:28990, badge:"Precio de pack",
    fabrics:["rayas","lunares","hojas"], sizes:[["Único",0]],
    lead:"Bolso tote y neceser mediano a juego. Ahorras $2.990.",
    material:"Lona de algodón y forro lavable.", medidas:"Tote 40 × 38 cm · neceser 22 × 14 cm.", cuidado:"Lavar a mano en agua fría."}
@@ -504,13 +583,31 @@ function priceHTML(p, extra=0){
   return `<div class="price">${p.sizes.some(s=>s[1]>0)&&!extra?"Desde ":""}${clp(extra?now:minPrice(p))}</div>`;
 }
 
+/* ---------- stock y utilidades ---------- */
+const soldOut = p => p.stock === 0;
+const lowStock = p => p.stock > 0 && p.stock <= 3;
+const badgeOf = p => soldOut(p) ? "Agotado" : lowStock(p) ? "Últimas unidades" : p.badge;
+const esc = v => String(v).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const EMAIL = /^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/;
+function check(form){
+  let ok = true;
+  form.querySelectorAll("[required]").forEach(el=>{
+    const bad = !el.value.trim() || (el.type==="email" && !EMAIL.test(el.value.trim()));
+    el.setAttribute("aria-invalid", bad);
+    const m = el.parentElement.querySelector(".err"); if(m) m.hidden = !bad;
+    if(bad && ok){ el.focus(); ok = false; }
+  });
+  return ok;
+}
+
 /* ---------- vistas ---------- */
 function cardHTML(p, fab){
   const f = fab || p.fabrics[0];
   const dots = p.fabrics.slice(0,5).map(x=>`<i title="${FABRICS[x].name}">${swatch(x,1)}</i>`).join("");
   return `<div class="card">
-    <div class="ph"><a class="ph-link" href="#p-${p.id}" aria-label="${p.name}">${photo(p, f)}</a>${p.badge?`<span class="badge">${p.badge}</span>`:""}
-      <button class="pill black block quick" data-add="${p.id}" data-addfab="${f}" aria-label="Agregar ${p.name} en ${FABRICS[f].name}">Agregar al carro</button></div>
+    <div class="ph"><a class="ph-link" href="#p-${p.id}" aria-label="${p.name}">${photo(p, f)}</a>${badgeOf(p)?`<span class="badge">${badgeOf(p)}</span>`:""}
+      ${soldOut(p) ? `<a class="pill white block quick" href="#p-${p.id}">Avísame cuando vuelva</a>`
+        : `<button class="pill black block quick" data-add="${p.id}" data-addfab="${f}" aria-label="Agregar ${p.name} en ${FABRICS[f].name}">Agregar al carro</button>`}</div>
     <div class="dots-row">${dots}</div>
     <a class="name" href="#p-${p.id}">${p.name}</a>
     <span class="sub">${COLS[p.col].name} · ${p.fabrics.length} telas</span>
@@ -595,7 +692,7 @@ function viewHome(){
     <div class="sec-head"><h2>Preguntas frecuentes</h2></div>
     <div class="rows">
       <details><summary>¿Cuánto demora mi pedido?</summary><div class="body"><p>Las piezas en stock salen en 1 a 2 días hábiles. Si eliges una tela que hay que cortar y coser, el taller demora entre 3 y 5 días hábiles.</p></div></details>
-      <details><summary>¿Cuánto cuesta el despacho?</summary><div class="body"><p>Coyhaique $3.500 con despacho propio, Puerto Aysén y Chacabuco $4.500, resto de Chile por Starken $6.900. Retiro gratis en el taller.</p></div></details>
+      <details><summary>¿Cuánto cuesta el despacho?</summary><div class="body"><p>Coyhaique $3.500 con despacho propio, Puerto Aysén y Chacabuco $4.500, resto de Chile por Starken $6.900. Retiro gratis en el taller. En Coyhaique y Puerto Aysén el despacho es gratis sobre $40.000.</p></div></details>
       <details><summary>¿Puedo pedir una tela que no aparece?</summary><div class="body"><p>Sí. Escríbenos por WhatsApp y te mostramos las telas que hay en el taller esa semana.</p></div></details>
       <details><summary>¿Cómo funcionan los cambios?</summary><div class="body"><p>Tienes 30 días para cambiar un producto sin uso. El despacho de vuelta es por nuestra cuenta en Coyhaique.</p></div></details>
       <details><summary>¿Cómo puedo pagar?</summary><div class="body"><p>Débito, crédito o transferencia. En la tienda real el pago se hace con Webpay o Mercado Pago.</p></div></details>
@@ -653,7 +750,10 @@ function viewProduct(p){
         ${p.sizes.length>1?`<div><div class="opt-head">Elige la medida</div><div class="sizes" role="group" aria-label="Elegir medida">${p.sizes.map((s,i)=>`<button class="size" data-size="${i}">${s[0]}</button>`).join("")}</div></div>`:""}
         <div class="buy">
           <div class="qty-line"><span class="mute">Cantidad</span><div class="qty"><button data-q="-1" aria-label="Quitar uno">−</button><output id="qty">1</output><button data-q="1" aria-label="Agregar uno">+</button></div></div>
-          <button class="pill black block" id="addBtn">Agregar al carro</button>
+          ${soldOut(p) ? `<button class="pill black block" disabled>Agotado</button>
+          <form class="form" id="stockForm" novalidate style="gap:10px"><label>Te avisamos por correo cuando vuelva<input id="stockMail" type="email" required placeholder="tu@correo.cl" autocomplete="email"><span class="err" hidden>Revisa el correo.</span></label><button class="pill outline block">Avísame cuando vuelva</button><p class="form-msg" id="stockMsg" hidden></p></form>`
+          : `<button class="pill black block" id="addBtn">Agregar al carro</button>`}
+          ${lowStock(p) ? `<span class="low">Quedan ${p.stock} unidades</span>` : ""}
           <button class="pill outline block" id="waAsk">Consultar por WhatsApp</button>
           <span class="made">Se cose en 3 a 5 días hábiles con la tela que elijas.</span>
         </div>
@@ -662,7 +762,7 @@ function viewProduct(p){
           <details open><summary>Detalles del producto</summary><div class="body"><p>${p.material}</p></div></details>
           ${p.cm?`<details open><summary>Medidas</summary><div class="body"><svg class="tape" id="tape" viewBox="0 0 820 54" role="img" aria-label="Cinta métrica"></svg><p id="tapeCap"></p><p>${p.medidas}</p></div></details>`:`<details><summary>Medidas</summary><div class="body"><p>${p.medidas}</p></div></details>`}
           <details><summary>Cuidados</summary><div class="body"><p>${p.cuidado}</p></div></details>
-          <details><summary>Despacho y cambios</summary><div class="body"><p>Coyhaique $3.500 · Puerto Aysén $4.500 · Resto de Chile por Starken $6.900 · Retiro gratis en el taller. Cambios dentro de 30 días.</p></div></details>
+          <details><summary>Despacho y cambios</summary><div class="body"><p>Coyhaique $3.500 · Puerto Aysén $4.500 · Resto de Chile por Starken $6.900 · Retiro gratis en el taller. Gratis en Coyhaique y Puerto Aysén sobre $40.000. Cambios dentro de 30 días.</p><p><a href="#despachos">Ver despachos y cambios</a></p></div></details>
         </div>
       </div>
     </div>
@@ -697,9 +797,173 @@ function paintTape(cm, label){
   $("#tapeCap").innerHTML = `Ancho real: <b>${cm} cm</b>${label && !/^(Único|Única|Par|Set)/.test(label) ? " · medida " + label : ""}`;
 }
 
+/* ---------- páginas internas ---------- */
+function crumbs(name){ return `<div class="crumbs"><a href="#inicio">Inicio</a> / ${name}</div>`; }
+
+function viewNosotros(){
+  return `<div class="wrap page">${crumbs("Quiénes somos")}
+    <h1>Un taller de costura en Coyhaique</h1>
+    <div class="split">
+      <img class="tall" src="img/det-bolsillo.jpg" alt="Bolsillo de un delantal con costura doble">
+      <div>
+        <p>Trama empezó en una mesa de cocina en Coyhaique, con una máquina de coser y las ganas de hacer cosas que duren. Hoy cosemos delantales, cojines, bolsos y textiles para la mesa, uno por uno.</p>
+        <p>Elegimos telas resistentes y lindas de mirar: lino, algodón y lona. Cada pieza se corta para tu pedido y se revisa antes de salir del taller.</p>
+        <p>Nos gusta que lo que hacemos se use todos los días, se lave y siga firme. Por eso las costuras van dobles y las asas reforzadas.</p>
+        <p><span class="note-ex">Texto de ejemplo: en la tienda real va la historia del taller.</span></p>
+        <p><a class="pill black" href="#tienda">Ver la tienda</a></p>
+      </div>
+    </div>
+    <div class="facts3">
+      <div><b>Cosido a mano</b><span>Cada pieza pasa por la máquina y por las manos de quien la cose.</span></div>
+      <div><b>Hecho a pedido</b><span>Cortamos la tela cuando compras, así no hay sobrestock ni desperdicio.</span></div>
+      <div><b>Desde la Patagonia</b><span>Despachamos a todo Chile desde Coyhaique, Región de Aysén.</span></div>
+    </div>
+  </div>`;
+}
+
+function viewContacto(){
+  return `<div class="wrap page">${crumbs("Contacto")}
+    <h1>Escríbenos</h1>
+    <div class="split">
+      <form class="form" id="contactForm" novalidate>
+        <div class="two">
+          <label>Nombre<input id="cName" required autocomplete="name"><span class="err" hidden>Escribe tu nombre.</span></label>
+          <label>Correo<input id="cMail" type="email" required autocomplete="email"><span class="err" hidden>Revisa el correo.</span></label>
+        </div>
+        <div class="two">
+          <label>Teléfono <span class="hint">Opcional</span><input id="cTel" type="tel" autocomplete="tel" placeholder="+56 9"></label>
+          <label>Motivo<select id="cMot"><option>Consulta sobre un producto</option><option>Estado de mi pedido</option><option>Cambio o devolución</option><option>Encargo a medida</option><option>Otro</option></select></label>
+        </div>
+        <label>Número de pedido <span class="hint">Si tienes uno</span><input id="cOrder" placeholder="Ej: 1024"></label>
+        <label>Mensaje<textarea id="cMsg" rows="5" required maxlength="1000"></textarea><span class="err" hidden>Cuéntanos en qué te ayudamos.</span></label>
+        <button class="pill black block">Enviar mensaje</button>
+        <p class="form-msg" id="cOut" hidden></p>
+      </form>
+      <div class="aside-info">
+        <div><b>WhatsApp del taller</b><span>Respondemos de lunes a viernes, de 10:00 a 18:00.</span></div>
+        <div><b>Correo</b><span>hola@trama.cl <span class="hint">(ejemplo)</span></span></div>
+        <div><b>Retiro en el taller</b><span>Coyhaique, Aysén. Coordinamos la hora cuando tu pedido esté listo.</span></div>
+        <div><b>Redes sociales</b><div class="social"><a href="#contacto" aria-label="Instagram (ejemplo)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg></a><a href="#contacto" aria-label="Facebook (ejemplo)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9v2.3H7.9v3h2.6V21z"/></svg></a><a href="#contacto" aria-label="TikTok (ejemplo)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.6 3c.4 2.3 1.9 3.8 4.2 4v3.1c-1.5.1-2.9-.4-4.2-1.2v6.2a5.6 5.6 0 1 1-5.6-5.6c.3 0 .6 0 .9.1v3.2a2.5 2.5 0 1 0 1.6 2.3V3z"/></svg></a></div></div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function viewDespachos(){
+  return `<div class="wrap page">${crumbs("Despachos y cambios")}
+    <h1>Despachos y cambios</h1>
+    <h2>Costos y plazos</h2>
+    <div class="tbl-wrap"><table class="tbl">
+      <thead><tr><th>Destino</th><th>Costo</th><th>Plazo</th></tr></thead>
+      <tbody>
+        <tr><td>Coyhaique, despacho propio</td><td class="num">$3.500 · gratis sobre $40.000</td><td>1 a 2 días hábiles</td></tr>
+        <tr><td>Puerto Aysén y Puerto Chacabuco</td><td class="num">$4.500 · gratis sobre $40.000</td><td>2 a 3 días hábiles</td></tr>
+        <tr><td>Resto de Chile, por Starken</td><td class="num">$6.900</td><td>3 a 6 días hábiles</td></tr>
+        <tr><td>Retiro en el taller</td><td class="num">Gratis</td><td>Coordinamos la hora</td></tr>
+      </tbody>
+    </table></div>
+    <p>Las piezas hechas a pedido suman 3 a 5 días hábiles de confección antes del despacho. Te avisamos por correo cuando sale tu pedido, con el número de seguimiento.</p>
+    <h2 id="cambios">Cambios y devoluciones</h2>
+    <ul>
+      <li>Tienes 30 días desde que recibes tu pedido para cambiar un producto sin uso y con su etiqueta.</li>
+      <li>Si una pieza llega con una falla de confección, la reponemos sin costo.</li>
+      <li>En Coyhaique, el despacho del cambio corre por nuestra cuenta.</li>
+      <li>Los encargos a medida y con bordado no tienen cambio, salvo falla.</li>
+    </ul>
+    <h2>Cómo pedir un cambio</h2>
+    <p>Escríbenos desde <a href="#contacto">contacto</a> con tu número de pedido y te respondemos en menos de 24 horas hábiles.</p>
+    <p><span class="note-ex">Condiciones de ejemplo: se ajustan con la clienta antes de publicar.</span></p>
+  </div>`;
+}
+
+function viewLegal(){
+  return `<div class="wrap page">${crumbs("Términos y privacidad")}
+    <h1>Términos y privacidad</h1>
+    <p><span class="note-ex">Texto de ejemplo. Antes de publicar la tienda real debe revisarlo un abogado.</span></p>
+    <h2>Términos y condiciones</h2>
+    <ul>
+      <li>Los precios están en pesos chilenos e incluyen IVA. El despacho se calcula en el carro.</li>
+      <li>Las compras quedan sujetas a disponibilidad de tela y de stock. Si algo falta, te contactamos antes de cobrar o te devolvemos el dinero.</li>
+      <li>Los pagos se procesan con Webpay o Mercado Pago. La tienda no guarda los datos de tu tarjeta.</li>
+      <li>Los derechos del consumidor se rigen por la Ley 19.496 sobre Protección de los Derechos de los Consumidores.</li>
+    </ul>
+    <h2 id="privacidad">Política de privacidad</h2>
+    <ul>
+      <li>Pedimos solo los datos necesarios para tu pedido: nombre, correo, teléfono y dirección de despacho.</li>
+      <li>Usamos esos datos para preparar y despachar tu compra y, si te suscribes, para enviarte novedades. Puedes darte de baja cuando quieras.</li>
+      <li>No vendemos ni compartimos tus datos con terceros, salvo la empresa de despacho y el medio de pago.</li>
+      <li>Puedes pedir acceso, corrección o eliminación de tus datos escribiéndonos desde <a href="#contacto">contacto</a>, según la Ley 19.628 y la Ley 21.719 de protección de datos personales.</li>
+    </ul>
+  </div>`;
+}
+
+function viewEncargo(){
+  const opts = PRODUCTS.filter(p=>p.col!=="regalos").map(p=>`<option value="${p.id}">${p.name}</option>`).join("");
+  return `<div class="wrap page">${crumbs("Encargos a medida")}
+    <h1>Encargos a medida</h1>
+    <p style="margin:-8px 0 28px">¿Necesitas otra medida, un bordado con nombre o varias piezas iguales para regalar? Cuéntanos y te respondemos con el valor final y el plazo.</p>
+    <div class="split">
+      <form class="form" id="encargoForm" novalidate>
+        <label>Producto<select id="encProd">${opts}</select></label>
+        <div class="two">
+          <label>Tela<select id="encFab"></select></label>
+          <label>Cantidad<input id="encQty" type="number" min="1" max="20" value="1" inputmode="numeric"></label>
+        </div>
+        <label>Medida especial <span class="hint">Opcional. Ej: delantal de 80 cm de largo</span><input id="encMed" maxlength="60"></label>
+        <label>Bordado con nombre <span class="hint">Opcional, hasta 14 letras, +${clp(EMB_PRICE)} por pieza</span><input id="encBord" maxlength="14"></label>
+        <label>¿Para cuándo lo necesitas? <span class="hint">Opcional</span><input id="encDate" type="date"></label>
+        <div class="two">
+          <label>Tu nombre<input id="encName" required autocomplete="name"><span class="err" hidden>Escribe tu nombre.</span></label>
+          <label>Correo<input id="encMail" type="email" required autocomplete="email"><span class="err" hidden>Revisa el correo.</span></label>
+        </div>
+        <label>Comentarios <span class="hint">Opcional</span><textarea id="encCom" rows="3" maxlength="400"></textarea></label>
+        <div class="estimate"><span>Valor estimado</span><b id="encEst"></b></div>
+        <button class="pill black block">Enviar encargo</button>
+        <div id="encOut" hidden></div>
+      </form>
+      <div>
+        <div class="ph-box" id="encPh"></div>
+        <p class="hint" style="margin-top:12px">El valor final lo confirma el taller según la medida y la tela. Se paga cuando apruebas el encargo.</p>
+      </div>
+    </div>
+  </div>`;
+}
+function paintEncargo(resetFab){
+  const p = byId($("#encProd").value), sel = $("#encFab");
+  if(resetFab || !sel.options.length) sel.innerHTML = p.fabrics.map(f=>`<option value="${f}">${FABRICS[f].name}</option>`).join("");
+  const qty = Math.min(20, Math.max(1, parseInt($("#encQty").value) || 1));
+  const emb = $("#encBord").value.trim() ? EMB_PRICE : 0;
+  $("#encEst").textContent = clp((p.price + emb) * qty);
+  $("#encPh").innerHTML = photo(p, sel.value);
+}
+function sendEncargo(){
+  const p = byId($("#encProd").value), f = FABRICS[$("#encFab").value];
+  const qty = Math.min(20, Math.max(1, parseInt($("#encQty").value) || 1));
+  const med = $("#encMed").value.trim(), bord = $("#encBord").value.trim(), date = $("#encDate").value, com = $("#encCom").value.trim();
+  const when = date ? new Date(date + "T12:00").toLocaleDateString("es-CL", {day:"numeric", month:"long", year:"numeric"}) : "sin fecha";
+  const text = `Hola, quiero hacer un encargo:
+• ${qty} × ${p.name} en ${f.name}
+• Medida: ${med || "estándar"}
+• Bordado: ${bord ? `“${bord}”` : "sin bordado"}
+• Para el: ${when}${com ? `\n• Comentarios: ${com}` : ""}
+Valor estimado: ${$("#encEst").textContent}
+${$("#encName").value.trim()} · ${$("#encMail").value.trim()}`;
+  const out = $("#encOut");
+  out.innerHTML = `<p class="form-msg">Encargo recibido. Te respondemos con el valor final y el plazo en menos de 24 horas hábiles.</p><p class="hint" style="margin:12px 0 0">Así le llega al taller:</p><pre class="preview">${esc(text)}</pre>`;
+  out.hidden = false;
+}
+const PAGES = {nosotros:viewNosotros, contacto:viewContacto, despachos:viewDespachos, legal:viewLegal, encargo:viewEncargo};
+
 /* ---------- carro ---------- */
 let cart = [];
 let ship = "coyhaique";
+const FREE_SHIP = 40000, FREE_ZONES = ["coyhaique","aysen"], GIFT_PRICE = 1500, EMB_PRICE = 3000;
+const COUPONS = {
+  BIENVENIDA10: {pct:10, label:"10% de bienvenida"},
+  TALLER5000:   {amt:5000, min:30000, label:"$5.000 en compras sobre $30.000"}
+};
+let coupon = null, couponMsg = "", couponOk = false;
+let gift = {on:false, msg:""};
 try { cart = JSON.parse(localStorage.getItem("trama-cart")) || []; } catch(e) { cart = []; }
 cart = cart.filter(it => byId(it.id) && FABRICS[it.fabric]);
 function saveCart(){ try { localStorage.setItem("trama-cart", JSON.stringify(cart)); } catch(e) {} }
@@ -709,6 +973,20 @@ function addToCart(id, fabric, size, qty){
   if(ex) ex.qty += qty; else cart.push({id, fabric, size, qty});
   saveCart(); paintCart();
 }
+function totals(){
+  const sub = cart.reduce((a,it)=>a+unitPrice(it)*it.qty,0);
+  const cp = coupon ? COUPONS[coupon] : null;
+  let disc = 0, cpNote = "";
+  if(cp){
+    if(cp.min && sub < cp.min) cpNote = `Este código es para compras sobre ${clp(cp.min)}.`;
+    else disc = cp.pct ? Math.round(sub*cp.pct/100) : cp.amt;
+  }
+  const s = SHIPPING.find(x=>x[0]===ship);
+  const freeZone = FREE_ZONES.includes(ship);
+  const shipCost = freeZone && sub >= FREE_SHIP ? 0 : s[2];
+  const giftCost = gift.on ? GIFT_PRICE : 0;
+  return {sub, disc, cpNote, shipCost, giftCost, total: Math.max(0, sub - disc) + shipCost + giftCost};
+}
 function paintCart(){
   const n = cart.reduce((a,it)=>a+it.qty,0);
   $("#cartCount").textContent = n || "";
@@ -717,7 +995,12 @@ function paintCart(){
     $("#cartFoot").hidden = true; return;
   }
   $("#cartFoot").hidden = false;
-  $("#cartBody").innerHTML = cart.map((it,i)=>{
+  const T = totals();
+  const falta = FREE_SHIP - T.sub, pct = Math.min(100, T.sub / FREE_SHIP * 100);
+  const bar = `<div class="freebar">${falta > 0
+      ? `Te faltan <b>${clp(falta)}</b> para despacho gratis en Coyhaique y Puerto Aysén`
+      : `Tienes <b>despacho gratis</b> en Coyhaique y Puerto Aysén`}<div class="bar"><i style="width:${pct}%"></i></div></div>`;
+  const lines = cart.map((it,i)=>{
     const p = byId(it.id);
     return `<div class="line"><div class="ph">${photo(p,it.fabric)}</div>
       <div style="min-width:0"><h3>${p.name}</h3><div class="var">${FABRICS[it.fabric].name}${p.sizes.length>1?" · "+p.sizes[it.size][0]:""}</div>
@@ -725,15 +1008,23 @@ function paintCart(){
         <button class="rm" data-rm="${i}">Eliminar</button></div>
       <div class="price" style="margin:0">${clp(unitPrice(it)*it.qty)}</div></div>`;
   }).join("");
-  const sub = cart.reduce((a,it)=>a+unitPrice(it)*it.qty,0);
-  const s = SHIPPING.find(x=>x[0]===ship);
+  const extras = `<div class="cart-extras">
+      <form class="coupon" id="couponForm" novalidate><input class="field" id="couponIn" placeholder="Código de descuento" value="${esc(coupon||"")}" aria-label="Código de descuento" autocapitalize="characters" spellcheck="false"><button class="pill cloud">Aplicar</button></form>
+      ${couponMsg ? `<p class="form-msg ${couponOk?"":"bad"}" style="${couponOk?"":"padding:0"}">${couponMsg}${couponOk?` <button class="link-btn" id="couponRm">Quitar</button>`:""}</p>` : ""}
+      ${T.cpNote ? `<p class="form-msg bad">${T.cpNote}</p>` : ""}
+      <label class="gift"><input type="checkbox" id="giftOn" ${gift.on?"checked":""}> Envolver para regalo con tarjeta (+${clp(GIFT_PRICE)})</label>
+      ${gift.on ? `<textarea class="field" id="giftMsg" rows="2" maxlength="150" placeholder="Mensaje para la tarjeta (opcional)" aria-label="Mensaje para la tarjeta">${esc(gift.msg)}</textarea>` : ""}
+    </div>`;
+  $("#cartBody").innerHTML = bar + lines + extras;
   $("#cartFoot").innerHTML = `
     <label for="ship">Despacho
       <select id="ship">${SHIPPING.map(x=>`<option value="${x[0]}" ${x[0]===ship?"selected":""}>${x[1]} · ${x[2]?clp(x[2]):"gratis"}</option>`).join("")}</select>
     </label>
-    <div class="row"><span>Subtotal</span><span>${clp(sub)}</span></div>
-    <div class="row"><span>Despacho</span><span>${s[2]?clp(s[2]):"Gratis"}</span></div>
-    <div class="row total"><span>Total</span><span>${clp(sub+s[2])}</span></div>
+    <div class="row"><span>Subtotal</span><span>${clp(T.sub)}</span></div>
+    ${T.disc ? `<div class="row disc"><span>Descuento (${coupon})</span><span>−${clp(T.disc)}</span></div>` : ""}
+    <div class="row"><span>Despacho</span><span>${T.shipCost?clp(T.shipCost):"Gratis"}</span></div>
+    ${T.giftCost ? `<div class="row"><span>Envoltorio de regalo</span><span>${clp(T.giftCost)}</span></div>` : ""}
+    <div class="row total"><span>Total</span><span>${clp(T.total)}</span></div>
     <button class="pill black block" id="payBtn">Ir a pagar</button>
     <div class="checkout-msg" id="payMsg" hidden>Esto es una demo. En la tienda real aquí se paga con Webpay o Mercado Pago y llega el correo de confirmación.</div>`;
 }
@@ -776,28 +1067,35 @@ function route(){
     const col = h.split("-")[1] || "";
     if(col && !COLS[col]){ location.hash = "#tienda"; return; }
     app.innerHTML = viewShop(col); $("#sort").value = shopState.sort; fillShop(col);
+  } else if(PAGES[h.split("-")[0]]){
+    const pg = h.split("-")[0]; nav = pg;
+    app.innerHTML = PAGES[pg]();
+    if(pg==="encargo") paintEncargo(true);
+    const anchor = {"despachos-cambios":"cambios", "legal-privacidad":"privacidad"}[h];
+    if(anchor){ requestAnimationFrame(()=>document.getElementById(anchor)?.scrollIntoView()); }
   } else if(h.startsWith("p-") && byId(h.slice(2))){
     app.innerHTML = viewProduct(byId(h.slice(2))); paintProduct(); nav = "tienda-" + byId(h.slice(2)).col;
   } else { location.hash = "#inicio"; return; }
   document.querySelectorAll("nav.main a").forEach(a=>{ if(a.dataset.nav===nav) a.setAttribute("aria-current","page"); else a.removeAttribute("aria-current"); });
-  if(h!=="inicio-faq") window.scrollTo(0,0);
+  if(h!=="inicio-faq" && h!=="despachos-cambios" && h!=="legal-privacidad") window.scrollTo(0,0);
 }
 
 /* ---------- eventos ---------- */
 document.addEventListener("click", e=>{
   const t = e.target.closest("button, a"); if(!t) return;
-  if(t.dataset.add){ e.preventDefault(); const pr = byId(t.dataset.add), f = t.dataset.addfab || pr.fabrics[0]; addToCart(pr.id, f, 0, 1); toast(`Agregado: ${pr.name} en ${FABRICS[f].name}`); }
+  if(t.dataset.add){ e.preventDefault(); if(soldOut(byId(t.dataset.add))) return; const pr = byId(t.dataset.add), f = t.dataset.addfab || pr.fabrics[0]; addToCart(pr.id, f, 0, 1); toast(`Agregado: ${pr.name} en ${FABRICS[f].name}`); }
   else if(t.dataset.step){ goSlide(carI + +t.dataset.step); startCar(); }
   else if(t.dataset.dot){ goSlide(+t.dataset.dot); startCar(); }
   else if(t.dataset.fab){ pdp.fabric = t.dataset.fab; paintProduct(); }
   else if(t.dataset.size){ pdp.size = +t.dataset.size; paintProduct(); }
   else if(t.dataset.view){ pdp.view = t.dataset.view; paintProduct(); }
-  else if(t.dataset.q){ pdp.qty = Math.max(1, pdp.qty + +t.dataset.q); paintProduct(); }
+  else if(t.dataset.q){ pdp.qty = Math.min(pdp.p.stock ?? 99, Math.max(1, pdp.qty + +t.dataset.q)); paintProduct(); }
   else if(t.id==="addBtn"){ addToCart(pdp.p.id, pdp.fabric, pdp.size, pdp.qty); toast(`Agregado: ${pdp.p.name} en ${FABRICS[pdp.fabric].name}`); openCart(); }
   else if(t.id==="waAsk" || t.id==="waBtn"){ $("#waPop").hidden = !$("#waPop").hidden; }
   else if(t.dataset.cq){ const [i,d] = t.dataset.cq.split(":").map(Number); cart[i].qty += d; if(cart[i].qty<1) cart.splice(i,1); saveCart(); paintCart(); }
   else if(t.dataset.rm){ cart.splice(+t.dataset.rm,1); saveCart(); paintCart(); }
   else if(t.id==="payBtn"){ $("#payMsg").hidden = false; }
+  else if(t.id==="couponRm"){ coupon = null; couponMsg = ""; paintCart(); }
   else if(t.id==="openCart"){ openCart(); }
   else if(t.id==="burger"){ openNav(); }
   else if(t.id==="closeCart" || t.id==="closeNav" || t.hasAttribute("data-close")){ closeAll(); }
@@ -806,10 +1104,47 @@ document.addEventListener("click", e=>{
 document.addEventListener("change", e=>{
   if(e.target.id==="sort"){ shopState.sort = e.target.value; fillShop(curCol()); }
   if(e.target.id==="ship"){ ship = e.target.value; paintCart(); }
+  if(e.target.id==="giftOn"){ gift.on = e.target.checked; paintCart(); }
+  if(e.target.id==="encProd"){ paintEncargo(true); }
+  if(e.target.id==="encFab"){ paintEncargo(false); }
   if(e.target.dataset.ffab){ const k = e.target.dataset.ffab; e.target.checked ? shopState.fabs.add(k) : shopState.fabs.delete(k); fillShop(curCol()); }
 });
 $("#navq").addEventListener("keydown", e=>{
   if(e.key==="Enter"){ shopState.q = e.target.value; if(location.hash.startsWith("#tienda")) fillShop(curCol()); else location.hash = "#tienda"; }
+});
+document.addEventListener("input", e=>{
+  if(e.target.id==="giftMsg") gift.msg = e.target.value;
+  if(e.target.id==="encQty" || e.target.id==="encBord") paintEncargo(false);
+  if(e.target.getAttribute("aria-invalid")==="true"){ e.target.setAttribute("aria-invalid","false"); const m = e.target.parentElement.querySelector(".err"); if(m) m.hidden = true; }
+});
+document.addEventListener("submit", e=>{
+  e.preventDefault();
+  const f = e.target;
+  if(f.id==="couponForm"){
+    const code = $("#couponIn").value.trim().toUpperCase();
+    if(!code){ coupon = null; couponMsg = ""; }
+    else if(COUPONS[code]){ coupon = code; couponOk = true; couponMsg = `Código aplicado: ${COUPONS[code].label}.`; }
+    else { coupon = null; couponOk = false; couponMsg = "Ese código no existe o ya venció."; }
+    paintCart();
+  }
+  else if(f.id==="newsForm"){
+    const m = $("#newsMail"), out = $("#newsMsg");
+    if(!EMAIL.test(m.value.trim())){ m.setAttribute("aria-invalid","true"); out.textContent = "Revisa el correo."; out.className = "form-msg bad"; out.hidden = false; m.focus(); return; }
+    out.className = "form-msg"; out.innerHTML = "Listo. Tu código de 10% para la primera compra es <b>BIENVENIDA10</b>."; out.hidden = false; f.reset();
+  }
+  else if(f.id==="stockForm"){
+    if(!check(f)) return;
+    const out = $("#stockMsg"); out.textContent = `Listo. Te escribimos a ${$("#stockMail").value.trim()} cuando vuelva a haber stock.`; out.hidden = false; f.querySelector("button").hidden = true;
+  }
+  else if(f.id==="contactForm"){
+    if(!check(f)) return;
+    const out = $("#cOut"); out.textContent = `Gracias, ${$("#cName").value.trim().split(" ")[0]}. Recibimos tu mensaje y te respondemos en menos de 24 horas hábiles.`; out.hidden = false;
+    f.querySelectorAll("input,textarea").forEach(el=>el.value = "");
+  }
+  else if(f.id==="encargoForm"){
+    if(!check(f)) return;
+    sendEncargo();
+  }
 });
 $("#overlay").addEventListener("click", closeAll);
 document.addEventListener("keydown", e=>{ if(e.key==="Escape"){ closeAll(); $("#waPop").hidden = true; } });
