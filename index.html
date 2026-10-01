@@ -84,10 +84,8 @@ nav.main a:hover,nav.main a[aria-current="page"]{border-bottom-color:var(--ink)}
 /* campaña (carrusel) */
 .campaign{position:relative;overflow:hidden}
 .track{display:flex;transition:transform .7s cubic-bezier(.65,0,.35,1)}
-/* movimiento reducido: fundido suave en vez de deslizar (el carrusel igual avanza) */
-.campaign.fade .track{display:grid;transform:none!important}
-.campaign.fade .tile{grid-area:1/1;opacity:0;visibility:hidden;transition:opacity .9s ease,visibility 0s linear .9s!important}
-.campaign.fade .tile.on{opacity:1;visibility:visible;transition:opacity .9s ease,visibility 0s!important}
+/* el carrusel se desliza siempre, aunque el sistema tenga las animaciones reducidas */
+.campaign .track{transition:none!important}
 .tile{flex:0 0 100%;position:relative;min-height:clamp(520px,72vh,720px);background:var(--tile-bg);color:var(--tile-fg);overflow:hidden}
 .tile .prod{position:absolute;right:max(var(--gut),calc((100vw - var(--max))/2 + var(--gut)));top:3%;height:94%;width:auto;max-width:58%;aspect-ratio:1;object-fit:contain}
 .tile .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--pos,right center)}
@@ -630,7 +628,7 @@ function inner(svg){ return svg.replace(/^<svg[^>]*>|<\/svg>$/g,""); }
 
 function viewHome(){
   const tiles = TILES.map((t,i)=>`<div class="tile" style="--tile-bg:${t.bg};--tile-fg:${t.fg}" role="group" aria-roledescription="diapositiva" aria-label="${i+1} de ${TILES.length}">
-      <img class="prod" src="img/${t.img}.jpg" alt="${t.alt}" ${i?'loading="lazy"':'fetchpriority="high"'}>
+      <img class="prod" src="img/${t.img}.jpg" alt="${t.alt}" ${i?'':'fetchpriority="high"'}>
       <div class="copy"><span class="kicker">${t.kicker}</span>${i===0?`<h1>${t.title}</h1>`:`<h2>${t.title}</h2>`}<p>${t.text}</p>
         <div class="ctas">${t.ctas.map(c=>`<a class="pill ${c[2]}" href="${c[1]}">${c[0]}</a>`).join("")}</div></div>
     </div>`).join("");
@@ -1047,10 +1045,16 @@ function toast(msg){ const t=$("#toast"); t.textContent=msg; t.classList.add("on
 let carI = 0, carTimer = null;
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 function goSlide(i){
+  const prev = carI;
   carI = (i + TILES.length) % TILES.length;
   const tr = $("#track"); if(!tr) return;
-  tr.style.transform = `translateX(-${carI*100}%)`;
-  tr.querySelectorAll(".tile").forEach((t,k)=>t.classList.toggle("on", k===carI));
+  const to = `translateX(-${carI*100}%)`;
+  // animación por JavaScript: funciona aunque Windows tenga las animaciones apagadas
+  if(prev !== carI && tr.animate){
+    tr.getAnimations().forEach(a=>a.cancel());
+    tr.animate([{transform:`translateX(-${prev*100}%)`},{transform:to}], {duration:800, easing:"cubic-bezier(.65,0,.35,1)"});
+  }
+  tr.style.transform = to;
   document.querySelectorAll("[data-dot]").forEach(d=>d.setAttribute("aria-current", +d.dataset.dot===carI));
   $("#dots").style.setProperty("--dot", TILES[carI].fg);
 }
@@ -1065,7 +1069,7 @@ function route(){
   stopCar(); closeAll();
   let nav = h;
   if(h==="inicio" || h==="inicio-faq" || h===""){
-    app.innerHTML = viewHome(); if(reduce) $("#carousel").classList.add("fade"); goSlide(0); startCar(); nav = "inicio";
+    app.innerHTML = viewHome(); carI = 0; goSlide(0); startCar(); nav = "inicio";
     const c = $("#carousel"); c.addEventListener("mouseenter", stopCar); c.addEventListener("mouseleave", startCar);
     if(h==="inicio-faq") $("#faq").scrollIntoView();
   } else if(h.startsWith("tienda")){
