@@ -6,17 +6,18 @@
 <meta name="description" content="Demo de tienda en línea para textiles hechos a mano en Coyhaique.">
 <meta name="robots" content="noindex">
 <style>img{max-width:100%}[hidden]{display:none!important}</style>
-<title>Tienda Trama</title>
+<title>Almadeco | Deco textil</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&display=swap">
 <style>
-/* Layout: barra utilitaria, nav blanca, campaña a todo el ancho, catálogo en grilla plana sobre gris "soft cloud". */
+/* Tienda Almadeco. Un solo tema claro con la paleta de la marca (verde salvia y crema).
+   Layout: barra utilitaria, nav blanca, campaña a todo el ancho, catálogo en grilla plana sobre gris "soft cloud". */
 :root{
-  --canvas:#ffffff; --cloud:#f5f5f5; --ink:#111111; --charcoal:#39393b; --mute:#707072; --stone:#9e9ea0;
-  --hair:#cacacb; --hair-soft:#e5e5e5; --sale:#d30005; --success:#007d48; --on-ink:#ffffff;
-  --photo:#f5f5f5; --tape:#f2c230; --tape-ink:#111111; --accent:#111111; --wa:#1f8a50;
-  --display:"Anton", "Arial Narrow", Impact, sans-serif;
+  --canvas:#fbfbf6; --cloud:#e8ead8; --ink:#2f3a22; --charcoal:#4a5538; --mute:#6b7560; --stone:#8f9c79;
+  --hair:#c9cfb8; --hair-soft:#dde1cf; --sale:#9a3b2e; --success:#4d6a2f; --on-ink:#ffffff;
+  --photo:#e8ead8; --tape:#c8d1a8; --tape-ink:#2f3a22; --accent:#667047; --wa:#1f8a50;
+  --display:"Dancing Script", "Segoe Script", cursive;
   --ui:"Helvetica Neue", Helvetica, Arial, sans-serif;
   --max:1440px; --gut:clamp(16px,3.5vw,48px);
   color-scheme:light;
@@ -451,25 +452,34 @@ table.tbl{width:100%;border-collapse:collapse;min-width:540px}
 .dev .empty-log{color:var(--mute);font-size:13px;display:block}
 @media (max-width:600px){.dev-btn{left:12px;bottom:calc(14px + env(safe-area-inset-bottom,0px))}.dev{left:12px;width:calc(100% - 24px)}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* ---- Almadeco: titulos en letra manuscrita como la marca, sin mayusculas forzadas */
+.logo,.tile h1,.tile h2,.feature h2,.newsband h2,.page h1{text-transform:none!important;letter-spacing:0!important;font-weight:700}
+.logo{font-size:40px}
+.tile h1,.tile h2{font-size:clamp(46px,7vw,96px);line-height:1.02}
+.feature h2{font-size:clamp(44px,6vw,84px);line-height:1.02}
+.newsband h2{font-size:clamp(38px,4.6vw,64px);line-height:1.02}
+.page h1{font-size:clamp(40px,5.4vw,70px);line-height:1.05;max-width:20ch}
+.ph img,.main-ph img,.cat img,.rev img{object-fit:cover}
+.tile .prod{object-fit:cover}
 </style>
 </head>
 <body>
 
 <div class="utility"><div class="wrap">
-  <span>Demo navegable: fotos de referencia, productos, precios y reseñas de ejemplo</span>
+  <span>Demo navegable con los productos, fotos y precios de Almadeco · despachos y pagos son de ejemplo</span>
   <div class="links"><a href="#despachos">Despacho a todo Chile</a><a href="#encargo">Encargos a medida</a><a href="#contacto">Ayuda</a></div>
 </div></div>
 
 <header class="nav"><div class="wrap">
   <button class="circ burger" id="burger" aria-label="Abrir menú"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
-  <a class="logo" href="#inicio">Trama</a>
+  <a class="logo" href="#inicio">Almadeco</a>
   <nav class="main" aria-label="Principal">
-    <a href="#tienda" data-nav="tienda">Novedades</a>
+    <a href="#tienda" data-nav="tienda">Todo</a>
     <a href="#tienda-cocina" data-nav="tienda-cocina">Cocina</a>
-    <a href="#tienda-mesa" data-nav="tienda-mesa">Mesa y hogar</a>
-    <a href="#tienda-llevar" data-nav="tienda-llevar">Para llevar</a>
-    <a href="#tienda-regalos" data-nav="tienda-regalos">Regalos</a>
-    <a href="#encargo" data-nav="encargo">A medida</a>
+    <a href="#tienda-mesa" data-nav="tienda-mesa">Mesa</a>
+    <a href="#tienda-hogar" data-nav="tienda-hogar">Hogar</a>
+    <a href="#encargo" data-nav="encargo">Manteles a medida</a>
   </nav>
   <div class="right">
     <label class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><input id="navq" type="search" placeholder="Buscar" aria-label="Buscar productos"></label>
@@ -479,24 +489,24 @@ table.tbl{width:100%;border-collapse:collapse;min-width:540px}
 
 <nav class="drawer-nav" id="drawerNav" aria-label="Menú" aria-hidden="true">
   <button class="circ" id="closeNav" aria-label="Cerrar menú">×</button>
-  <a href="#tienda">Novedades</a><a href="#tienda-cocina">Cocina</a><a href="#tienda-mesa">Mesa y hogar</a><a href="#tienda-llevar">Para llevar</a><a href="#tienda-regalos">Regalos</a><a href="#encargo">Encargos a medida</a><a href="#nosotros">Quiénes somos</a><a href="#contacto">Contacto</a>
+  <a href="#tienda">Todo</a><a href="#tienda-cocina">Cocina</a><a href="#tienda-mesa">Mesa</a><a href="#tienda-hogar">Hogar</a><a href="#encargo">Manteles a medida</a><a href="#nosotros">Quiénes somos</a><a href="#contacto">Contacto</a>
 </nav>
 
 <main id="app"></main>
 
 <section class="newsband"><div class="wrap">
-  <h2>10% en tu primera compra</h2>
-  <div><p>Suscríbete y recibe las telas nuevas antes que nadie.</p>
+  <h2>Novedades de Almadeco</h2>
+  <div><p>Déjanos tu correo y te avisamos cuando haya diseños nuevos.</p>
     <form class="news" id="newsForm" novalidate><input class="field" id="newsMail" type="email" required placeholder="tu@correo.cl" aria-label="Correo para suscribirte" autocomplete="email"><button class="pill black">Suscribirme</button></form>
     <p class="form-msg" id="newsMsg" hidden style="margin-top:10px"></p></div>
 </div></section>
 <footer class="foot"><div class="wrap">
   <div class="cols">
-    <div><h4>Tienda</h4><a href="#tienda-cocina">Cocina</a><a href="#tienda-mesa">Mesa y hogar</a><a href="#tienda-llevar">Para llevar</a><a href="#tienda-regalos">Packs para regalar</a><a href="#encargo">Encargos a medida</a></div>
+    <div><h4>Tienda</h4><a href="#tienda-cocina">Cocina</a><a href="#tienda-mesa">Mesa</a><a href="#tienda-hogar">Hogar</a><a href="#encargo">Manteles a medida</a></div>
     <div><h4>Ayuda</h4><a href="#despachos">Despachos</a><a href="#despachos-cambios">Cambios y devoluciones</a><a href="#inicio-faq">Preguntas frecuentes</a><a href="#contacto">Contacto</a></div>
-    <div><h4>El taller</h4><a href="#nosotros">Quiénes somos</a><a href="#tienda">Telas de la temporada</a><a href="#legal">Términos y condiciones</a><a href="#legal-privacidad">Política de privacidad</a></div>
+    <div><h4>El taller</h4><a href="#nosotros">Quiénes somos</a><a href="#tienda">Catalogo 2026</a><a href="#legal">Términos y condiciones</a><a href="#legal-privacidad">Política de privacidad</a></div>
   </div>
-  <div class="fine"><span>© 2026 Trama · Coyhaique, Aysén</span><div class="social" style="margin:0"><a href="#contacto" aria-label="Instagram (ejemplo)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg></a><a href="#contacto" aria-label="Facebook (ejemplo)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9v2.3H7.9v3h2.6V21z"/></svg></a><a href="#contacto" aria-label="TikTok (ejemplo)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.6 3c.4 2.3 1.9 3.8 4.2 4v3.1c-1.5.1-2.9-.4-4.2-1.2v6.2a5.6 5.6 0 1 1-5.6-5.6c.3 0 .6 0 .9.1v3.2a2.5 2.5 0 1 0 1.6 2.3V3z"/></svg></a></div><span><a href="#legal" style="display:inline">Términos</a> · <a href="#legal-privacidad" style="display:inline">Privacidad</a> · <a href="#despachos" style="display:inline">Despachos</a></span></div>
+  <div class="fine"><span>© 2026 Almadeco · Patagonia chilena</span><div class="social" style="margin:0"><a href="#contacto" aria-label="Instagram @almadecopatagonia"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg></a><a href="#contacto" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9v2.3H7.9v3h2.6V21z"/></svg></a><a href="#contacto" aria-label="TikTok (ejemplo)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.6 3c.4 2.3 1.9 3.8 4.2 4v3.1c-1.5.1-2.9-.4-4.2-1.2v6.2a5.6 5.6 0 1 1-5.6-5.6c.3 0 .6 0 .9.1v3.2a2.5 2.5 0 1 0 1.6 2.3V3z"/></svg></a></div><span><a href="#legal" style="display:inline">Términos</a> · <a href="#legal-privacidad" style="display:inline">Privacidad</a> · <a href="#despachos" style="display:inline">Despachos</a></span></div>
 </div></footer>
 
 <div class="overlay" id="overlay" hidden></div>
@@ -509,7 +519,7 @@ table.tbl{width:100%;border-collapse:collapse;min-width:540px}
 <button class="wa" id="waBtn" aria-label="Escribir por WhatsApp">
   <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.4.8 3.2.6a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.2-.2-.4-.3z"/></svg>
 </button>
-<div class="wa-pop" id="waPop" hidden><b>Hablemos por WhatsApp</b><span>En la tienda real, este botón abre WhatsApp con un mensaje listo para el taller.</span></div>
+<div class="wa-pop" id="waPop" hidden><b>Hablemos por WhatsApp</b><span>Escríbenos al +56 9 3579 9990.</span></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <div class="modal" id="payModal" hidden role="dialog" aria-modal="true" aria-labelledby="payTitle"><div class="box" id="payBox"></div></div>
 <button class="pill white dev-btn" id="devBtn" aria-expanded="false" aria-controls="devPanel">Integraciones <i id="devCount"></i></button>
@@ -521,73 +531,51 @@ table.tbl{width:100%;border-collapse:collapse;min-width:540px}
 <script>
 /* ---------- datos de ejemplo ---------- */
 const FABRICS = {
-  hojas:    {name:"Hojas de lenga", note:"Lino-algodón", bg:"#dfe3d6", w:40, h:40,
-             d:'<ellipse cx="10" cy="10" rx="7" ry="3" fill="#a8322d" transform="rotate(35 10 10)"/><ellipse cx="30" cy="28" rx="7" ry="3" fill="#6d7b52" transform="rotate(-30 30 28)"/><ellipse cx="28" cy="8" rx="4" ry="1.8" fill="#6d7b52" transform="rotate(60 28 8)"/><ellipse cx="9" cy="31" rx="4" ry="1.8" fill="#a8322d" transform="rotate(-50 9 31)"/>'},
-  cuadrille:{name:"Cuadrillé rojo techo", note:"Algodón tejido", bg:"#f3f2ee", w:24, h:24,
-             d:'<rect width="12" height="24" fill="#a8322d" opacity=".38"/><rect width="24" height="12" fill="#a8322d" opacity=".38"/>'},
-  rayas:    {name:"Rayas marineras", note:"Lona de algodón", bg:"#ebede8", w:16, h:16,
-             d:'<rect width="5" height="16" fill="#344e5c"/><rect x="9.5" width="1.5" height="16" fill="#344e5c" opacity=".55"/>'},
-  lunares:  {name:"Lunares noche", note:"Popelina de algodón", bg:"#2f4856", w:20, h:20,
-             d:'<circle cx="5" cy="5" r="2.4" fill="#eef1ee"/><circle cx="15" cy="15" r="2.4" fill="#eef1ee"/>'},
-  ondas:    {name:"Ondas del Simpson", note:"Lino lavado", bg:"#d8e6e4", w:32, h:16,
-             d:'<path d="M0 8 Q8 2 16 8 T32 8" fill="none" stroke="#3b6b78" stroke-width="2.2"/>'},
-  mostaza:  {name:"Liso lupino", note:"Gabardina de algodón", bg:"#a23a6c", w:8, h:8,
-             d:'<path d="M0 0L8 8M8 0L0 8" stroke="#8a2c5a" stroke-width=".8"/>'}
+  rep:  {name:"Tela repelente a líquidos", note:"Hecha a mano en la Patagonia", bg:"#e8ead8", w:16, h:16,
+         d:'<path d="M0 8Q4 3 8 8T16 8" fill="none" stroke="#8f9c79" stroke-width="1.4"/>'},
+  culla:{name:"Lino Culla", note:"Fundas de cojín", bg:"#e4e1d4", w:16, h:16,
+         d:'<rect y="3" width="16" height="1.2" fill="#9b9a8c"/><rect y="11" width="16" height="1.2" fill="#9b9a8c"/>'}
 };
 const COLS = {
-  cocina:{name:"Cocina", art:["delantal","hojas"]},
-  mesa:{name:"Mesa y hogar", art:["cojin","ondas"]},
-  llevar:{name:"Para llevar", art:["tote","rayas"]},
-  regalos:{name:"Packs para regalar", art:["packcocina","hojas"]}
+  cocina:{name:"Cocina", art:["delantal","rep"]},
+  mesa:{name:"Mesa", art:["individuales","rep"]},
+  hogar:{name:"Hogar", art:["cojin","culla"]}
 };
+const WA_NUM = "56993579990";
 const PRODUCTS = [
-  {id:"delantal", cm:[70,50], name:"Delantal de cocina", col:"cocina", price:24990, badge:"Más vendido",
-   fabrics:["hojas","cuadrille","rayas","mostaza"], sizes:[["Adulto",0],["Niño",-6000]],
-   lead:"Delantal con peto regulable, tiras largas para amarrar adelante y bolsillo doble para el paño y el teléfono.",
-   material:"Lino-algodón 55/45, costuras dobles y tiras reforzadas.", medidas:"Adulto 70 × 85 cm · Niño 50 × 60 cm.", cuidado:"Lavar a 30 °C del revés. Planchar tibio."},
-  {id:"cojin", cm:[40,45,50], name:"Funda de cojín", col:"mesa", price:15990, badge:"Nuevo",
-   fabrics:["ondas","hojas","lunares","mostaza","cuadrille"], sizes:[["40 × 40 cm",0],["45 × 45 cm",2000],["50 × 50 cm",4000]],
-   lead:"Funda con cierre escondido y terminación de vivo. El relleno se vende aparte.",
-   material:"Lino lavado o algodón, según la tela elegida.", medidas:"Tres medidas: 40, 45 y 50 cm por lado.", cuidado:"Lavar a máquina a 30 °C con el cierre cerrado."},
-  {id:"tote", cm:[40], name:"Bolso tote", col:"llevar", price:18990, badge:"",
-   fabrics:["rayas","hojas","lunares","ondas"], sizes:[["Único",0]],
-   lead:"Bolso amplio con forro interior, bolsillo para llaves y asas largas para llevar al hombro.",
-   material:"Lona de algodón 12 oz con forro de crudo.", medidas:"40 × 38 × 12 cm · asas de 60 cm.", cuidado:"Lavar a mano en agua fría. Secar a la sombra."},
-  {id:"neceser", cm:[22,28], name:"Neceser con cierre", col:"llevar", price:12990, badge:"",
-   fabrics:["lunares","rayas","mostaza","hojas"], sizes:[["Mediano",0],["Grande",3000]],
-   lead:"Neceser forrado con tela impermeable por dentro, para maquillaje, remedios o cables.",
-   material:"Algodón exterior, forro de PUL lavable.", medidas:"Mediano 22 × 14 cm · Grande 28 × 18 cm.", cuidado:"Limpiar el forro con paño húmedo. Lavar a mano."},
-  {id:"individuales", cm:[45,45], name:"Individuales (set de 4)", col:"mesa", price:21990, badge:"",
-   fabrics:["cuadrille","rayas","ondas","mostaza"], sizes:[["Set de 4",0],["Set de 6",9000]],
-   lead:"Individuales de doble faz con entretela, para que no se arruguen con el uso diario.",
-   material:"Algodón tejido doble faz.", medidas:"45 × 33 cm cada uno.", cuidado:"Lavar a 40 °C. Planchar por ambos lados."},
-  {id:"pano", cm:[50], name:"Paños de cocina (par)", col:"cocina", price:9990, badge:"",
-   fabrics:["cuadrille","rayas","hojas"], sizes:[["Par",0]],
-   lead:"Paños absorbentes con colgador de cinta. Se ponen más suaves con cada lavado.",
-   material:"Lino-algodón de alta absorción.", medidas:"50 × 70 cm cada uno.", cuidado:"Lavar a 60 °C. No usar suavizante."},
-  {id:"panera", cm:[26], name:"Panera de tela", col:"cocina", price:11990, badge:"Nuevo",
-   fabrics:["hojas","cuadrille","mostaza","lunares"], sizes:[["Único",0]],
-   lead:"Panera estructurada que se dobla plana. Mantiene el pan tibio en la mesa del once.",
-   material:"Algodón con entretela firme.", medidas:"26 × 18 × 9 cm armada.", cuidado:"Lavar a mano. Secar estirada."},
-  {id:"bolsapan", stock:3, cm:[30], name:"Bolsa para el pan", col:"cocina", price:8990, badge:"",
-   fabrics:["rayas","ondas","hojas"], sizes:[["Única",0]],
-   lead:"Bolsa con cordón para guardar la marraqueta sin plástico. Deja respirar el pan.",
-   material:"Lino crudo con cordón de algodón.", medidas:"30 × 40 cm.", cuidado:"Lavar a 40 °C y sacudir las migas a diario."}
+  {id:"delantal", name:"Delantal estilo japonés", col:"cocina", price:25900, badge:"Un diseño por modelo",
+   fabrics:["rep"], sizes:[["Talla única",0]],
+   lead:"Delantal estilo japonés con tela repelente a líquidos, talla única: se adapta a tu cuerpo. Diseño exclusivo, con pocas unidades por diseño. Envíos a todo Chile.",
+   material:"Tela repelente a líquidos, hecho a mano en la Patagonia.", medidas:"Talla única."},
+  {id:"mandil", name:"Mandil", col:"cocina", price:19900, badge:"",
+   fabrics:["rep"], sizes:[["Único",0]],
+   lead:"Mandil confeccionado con tela repelente a líquidos y con tres bolsillos de gran tamaño.",
+   material:"Tela repelente a líquidos, hecho a mano en la Patagonia.", medidas:"Tres bolsillos grandes."},
+  {id:"pechera", name:"Pechera para pasta", col:"cocina", price:8000, badge:"Stock limitado",
+   fabrics:["rep"], sizes:[["Única",0]],
+   lead:"Pecheras para pasta, para quienes disfrutan sin preocuparse de las manchas. En color banco/rojo y blanco/grafito. Stock limitado.",
+   material:"Tela repelente a líquidos.", medidas:"Venta por unidad."},
+  {id:"individuales", cm:[43], name:"Individuales", col:"mesa", price:6000, badge:"",
+   fabrics:["rep"], sizes:[["Unidad",0]],
+   lead:"Individuales hechos a mano con tela repelente a líquidos. Precio por unidad.",
+   material:"Tela repelente a líquidos, hechos a mano.", medidas:"33 × 43 cm aproximadamente."},
+  {id:"panera", name:"Panera", col:"mesa", price:12000, badge:"",
+   fabrics:["rep"], sizes:[["Única",0]],
+   lead:"Paneras confeccionadas con tela repelente a líquidos, por fuera y por dentro. Precio por unidad.",
+   material:"Tela repelente a líquidos en el exterior y en el interior.", medidas:"Consulta las medidas por WhatsApp."},
+  {id:"mantel", quote:true, name:"Mantel antiderrame a medida", col:"mesa", price:0, badge:"A medida",
+   fabrics:["rep"], sizes:[["A medida",0]],
+   lead:"Manteles personalizados, confeccionados a la medida de tu mesa con tela repelente a líquidos. Cuéntanos las medidas de tu mesa y te cotizamos.",
+   material:"Tela repelente a líquidos.", medidas:"A la medida de tu mesa."},
+  {id:"cojin", cm:[45], name:"Funda de cojín", col:"hogar", price:11900, badge:"",
+   fabrics:["culla"], sizes:[["45 × 45 cm",0]],
+   lead:"Hermosas fundas de cojín en lino Culla y en tela repelente a líquidos, de 45 × 45 cm. Precio por unidad.",
+   material:"Lino Culla o tela repelente a líquidos.", medidas:"45 × 45 cm."},
+  {id:"flores", name:"Set de flores para difusores", col:"hogar", price:6900, badge:"",
+   fabrics:["rep"], sizes:[["Set de 3",0]],
+   lead:"Set de 3 flores en varillas de ratán para difusores de aromas, para complementar las varillas de tu difusor.",
+   material:"Flores de tela en varillas de ratán.", medidas:"Cada set trae 3 flores."}
 ];
-PRODUCTS.push(
-  {id:"packcocina", before:34980, name:"Set cocina: delantal + paños", col:"regalos", price:31990, badge:"Precio de pack",
-   fabrics:["hojas","cuadrille","rayas"], sizes:[["Único",0]],
-   lead:"Delantal adulto y par de paños en la misma tela, listos para regalar. Ahorras $2.990 frente a comprarlos por separado.",
-   material:"Lino-algodón 55/45.", medidas:"Delantal 70 × 85 cm · paños 50 × 70 cm.", cuidado:"Lavar a 30 °C. Planchar tibio."},
-  {id:"packonce", before:20980, name:"Set once: panera + bolsa del pan", col:"regalos", price:18990, badge:"Precio de pack",
-   fabrics:["hojas","cuadrille","rayas"], sizes:[["Único",0]],
-   lead:"Para la mesa de la once: panera de tela y bolsa para guardar la marraqueta. Ahorras $1.990.",
-   material:"Algodón y lino crudo.", medidas:"Panera 26 × 18 cm · bolsa 30 × 40 cm.", cuidado:"Lavar a mano. Secar estirada."},
-  {id:"packviaje", stock:0, before:31980, name:"Set viaje: tote + neceser", col:"regalos", price:28990, badge:"Precio de pack",
-   fabrics:["rayas","lunares","hojas"], sizes:[["Único",0]],
-   lead:"Bolso tote y neceser mediano a juego. Ahorras $2.990.",
-   material:"Lona de algodón y forro lavable.", medidas:"Tote 40 × 38 cm · neceser 22 × 14 cm.", cuidado:"Lavar a mano en agua fría."}
-);
 /* despacho por comuna: propio en Coyhaique y Puerto Aysén, Chilexpress al resto (tarifas de ejemplo) */
 const REGIONS = [
   {id:"aysen", name:"Aysén", chx:4900, days:"2 a 4", comunas:["Coyhaique","Aysén (Puerto Aysén y Chacabuco)","Cisnes","Cochrane","Chile Chico","Guaitecas","Lago Verde","O'Higgins","Río Ibáñez","Tortel"]},
@@ -674,8 +662,8 @@ const $ = s => document.querySelector(s);
 
 
 
-/* ---------- fotos: cada producto en su tela principal ---------- */
-const PHOTOS = {delantal:1, cojin:1, tote:1, neceser:1, individuales:1, pano:1, panera:1, bolsapan:1, packcocina:1, packonce:1, packviaje:1};
+/* ---------- fotos ---------- */
+const PHOTOS = {delantal:1, mandil:1, pechera:1, individuales:1, panera:1, mantel:1, cojin:1, flores:1};
 function hasPhoto(p, fab){ return PHOTOS[p.id] && fab === p.fabrics[0]; }
 function photo(p, fab, eager){
   return hasPhoto(p, fab)
@@ -686,6 +674,7 @@ function photo(p, fab, eager){
 /* ---------- precios ---------- */
 function minPrice(p){ return p.price + Math.min(...p.sizes.map(s=>s[1])); }
 function priceHTML(p, extra=0){
+  if(p.quote) return `<div class="price">Cotizar</div>`;
   const now = p.price + extra;
   if(p.before){
     const off = Math.round((p.before - p.price) / p.before * 100);
@@ -714,24 +703,23 @@ function check(form){
 /* ---------- vistas ---------- */
 function cardHTML(p, fab){
   const f = fab || p.fabrics[0];
-  const dots = p.fabrics.slice(0,5).map(x=>`<i title="${FABRICS[x].name}">${swatch(x,1)}</i>`).join("");
   return `<div class="card">
     <div class="ph"><a class="ph-link" href="#p-${p.id}" aria-label="${p.name}">${photo(p, f)}</a>${badgeOf(p)?`<span class="badge">${badgeOf(p)}</span>`:""}
-      ${soldOut(p) ? `<a class="pill white block quick" href="#p-${p.id}">Avísame cuando vuelva</a>`
+      ${p.quote ? `<a class="pill black block quick" href="#encargo">Cotizar mi mantel</a>`
+      : soldOut(p) ? `<a class="pill white block quick" href="#p-${p.id}">Avísame cuando vuelva</a>`
         : `<button class="pill black block quick" data-add="${p.id}" data-addfab="${f}" aria-label="Agregar ${p.name} en ${FABRICS[f].name}">Agregar al carro</button>`}</div>
-    <div class="dots-row">${dots}</div>
     <a class="name" href="#p-${p.id}">${p.name}</a>
-    <span class="sub">${COLS[p.col].name} · ${p.fabrics.length} telas</span>
+    <span class="sub">${COLS[p.col].name}</span>
     ${priceHTML(p)}
   </div>`;
 }
 
 const TILES = [
-  {img:"delantal", bg:"#efefef", fg:"#111111", kicker:"Cosido a mano en Coyhaique", title:"Telas que se eligen una a una", text:"Delantales, cojines y bolsos hechos en el taller. Tú eliges la tela y nosotras la cosemos.", ctas:[["Comprar","#p-delantal","black"],["Ver cocina","#tienda-cocina","cloud"]], alt:"Delantal de cocina en tela Hojas de lenga"},
-  {img:"cojin", bg:"#f0f0f0", fg:"#111111", kicker:"Colección nueva", title:"Ondas del Simpson", text:"Lino lavado en el verde-azul del río, para el living y la mesa.", ctas:[["Comprar","#p-cojin","black"],["Ver mesa y hogar","#tienda-mesa","cloud"]], alt:"Funda de cojín en tela Ondas del Simpson"},
-  {img:"packcocina", bg:"#f1f1f1", fg:"#111111", kicker:"Packs para regalar", title:"Regalos que se usan todos los días", text:"Delantal y paños en la misma tela, con precio de pack: $31.990.", ctas:[["Comprar","#p-packcocina","black"],["Ver los packs","#tienda-regalos","cloud"]], alt:"Set cocina: delantal y paños en Hojas de lenga"}
+  {img:"delantal", bg:"#e8ead8", fg:"#2f3a22", kicker:"Hecho a mano en la Patagonia chilena", title:"Deco textil para tu hogar", text:"Artículos textiles para tu hogar, con telas repelentes a líquidos. Para amantes del diseño y la funcionalidad.", ctas:[["Ver el delantal","#p-delantal","black"],["Ver la tienda","#tienda","cloud"]], alt:"Delantal estilo japonés de Almadeco"},
+  {img:"individuales", bg:"#e4e8d3", fg:"#2f3a22", kicker:"Para la mesa", title:"Disfruta sin preocuparte de las manchas", text:"Individuales y paneras hechos a mano con tela repelente a líquidos.", ctas:[["Comprar individuales","#p-individuales","black"],["Ver mesa","#tienda-mesa","cloud"]], alt:"Individuales con flores sobre una mesa"},
+  {img:"mantel", bg:"#e8ead8", fg:"#2f3a22", kicker:"A medida", title:"Mantel antiderrame", text:"Confeccionado a la medida de tu mesa. Cuéntanos las medidas y te cotizamos.", ctas:[["Cotizar mi mantel","#encargo","black"],["Ver mesa","#tienda-mesa","cloud"]], alt:"Mantel antiderrame a medida sobre una mesa servida"}
 ];
-const CATS = [["cocina","pano"],["mesa","cojin"],["llevar","tote"],["regalos","packcocina"]];
+const CATS = [["cocina","delantal"],["mesa","individuales"],["hogar","cojin"]];
 
 function inner(svg){ return svg.replace(/^<svg[^>]*>|<\/svg>$/g,""); }
 
@@ -742,10 +730,9 @@ function viewHome(){
         <div class="ctas">${t.ctas.map(c=>`<a class="pill ${c[2]}" href="${c[1]}">${c[0]}</a>`).join("")}</div></div>
     </div>`).join("");
   const dots = TILES.map((_,i)=>`<button data-dot="${i}" aria-label="Ir a la diapositiva ${i+1}"></button>`).join("");
-  const top = ["delantal","cojin","tote","panera","neceser","individuales"].map(id=>cardHTML(byId(id))).join("");
-  const cats = CATS.map(([k,id])=>`<a class="cat" href="#tienda-${k}" style="--cat-bg:#f5f5f5"><img src="img/${id}.jpg" alt="" loading="lazy"><span class="pill white">${COLS[k].name}</span></a>`).join("");
-  const spot = ["delantal","panera","packcocina","packonce"].map(id=>cardHTML(byId(id),"hojas")).join("");
-  const packs = PRODUCTS.filter(p=>p.col==="regalos").map(p=>cardHTML(p)).join("");
+  const top = ["delantal","individuales","cojin","panera","mandil","pechera"].map(id=>cardHTML(byId(id))).join("");
+  const cats = CATS.map(([k,id])=>`<a class="cat" href="#tienda-${k}" style="--cat-bg:#e8ead8"><img src="img/${id}.jpg" alt="" loading="lazy"><span class="pill white">${COLS[k].name}</span></a>`).join("");
+  const rest = ["mantel","flores","pechera","mandil"].map(id=>cardHTML(byId(id))).join("");
   return `
   <section class="campaign" id="carousel" aria-label="Destacados">
     <div class="track" id="track">${tiles}</div>
@@ -759,54 +746,29 @@ function viewHome(){
   </section>
 
   <section class="sec wrap">
-    <div class="sec-head"><h2>Compra por colección</h2></div>
+    <div class="sec-head"><h2>Compra por categoría</h2></div>
     <div class="rail">${cats}</div>
   </section>
 
   <section class="sec">
-    <div class="feature" style="--feat-bg:#f5f5f5">
-      <div class="sw"><img src="img/tela-detalle.jpg" alt="Detalle de la tela Hojas de lenga en el delantal" loading="lazy"></div>
-      <div class="copy"><span class="kicker" style="font-weight:500">La tela del mes</span><h2>Hojas de lenga</h2><p>Lino-algodón con hojas en rojo otoño y verde bosque, como la lenga de Aysén en abril. Disponible en delantales, cojines y paneras.</p><a class="pill black" href="#p-delantal">Comprar en esta tela</a></div>
+    <div class="feature" style="--feat-bg:#e8ead8">
+      <div class="sw"><img src="img/panera.jpg" alt="Panera e individuales en tela repelente a líquidos sobre la mesa" loading="lazy"></div>
+      <div class="copy"><span class="kicker" style="font-weight:500">Nuestra tela</span><h2>Repelente a líquidos</h2><p>Artículos textiles para tu hogar, hechos a mano en la Patagonia chilena con telas repelentes a líquidos. Para la mesa y para la cocina.</p><a class="pill black" href="#tienda-mesa">Ver la mesa</a></div>
     </div>
   </section>
 
   <section class="sec wrap">
-    <div class="sec-head"><h2>En Hojas de lenga</h2></div>
-    <div class="grid">${spot}</div>
-  </section>
-
-  <section class="sec wrap">
-    <div class="sec-head"><h2>Packs para regalar</h2><div class="tools"><a class="link" href="#tienda-regalos">Ver los packs</a></div></div>
-    <div class="grid" style="--cols:3">${packs}</div>
-  </section>
-
-  <section class="sec wrap">
-    <div class="sec-head"><h2>Hecho para durar</h2></div>
-    <div class="details">
-      <div class="detail"><img src="img/det-bolsillo.jpg" alt="Bolsillo del delantal con costura doble" loading="lazy"><b>Costura doble</b><span>Bolsillos y bordes con doble pespunte, para que aguanten el uso de todos los días.</span><a href="#p-delantal">Ver el delantal</a></div>
-      <div class="detail"><img src="img/det-asa.jpg" alt="Asa del bolso tote con costura reforzada en X" loading="lazy"><b>Asas reforzadas</b><span>Costura en X donde el asa se une al bolso, que es el punto que más se exige.</span><a href="#p-tote">Ver el bolso tote</a></div>
-      <div class="detail"><img src="img/det-vivo.jpg" alt="Esquina del cojín con terminación de vivo" loading="lazy"><b>Terminación con vivo</b><span>Los cojines llevan vivo en el borde y el cierre queda escondido.</span><a href="#p-cojin">Ver el cojín</a></div>
-    </div>
-    <p class="made-line">Cada pieza se corta y se cose en el taller de Coyhaique, en 3 a 5 días hábiles desde tu compra.</p>
-  </section>
-
-  <section class="sec wrap">
-    <div class="sec-head"><h2>Reseñas</h2><span class="mute" style="font-size:14px">Ejemplos para la demo</span></div>
-    <div class="rev-list">
-      <div class="rev"><img src="img/delantal.jpg" alt="" loading="lazy"><div><div class="stars" aria-label="5 de 5">★★★★★</div><h3>Las tiras son largas de verdad</h3><p>El delantal quedó precioso y se amarra adelante sin problema. Llegó a Puerto Aysén en dos días.</p><div class="meta">Camila R. · Puerto Aysén · <a href="#p-delantal">Delantal de cocina</a></div></div></div>
-      <div class="rev"><img src="img/cojin.jpg" alt="" loading="lazy"><div><div class="stars" aria-label="5 de 5">★★★★★</div><h3>El cierre no se ve</h3><p>Pedí tres fundas para el living. La costura es firme y el color es igual al de la foto.</p><div class="meta">Javiera M. · Coyhaique · <a href="#p-cojin">Funda de cojín</a></div></div></div>
-      <div class="rev"><img src="img/bolsapan.jpg" alt="" loading="lazy"><div><div class="stars" aria-label="4 de 5">★★★★☆</div><h3>La marraqueta dura más</h3><p>La guardo en la bolsa y sigue crujiente hasta la tarde. Le pondría un cordón un poco más largo.</p><div class="meta">Daniela P. · Santiago · <a href="#p-bolsapan">Bolsa para el pan</a></div></div></div>
-    </div>
+    <div class="sec-head"><h2>También en Almadeco</h2><div class="tools"><a class="link" href="#tienda">Ver todo</a></div></div>
+    <div class="grid">${rest}</div>
   </section>
 
   <section class="sec wrap" id="faq">
     <div class="sec-head"><h2>Preguntas frecuentes</h2></div>
     <div class="rows">
-      <details><summary>¿Cuánto demora mi pedido?</summary><div class="body"><p>Las piezas en stock salen en 1 a 2 días hábiles. Si eliges una tela que hay que cortar y coser, el taller demora entre 3 y 5 días hábiles.</p></div></details>
-      <details><summary>¿Cuánto cuesta el despacho?</summary><div class="body"><p>Coyhaique $3.500 con despacho propio, Puerto Aysén y Chacabuco $4.500, resto de Chile por Chilexpress desde $4.900 según la comuna. Retiro gratis en el taller. En Coyhaique y Puerto Aysén el despacho es gratis sobre $40.000. El valor exacto aparece al poner tu comuna en el pago.</p></div></details>
-      <details><summary>¿Puedo pedir una tela que no aparece?</summary><div class="body"><p>Sí. Escríbenos por WhatsApp y te mostramos las telas que hay en el taller esa semana.</p></div></details>
-      <details><summary>¿Cómo funcionan los cambios?</summary><div class="body"><p>Tienes 30 días para cambiar un producto sin uso. El despacho de vuelta es por nuestra cuenta en Coyhaique.</p></div></details>
-      <details><summary>¿Cómo puedo pagar?</summary><div class="body"><p>Con Mercado Pago: tarjeta de crédito (hasta 3 cuotas sin interés), débito, prepago o saldo de Mercado Pago. También con Webpay. La tienda nunca ve ni guarda los datos de tu tarjeta.</p></div></details>
+      <details><summary>¿Hacen envíos a todo Chile?</summary><div class="body"><p>Sí, enviamos a todo Chile. El valor exacto aparece al poner tu comuna en el pago.</p></div></details>
+      <details><summary>¿Puedo pedir un mantel a la medida de mi mesa?</summary><div class="body"><p>Sí. Cuéntanos las medidas de tu mesa desde “Manteles a medida” o por WhatsApp y te cotizamos con tela repelente a líquidos.</p></div></details>
+      <details><summary>¿Los delantales son todos iguales?</summary><div class="body"><p>No. Cada delantal tiene diseño exclusivo y hacemos pocas unidades por diseño.</p></div></details>
+      <details><summary>¿Cómo puedo pagar?</summary><div class="body"><p>Con Mercado Pago: tarjeta de crédito, débito, prepago o saldo de Mercado Pago. También con Webpay. La tienda nunca ve ni guarda los datos de tu tarjeta.</p></div></details>
     </div>
   </section>`;
 }
@@ -826,7 +788,7 @@ function viewShop(col){
       </div>
     </div>
     <div class="plp ${shopState.hide?"nofilter":""}" id="plp">
-      <aside class="filters" aria-label="Filtros">${colLinks}<h3>Tela</h3>${fabChecks}</aside>
+      <aside class="filters" aria-label="Filtros">${colLinks}</aside>
       <div class="grid" id="shopGrid"></div>
     </div>
   </div>`;
@@ -852,28 +814,28 @@ function viewProduct(p){
       <div class="gallery"><div class="thumbs" id="thumbs"></div><div class="main-ph" id="mainPh"></div></div>
       <div class="info">
         <div><h1>${p.name}</h1><div class="sub">${COLS[p.col].name}</div><div class="big-price" id="pPrice"></div></div>
-        <div>
+        ${p.fabrics.length>1?`<div>
           <div class="opt-head">Elige la tela <span id="fabName"></span></div>
           <div class="colorways" role="group" aria-label="Elegir tela">
             ${p.fabrics.map(f=>`<button class="cw" data-fab="${f}" aria-label="${FABRICS[f].name}" title="${FABRICS[f].name}">${swatch(f,1.3)}</button>`).join("")}
           </div>
-        </div>
+        </div>`:`<span id="fabName" hidden></span>`}
         ${p.sizes.length>1?`<div><div class="opt-head">Elige la medida</div><div class="sizes" role="group" aria-label="Elegir medida">${p.sizes.map((s,i)=>`<button class="size" data-size="${i}">${s[0]}</button>`).join("")}</div></div>`:""}
         <div class="buy">
-          <div class="qty-line"><span class="mute">Cantidad</span><div class="qty"><button data-q="-1" aria-label="Quitar uno">−</button><output id="qty">1</output><button data-q="1" aria-label="Agregar uno">+</button></div></div>
-          ${soldOut(p) ? `<button class="pill black block" disabled>Agotado</button>
+          <div class="qty-line" ${p.quote?'hidden':''}><span class="mute">Cantidad</span><div class="qty"><button data-q="-1" aria-label="Quitar uno">−</button><output id="qty">1</output><button data-q="1" aria-label="Agregar uno">+</button></div></div>
+          ${p.quote ? `<a class="pill black block" href="#encargo">Cotizar mi mantel</a>` : soldOut(p) ? `<button class="pill black block" disabled>Agotado</button>
           <form class="form" id="stockForm" novalidate style="gap:10px"><label>Te avisamos por correo cuando vuelva<input id="stockMail" type="email" required placeholder="tu@correo.cl" autocomplete="email"><span class="err" hidden>Revisa el correo.</span></label><button class="pill outline block">Avísame cuando vuelva</button><p class="form-msg" id="stockMsg" hidden></p></form>`
           : `<button class="pill black block" id="addBtn">Agregar al carro</button>`}
           ${lowStock(p) ? `<span class="low">Quedan ${p.stock} unidades</span>` : ""}
           <button class="pill outline block" id="waAsk">Consultar por WhatsApp</button>
-          <span class="made">Se cose en 3 a 5 días hábiles con la tela que elijas.</span>
+          <span class="made">Hecho a mano en la Patagonia chilena.</span>
         </div>
         <p style="margin:0">${p.lead}</p>
         <div class="rows">
           <details open><summary>Detalles del producto</summary><div class="body"><p>${p.material}</p></div></details>
           ${p.cm?`<details open><summary>Medidas</summary><div class="body"><svg class="tape" id="tape" viewBox="0 0 820 54" role="img" aria-label="Cinta métrica"></svg><p id="tapeCap"></p><p>${p.medidas}</p></div></details>`:`<details><summary>Medidas</summary><div class="body"><p>${p.medidas}</p></div></details>`}
-          <details><summary>Cuidados</summary><div class="body"><p>${p.cuidado}</p></div></details>
-          <details><summary>Despacho y cambios</summary><div class="body"><p>Coyhaique $3.500 · Puerto Aysén $4.500 · Resto de Chile por Chilexpress desde $4.900 · Retiro gratis en el taller. Gratis en Coyhaique y Puerto Aysén sobre $40.000. Cambios dentro de 30 días.</p><p><a href="#despachos">Ver despachos y cambios</a></p></div></details>
+          ${p.cuidado?`<details><summary>Cuidados</summary><div class="body"><p>${p.cuidado}</p></div></details>`:""}
+          <details><summary>Despacho y cambios</summary><div class="body"><p>Enviamos a todo Chile. El valor se calcula en el pago con tu comuna.</p><p><a href="#despachos">Ver despachos y cambios</a></p></div></details>
         </div>
       </div>
     </div>
@@ -886,7 +848,7 @@ function paintProduct(){
   $("#mainPh").innerHTML = view==="prod"
     ? photo(p, fabric, true) + (hasPhoto(p, fabric) ? "" : `<span class="ph-note">Vista ilustrativa en ${f.name}</span>`)
     : swatch(fabric, 3.5);
-  $("#thumbs").innerHTML = `<button data-view="prod" aria-pressed="${view==="prod"}" aria-label="Ver producto">${photo(p,fabric)}</button><button data-view="tela" aria-pressed="${view==="tela"}" aria-label="Ver detalle de la tela">${swatch(fabric,1.6)}</button>`;
+  $("#thumbs").innerHTML = `<button data-view="prod" aria-pressed="${view==="prod"}" aria-label="Ver producto">${photo(p,fabric)}</button>`;
   $("#fabName").textContent = f.name + " · " + f.note;
   document.querySelectorAll(".cw").forEach(b=>b.setAttribute("aria-pressed", b.dataset.fab===fabric));
   document.querySelectorAll(".size").forEach(b=>b.setAttribute("aria-pressed", +b.dataset.size===size));
@@ -913,21 +875,20 @@ function crumbs(name){ return `<div class="crumbs"><a href="#inicio">Inicio</a> 
 
 function viewNosotros(){
   return `<div class="wrap page">${crumbs("Quiénes somos")}
-    <h1>Un taller de costura en Coyhaique</h1>
+    <h1>Hecho a mano en la Patagonia</h1>
     <div class="split">
-      <img class="tall" src="img/det-bolsillo.jpg" alt="Bolsillo de un delantal con costura doble">
+      <img class="tall" src="img/delantal.jpg" alt="Delantal estilo japonés de Almadeco">
       <div>
-        <p>Trama empezó en una mesa de cocina en Coyhaique, con una máquina de coser y las ganas de hacer cosas que duren. Hoy cosemos delantales, cojines, bolsos y textiles para la mesa, uno por uno.</p>
-        <p>Elegimos telas resistentes y lindas de mirar: lino, algodón y lona. Cada pieza se corta para tu pedido y se revisa antes de salir del taller.</p>
-        <p>Nos gusta que lo que hacemos se use todos los días, se lave y siga firme. Por eso las costuras van dobles y las asas reforzadas.</p>
-        <p><span class="note-ex">Texto de ejemplo: en la tienda real va la historia del taller.</span></p>
+        <p>Almadeco hace artículos textiles para tu hogar, a mano en la Patagonia chilena y con telas repelentes a líquidos. Para amantes del diseño y la funcionalidad.</p>
+        <p>Hacemos delantales, mandiles, pecheras para pasta, individuales, paneras, manteles a medida y fundas de cojín. Los delantales tienen diseño exclusivo y pocas unidades por diseño.</p>
+        <p>Almadeco es el emprendimiento de Francisca Hernández Ramwell, su fundadora.</p>
         <p><a class="pill black" href="#tienda">Ver la tienda</a></p>
       </div>
     </div>
     <div class="facts3">
-      <div><b>Cosido a mano</b><span>Cada pieza pasa por la máquina y por las manos de quien la cose.</span></div>
-      <div><b>Hecho a pedido</b><span>Cortamos la tela cuando compras, así no hay sobrestock ni desperdicio.</span></div>
-      <div><b>Desde la Patagonia</b><span>Despachamos a todo Chile desde Coyhaique, Región de Aysén.</span></div>
+      <div><b>Hecho a mano</b><span>Cada pieza se confecciona a mano en la Patagonia chilena.</span></div>
+      <div><b>Tela repelente a líquidos</b><span>Para disfrutar la mesa y la cocina sin preocuparte de las manchas.</span></div>
+      <div><b>Desde la Patagonia</b><span>Enviamos a todo Chile.</span></div>
     </div>
   </div>`;
 }
@@ -951,10 +912,10 @@ function viewContacto(){
         <p class="form-msg" id="cOut" hidden></p>
       </form>
       <div class="aside-info">
-        <div><b>WhatsApp del taller</b><span>Respondemos de lunes a viernes, de 10:00 a 18:00.</span></div>
-        <div><b>Correo</b><span>hola@trama.cl <span class="hint">(ejemplo)</span></span></div>
-        <div><b>Retiro en el taller</b><span>Coyhaique, Aysén. Coordinamos la hora cuando tu pedido esté listo.</span></div>
-        <div><b>Redes sociales</b><div class="social"><a href="#contacto" aria-label="Instagram (ejemplo)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg></a><a href="#contacto" aria-label="Facebook (ejemplo)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9v2.3H7.9v3h2.6V21z"/></svg></a><a href="#contacto" aria-label="TikTok (ejemplo)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.6 3c.4 2.3 1.9 3.8 4.2 4v3.1c-1.5.1-2.9-.4-4.2-1.2v6.2a5.6 5.6 0 1 1-5.6-5.6c.3 0 .6 0 .9.1v3.2a2.5 2.5 0 1 0 1.6 2.3V3z"/></svg></a></div></div>
+        <div><b>WhatsApp</b><span><a href="https://wa.me/56993579990" target="_blank" rel="noopener">+56 9 3579 9990</a></span></div>
+        <div><b>Instagram</b><span><a href="https://www.instagram.com/almadecopatagonia/" target="_blank" rel="noopener">@almadecopatagonia</a></span></div>
+        <div><b>Retiro</b><span>Lo coordinamos por WhatsApp.</span></div>
+        <div><b>Redes sociales</b><div class="social"><a href="#contacto" aria-label="Instagram @almadecopatagonia"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg></a><a href="#contacto" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9v2.3H7.9v3h2.6V21z"/></svg></a><a href="#contacto" aria-label="TikTok (ejemplo)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.6 3c.4 2.3 1.9 3.8 4.2 4v3.1c-1.5.1-2.9-.4-4.2-1.2v6.2a5.6 5.6 0 1 1-5.6-5.6c.3 0 .6 0 .9.1v3.2a2.5 2.5 0 1 0 1.6 2.3V3z"/></svg></a></div></div>
       </div>
     </div>
   </div>`;
@@ -983,7 +944,7 @@ function viewDespachos(){
       <li>Tienes 30 días desde que recibes tu pedido para cambiar un producto sin uso y con su etiqueta.</li>
       <li>Si una pieza llega con una falla de confección, la reponemos sin costo.</li>
       <li>En Coyhaique, el despacho del cambio corre por nuestra cuenta.</li>
-      <li>Los encargos a medida y con bordado no tienen cambio, salvo falla.</li>
+      <li>Los manteles a medida no tienen cambio, salvo falla.</li>
     </ul>
     <h2>Cómo pedir un cambio</h2>
     <p>Escríbenos desde <a href="#contacto">contacto</a> con tu número de pedido y te respondemos en menos de 24 horas hábiles.</p>
@@ -1013,10 +974,10 @@ function viewLegal(){
 }
 
 function viewEncargo(){
-  const opts = PRODUCTS.filter(p=>p.col!=="regalos").map(p=>`<option value="${p.id}">${p.name}</option>`).join("");
+  const opts = PRODUCTS.filter(p=>p.id==="mantel").map(p=>`<option value="${p.id}">${p.name}</option>`).join("");
   return `<div class="wrap page">${crumbs("Encargos a medida")}
-    <h1>Encargos a medida</h1>
-    <p style="margin:-8px 0 28px">¿Necesitas otra medida, un bordado con nombre o varias piezas iguales para regalar? Cuéntanos y te respondemos con el valor final y el plazo.</p>
+    <h1>Manteles a medida</h1>
+    <p style="margin:-8px 0 28px">Confeccionamos el mantel a la medida de tu mesa con tela repelente a líquidos. Cuéntanos las medidas y te respondemos con el valor y el plazo.</p>
     <div class="split">
       <form class="form" id="encargoForm" novalidate>
         <label>Producto<select id="encProd">${opts}</select></label>
@@ -1024,21 +985,20 @@ function viewEncargo(){
           <label>Tela<select id="encFab"></select></label>
           <label>Cantidad<input id="encQty" type="number" min="1" max="20" value="1" inputmode="numeric"></label>
         </div>
-        <label>Medida especial <span class="hint">Opcional. Ej: delantal de 80 cm de largo</span><input id="encMed" maxlength="60"></label>
-        <label>Bordado con nombre <span class="hint">Opcional, hasta 14 letras, +${clp(EMB_PRICE)} por pieza</span><input id="encBord" maxlength="14"></label>
+        <label>Medidas de tu mesa <span class="hint">Largo × ancho en cm, y si es redonda u ovalada</span><input id="encMed" maxlength="60" required></label>
         <label>¿Para cuándo lo necesitas? <span class="hint">Opcional</span><input id="encDate" type="date"></label>
         <div class="two">
           <label>Tu nombre<input id="encName" required autocomplete="name"><span class="err" hidden>Escribe tu nombre.</span></label>
           <label>Correo<input id="encMail" type="email" required autocomplete="email"><span class="err" hidden>Revisa el correo.</span></label>
         </div>
         <label>Comentarios <span class="hint">Opcional</span><textarea id="encCom" rows="3" maxlength="400"></textarea></label>
-        <div class="estimate"><span>Valor estimado</span><b id="encEst"></b></div>
+        <div class="estimate"><span>Valor</span><b id="encEst">A cotizar</b></div>
         <button class="pill black block">Enviar encargo</button>
         <div id="encOut" hidden></div>
       </form>
       <div>
         <div class="ph-box" id="encPh"></div>
-        <p class="hint" style="margin-top:12px">El valor final lo confirma el taller según la medida y la tela. Se paga cuando apruebas el encargo.</p>
+        <p class="hint" style="margin-top:12px">El valor lo confirmamos según las medidas de tu mesa.</p>
       </div>
     </div>
   </div>`;
@@ -1047,24 +1007,23 @@ function paintEncargo(resetFab){
   const p = byId($("#encProd").value), sel = $("#encFab");
   if(resetFab || !sel.options.length) sel.innerHTML = p.fabrics.map(f=>`<option value="${f}">${FABRICS[f].name}</option>`).join("");
   const qty = Math.min(20, Math.max(1, parseInt($("#encQty").value) || 1));
-  const emb = $("#encBord").value.trim() ? EMB_PRICE : 0;
-  $("#encEst").textContent = clp((p.price + emb) * qty);
+  const emb = 0;
+  $("#encEst").textContent = "A cotizar";
   $("#encPh").innerHTML = photo(p, sel.value);
 }
 function sendEncargo(){
   const p = byId($("#encProd").value), f = FABRICS[$("#encFab").value];
   const qty = Math.min(20, Math.max(1, parseInt($("#encQty").value) || 1));
-  const med = $("#encMed").value.trim(), bord = $("#encBord").value.trim(), date = $("#encDate").value, com = $("#encCom").value.trim();
+  const med = $("#encMed").value.trim(), bord = "", date = $("#encDate").value, com = $("#encCom").value.trim();
   const when = date ? new Date(date + "T12:00").toLocaleDateString("es-CL", {day:"numeric", month:"long", year:"numeric"}) : "sin fecha";
   const text = `Hola, quiero hacer un encargo:
 • ${qty} × ${p.name} en ${f.name}
-• Medida: ${med || "estándar"}
-• Bordado: ${bord ? `“${bord}”` : "sin bordado"}
+• Medidas de la mesa: ${med}
 • Para el: ${when}${com ? `\n• Comentarios: ${com}` : ""}
 Valor estimado: ${$("#encEst").textContent}
 ${$("#encName").value.trim()} · ${$("#encMail").value.trim()}`;
   const out = $("#encOut");
-  out.innerHTML = `<p class="form-msg">Encargo recibido. Te respondemos con el valor final y el plazo en menos de 24 horas hábiles.</p><p class="hint" style="margin:12px 0 0">Así le llega al taller:</p><pre class="preview">${esc(text)}</pre>`;
+  out.innerHTML = `<p class="form-msg">Solicitud recibida. Te respondemos con el valor y el plazo.</p><p class="hint" style="margin:12px 0 0">Así nos llega:</p><pre class="preview">${esc(text)}</pre>`;
   out.hidden = false;
 }
 /* ---------- integraciones: Pixel de Meta + registro de la demo ---------- */
@@ -1167,7 +1126,7 @@ function openPay(){
     if(!pending) return;
     const c3 = Math.round(T.total/3), c2 = Math.round(T.total/2);
     $("#payBox").innerHTML = `
-      <div class="who"><b>${payLabel()}</b><span>Pago a Trama · ${pending.id}</span></div>
+      <div class="who"><b>${payLabel()}</b><span>Pago a Almadeco · ${pending.id}</span></div>
       <div><div class="hint">Total a pagar</div><div class="amount">${clp(T.total)}</div></div>
       <form class="form" id="cardForm" novalidate>
         <label>Número de tarjeta<input id="cardNum" inputmode="numeric" autocomplete="cc-number" value="4509 9535 6623 3704"></label>
@@ -1205,7 +1164,7 @@ function finishOrder(cuotas, last4){
   px("Purchase", {...itemsData(cart), value:T.total}, `${lastOrder.id} · ${clp(T.total)}`);
   if(lastOrder.ot) devLog("Chilexpress", "Orden de transporte creada", `OT ${lastOrder.ot} · ${co.comuna}, ${REGIONS.find(r=>r.id===co.region).name}`);
   devLog("Correo", "Confirmación enviada", `A ${co.mail} · “Recibimos tu pedido ${lastOrder.id}”`);
-  try { localStorage.setItem("trama-order", JSON.stringify(lastOrder)); } catch(e) {}
+  try { localStorage.setItem("almadeco-order", JSON.stringify(lastOrder)); } catch(e) {}
   cart = []; coupon = null; couponMsg = ""; gift = {on:false, msg:""}; saveCart(); paintCart();
   $("#payModal").hidden = true; pending = null;
   location.hash = "#pedido";
@@ -1238,9 +1197,9 @@ function viewPedido(){
       <div>
         <h2 style="margin-top:0">El correo que te llega</h2>
         <div class="mail">
-          <div class="hdr"><span>De: <b>Trama</b> &lt;pedidos@trama.cl&gt;</span><span>Para: ${esc(o.co.mail)}</span><span>Asunto: <b>Recibimos tu pedido ${o.id}</b></span></div>
+          <div class="hdr"><span>De: <b>Almadeco</b> &lt;pedidos@almadeco.cl&gt;</span><span>Para: ${esc(o.co.mail)}</span><span>Asunto: <b>Recibimos tu pedido ${o.id}</b></span></div>
           <div class="bd">
-            <span class="logo">Trama</span>
+            <span class="logo">Almadeco</span>
             <p>Hola ${esc(first)}, gracias por tu compra. Ya estamos preparando tu pedido en el taller.</p>
             ${rows}
             ${T.disc ? `<div class="row disc"><span>Descuento (${o.coupon})</span><span>−${clp(T.disc)}</span></div>` : ""}
@@ -1262,7 +1221,7 @@ let cart = [];
 /* datos del pago; la entrega se elige con la comuna */
 const co = {name:"", mail:"", tel:"", region:"aysen", comuna:"Coyhaique", dir:"", method:"propio", pay:"mp"};
 let lastOrder = null;
-try { lastOrder = JSON.parse(localStorage.getItem("trama-order")); } catch(e) {}
+try { lastOrder = JSON.parse(localStorage.getItem("almadeco-order")); } catch(e) {}
 const FREE_SHIP = 40000, GIFT_PRICE = 1500, EMB_PRICE = 3000;
 const COUPONS = {
   BIENVENIDA10: {pct:10, label:"10% de bienvenida"},
@@ -1270,9 +1229,9 @@ const COUPONS = {
 };
 let coupon = null, couponMsg = "", couponOk = false;
 let gift = {on:false, msg:""};
-try { cart = JSON.parse(localStorage.getItem("trama-cart")) || []; } catch(e) { cart = []; }
+try { cart = JSON.parse(localStorage.getItem("almadeco-cart")) || []; } catch(e) { cart = []; }
 cart = cart.filter(it => byId(it.id) && FABRICS[it.fabric]);
-function saveCart(){ try { localStorage.setItem("trama-cart", JSON.stringify(cart)); } catch(e) {} }
+function saveCart(){ try { localStorage.setItem("almadeco-cart", JSON.stringify(cart)); } catch(e) {} }
 function unitPrice(it){ const p = byId(it.id); return p.price + p.sizes[it.size][1]; }
 function addToCart(id, fabric, size, qty){
   const ex = cart.find(it=>it.id===id && it.fabric===fabric && it.size===size);
@@ -1406,7 +1365,7 @@ document.addEventListener("click", e=>{
   else if(t.dataset.view){ pdp.view = t.dataset.view; paintProduct(); }
   else if(t.dataset.q){ pdp.qty = Math.min(pdp.p.stock ?? 99, Math.max(1, pdp.qty + +t.dataset.q)); paintProduct(); }
   else if(t.id==="addBtn"){ addToCart(pdp.p.id, pdp.fabric, pdp.size, pdp.qty); toast(`Agregado: ${pdp.p.name} en ${FABRICS[pdp.fabric].name}`); openCart(); }
-  else if(t.id==="waAsk" || t.id==="waBtn"){ $("#waPop").hidden = !$("#waPop").hidden; }
+  else if(t.id==="waAsk" || t.id==="waBtn"){ const msg = t.id==="waAsk" && pdp ? `Hola, quiero consultar por: ${pdp.p.name}` : "Hola, quiero consultar por los productos de Almadeco"; window.open(`https://wa.me/${WA_NUM}?text=${encodeURIComponent(msg)}`, "_blank", "noopener"); }
   else if(t.dataset.cq){ const [i,d] = t.dataset.cq.split(":").map(Number); cart[i].qty += d; if(cart[i].qty<1) cart.splice(i,1); saveCart(); paintCart(); }
   else if(t.dataset.rm){ cart.splice(+t.dataset.rm,1); saveCart(); paintCart(); }
   else if(t.id==="payCancel"){ $("#payModal").hidden = true; pending = null; }
