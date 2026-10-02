@@ -473,7 +473,7 @@ table.tbl{width:100%;border-collapse:collapse;min-width:540px}
 
 <header class="nav"><div class="wrap">
   <button class="circ burger" id="burger" aria-label="Abrir menú"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
-  <a class="logo" href="#inicio" aria-label="Almadeco, inicio"><img src="img/logo.png?v=20261002b" alt="Almadeco" style="height:34px;width:auto;display:block"></a>
+  <a class="logo" href="#inicio" aria-label="Almadeco, inicio"><img src="img/logo.png?v=20261002c" alt="Almadeco" style="height:34px;width:auto;display:block"></a>
   <nav class="main" aria-label="Principal">
     <a href="#tienda" data-nav="tienda">Todo</a>
     <a href="#tienda-cocina" data-nav="tienda-cocina">Cocina</a>
@@ -667,7 +667,7 @@ const PHOTOS = {delantal:1, mandil:1, pechera:1, individuales:1, panera:1, mante
 function hasPhoto(p, fab){ return PHOTOS[p.id] && fab === p.fabrics[0]; }
 function photo(p, fab, eager){
   return hasPhoto(p, fab)
-    ? `<img src="img/${p.id}.jpg?v=20261002b" alt="${p.name} en ${FABRICS[fab].name}" ${eager?"":'loading="lazy"'} width="900" height="900">`
+    ? `<img src="img/${p.id}.jpg?v=20261002c" alt="${p.name} en ${FABRICS[fab].name}" ${eager?"":'loading="lazy"'} width="900" height="900">`
     : art(p.id, fab);
 }
 
@@ -725,13 +725,13 @@ function inner(svg){ return svg.replace(/^<svg[^>]*>|<\/svg>$/g,""); }
 
 function viewHome(){
   const tiles = TILES.map((t,i)=>`<div class="tile" style="--tile-bg:${t.bg};--tile-fg:${t.fg}" role="group" aria-roledescription="diapositiva" aria-label="${i+1} de ${TILES.length}">
-      <img class="prod" src="img/${t.img}.jpg?v=20261002b" alt="${t.alt}" ${i?'':'fetchpriority="high"'}>
+      <img class="prod" src="img/${t.img}.jpg?v=20261002c" alt="${t.alt}" ${i?'':'fetchpriority="high"'}>
       <div class="copy"><span class="kicker">${t.kicker}</span>${i===0?`<h1>${t.title}</h1>`:`<h2>${t.title}</h2>`}<p>${t.text}</p>
         <div class="ctas">${t.ctas.map(c=>`<a class="pill ${c[2]}" href="${c[1]}">${c[0]}</a>`).join("")}</div></div>
     </div>`).join("");
   const dots = TILES.map((_,i)=>`<button data-dot="${i}" aria-label="Ir a la diapositiva ${i+1}"></button>`).join("");
   const top = ["delantal","individuales","cojin","panera","mandil","pechera"].map(id=>cardHTML(byId(id))).join("");
-  const cats = CATS.map(([k,id])=>`<a class="cat" href="#tienda-${k}" style="--cat-bg:#e8ead8"><img src="img/${id}.jpg?v=20261002b" alt="" loading="lazy"><span class="pill white">${COLS[k].name}</span></a>`).join("");
+  const cats = CATS.map(([k,id])=>`<a class="cat" href="#tienda-${k}" style="--cat-bg:#e8ead8"><img src="img/${id}.jpg?v=20261002c" alt="" loading="lazy"><span class="pill white">${COLS[k].name}</span></a>`).join("");
   const rest = ["mantel","flores","pechera","mandil"].map(id=>cardHTML(byId(id))).join("");
   return `
   <section class="campaign" id="carousel" aria-label="Destacados">
@@ -752,7 +752,7 @@ function viewHome(){
 
   <section class="sec">
     <div class="feature" style="--feat-bg:#e8ead8">
-      <div class="sw"><img src="img/panera.jpg?v=20261002b" alt="Panera e individuales en tela repelente a líquidos sobre la mesa" loading="lazy"></div>
+      <div class="sw"><img src="img/panera.jpg?v=20261002c" alt="Panera e individuales en tela repelente a líquidos sobre la mesa" loading="lazy"></div>
       <div class="copy"><span class="kicker" style="font-weight:500">Nuestra tela</span><h2>Repelente a líquidos</h2><p>Artículos textiles para tu hogar, hechos a mano en la Patagonia chilena con telas repelentes a líquidos. Para la mesa y para la cocina.</p><a class="pill black" href="#tienda-mesa">Ver la mesa</a></div>
     </div>
   </section>
@@ -877,7 +877,7 @@ function viewNosotros(){
   return `<div class="wrap page">${crumbs("Quiénes somos")}
     <h1>Hecho a mano en la Patagonia</h1>
     <div class="split">
-      <img class="tall" src="img/delantal.jpg?v=20261002b" alt="Delantal estilo japonés de Almadeco">
+      <img class="tall" src="img/delantal.jpg?v=20261002c" alt="Delantal estilo japonés de Almadeco">
       <div>
         <p>Almadeco hace artículos textiles para tu hogar, a mano en la Patagonia chilena y con telas repelentes a líquidos. Para amantes del diseño y la funcionalidad.</p>
         <p>Hacemos delantales, mandiles, pecheras para pasta, individuales, paneras, manteles a medida y fundas de cojín. Los delantales tienen diseño exclusivo y pocas unidades por diseño.</p>
