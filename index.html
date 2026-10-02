@@ -370,6 +370,86 @@ table.tbl{width:100%;border-collapse:collapse;min-width:540px}
 .link-btn{background:none;border:0;padding:0;text-decoration:underline;font-size:13px;color:var(--mute)}
 .low{color:var(--sale);font-size:14px;font-weight:500}
 .pill[disabled]{opacity:.35;cursor:not-allowed}
+
+/* pago */
+.pay-logos{margin:0;text-align:center;font-size:13px;color:var(--mute)}
+.co{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:clamp(24px,4vw,64px);align-items:start;padding-bottom:24px}
+.co > *{min-width:0}
+@media (max-width:900px){.co{grid-template-columns:minmax(0,1fr)}}
+.co-form{max-width:none;gap:28px}
+.co-form fieldset{border:0;margin:0;padding:0;display:grid;gap:16px;min-width:0}
+.co-form legend{display:flex;align-items:center;gap:12px;font-size:20px;font-weight:500;padding:0;margin-bottom:16px}
+.co-form legend span{width:30px;height:30px;border-radius:50%;background:var(--ink);color:var(--on-ink);display:grid;place-items:center;font-size:14px}
+.opts{display:grid;gap:8px}
+.opt{display:grid!important;grid-template-columns:auto minmax(0,1fr) auto;gap:14px!important;align-items:center;padding:16px;border-radius:8px;box-shadow:inset 0 0 0 1px var(--hair);cursor:pointer;font-weight:400!important}
+.opt:hover{box-shadow:inset 0 0 0 1px var(--ink)}
+.opt:has(input:checked){box-shadow:inset 0 0 0 2px var(--ink)}
+.form .opt input{accent-color:#111;width:18px;height:18px;margin:0;box-shadow:none;padding:0}
+.opt b{display:block;font-weight:500;font-size:15px}
+.opt small{display:block;color:var(--mute);font-size:13px;margin-top:2px}
+.opt .num{font-weight:500;font-variant-numeric:tabular-nums;white-space:nowrap}
+.co-sum{background:var(--cloud);padding:24px;display:grid;gap:10px;position:sticky;top:84px}
+.co-sum h2{font-size:20px;margin:0 0 6px}
+.co-sum .line{grid-template-columns:64px minmax(0,1fr) auto;padding:10px 0;gap:12px}
+.co-sum .line h3{font-size:14px}
+.co-sum .line .var{font-size:13px}
+.co-sum .row{font-size:15px}
+.co-sum .secure{font-size:13px;color:var(--mute);display:flex;gap:8px;align-items:center;margin:6px 0 0}
+.co-sum .secure svg{width:16px;height:16px;flex:0 0 16px}
+@media (max-width:900px){.co-sum{position:static}}
+.btn-big{min-height:60px;font-size:17px}
+
+/* ventana de pago */
+[hidden]{display:none!important}
+.modal{position:fixed;inset:0;z-index:80;display:grid;place-items:center;padding:16px;background:rgba(0,0,0,.5)}
+.modal .box{background:var(--canvas);width:min(440px,100%);max-height:calc(100vh - 32px);overflow-y:auto;border-radius:12px;padding:28px;display:grid;gap:16px}
+.modal h2{font-size:22px}
+.modal .who{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-bottom:14px;border-bottom:1px solid var(--hair-soft);font-size:14px;color:var(--mute)}
+.modal .who b{color:var(--ink);font-size:16px;font-weight:500}
+.modal .amount{font-size:32px;font-weight:500;font-variant-numeric:tabular-nums}
+.modal .form{gap:12px}
+.spin{width:40px;height:40px;border-radius:50%;border:3px solid var(--hair-soft);border-top-color:var(--ink);animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.modal .center{display:grid;gap:14px;justify-items:center;text-align:center;padding:24px 0}
+.ok-mark{width:56px;height:56px;border-radius:50%;background:var(--success);color:#fff;display:grid;place-items:center}
+.ok-mark svg{width:28px;height:28px}
+
+/* pedido confirmado */
+.track-list{list-style:none;padding:0!important;margin:8px 0 0}
+.track-list li{position:relative;padding:0 0 22px 34px;margin:0!important}
+.track-list li::before{content:"";position:absolute;left:8px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--canvas);box-shadow:inset 0 0 0 2px var(--hair)}
+.track-list li::after{content:"";position:absolute;left:13px;top:20px;bottom:-2px;width:2px;background:var(--hair-soft)}
+.track-list li:last-child::after{display:none}
+.track-list li.done::before{background:var(--success);box-shadow:none}
+.track-list b{display:block;font-weight:500;color:var(--ink)}
+.track-list span{font-size:14px;color:var(--mute)}
+.mail{box-shadow:0 0 0 1px var(--hair);border-radius:8px;overflow:hidden;font-size:14px}
+.mail .hdr{background:var(--cloud);padding:14px 18px;display:grid;gap:2px;color:var(--mute)}
+.mail .hdr b{color:var(--ink);font-weight:500}
+.mail .bd{padding:22px 18px;display:grid;gap:12px}
+.mail .bd .logo{font-size:26px}
+.mail .bd p{margin:0;color:var(--charcoal)}
+.mail .bd .row{font-size:14px}
+.mail .bd .row.total{font-size:16px}
+
+/* panel de integraciones (solo demo) */
+.dev-btn{position:fixed;left:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:40;min-height:44px!important;padding:8px 18px!important;box-shadow:0 6px 18px rgba(0,0,0,.18)}
+.dev-btn i{font-style:normal;background:var(--sale);color:#fff;border-radius:20px;min-width:22px;height:22px;display:grid;place-items:center;font-size:12px;padding:0 6px}
+.dev-btn i:empty{display:none}
+.dev{position:fixed;left:18px;bottom:calc(72px + env(safe-area-inset-bottom,0px));z-index:45;width:min(400px,calc(100% - 36px));max-height:min(60vh,520px);background:var(--canvas);box-shadow:0 0 0 1px var(--hair-soft),0 16px 40px rgba(0,0,0,.18);border-radius:12px;display:flex;flex-direction:column}
+.dev header{padding:16px 18px 12px;border-bottom:1px solid var(--hair-soft);display:grid;gap:4px}
+.dev header b{font-weight:500}
+.dev header span{font-size:13px;color:var(--mute)}
+.dev ol{list-style:none;margin:0;padding:6px 18px 12px;overflow-y:auto}
+.dev li{padding:10px 0;border-bottom:1px solid var(--hair-soft);display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:4px 10px;font-size:13px;align-items:baseline}
+.dev li:last-child{border-bottom:0}
+.dev .tag{font-size:11px;font-weight:700;border-radius:20px;padding:2px 8px;color:#fff;white-space:nowrap}
+.dev .tag.meta{background:#1d5bd8}.dev .tag.mp{background:#0a6fb8}.dev .tag.chx{background:#9a6b00}.dev .tag.mail{background:#39393b}
+.dev li b{font-weight:500}
+.dev li time{color:var(--stone);font-variant-numeric:tabular-nums}
+.dev li small{grid-column:2/-1;color:var(--mute)}
+.dev .empty-log{color:var(--mute);font-size:13px;display:block}
+@media (max-width:600px){.dev-btn{left:12px;bottom:calc(14px + env(safe-area-inset-bottom,0px))}.dev{left:12px;width:calc(100% - 24px)}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
@@ -431,6 +511,12 @@ table.tbl{width:100%;border-collapse:collapse;min-width:540px}
 </button>
 <div class="wa-pop" id="waPop" hidden><b>Hablemos por WhatsApp</b><span>En la tienda real, este botón abre WhatsApp con un mensaje listo para el taller.</span></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="modal" id="payModal" hidden role="dialog" aria-modal="true" aria-labelledby="payTitle"><div class="box" id="payBox"></div></div>
+<button class="pill white dev-btn" id="devBtn" aria-expanded="false" aria-controls="devPanel">Integraciones <i id="devCount"></i></button>
+<section class="dev" id="devPanel" hidden aria-label="Integraciones en vivo">
+  <header><b>Integraciones en vivo</b><span>Lo que la tienda le avisa a Meta, Mercado Pago, Chilexpress y al correo mientras navegas. Este panel solo existe en la demo.</span></header>
+  <ol id="devLog"><li class="empty-log">Navega, agrega algo al carro y paga para ver los eventos.</li></ol>
+</section>
 
 <script>
 /* ---------- datos de ejemplo ---------- */
@@ -502,12 +588,35 @@ PRODUCTS.push(
    lead:"Bolso tote y neceser mediano a juego. Ahorras $2.990.",
    material:"Lona de algodón y forro lavable.", medidas:"Tote 40 × 38 cm · neceser 22 × 14 cm.", cuidado:"Lavar a mano en agua fría."}
 );
-const SHIPPING = [
-  ["coyhaique","Coyhaique · despacho propio",3500],
-  ["aysen","Puerto Aysén y Chacabuco",4500],
-  ["chile","Resto de Chile · Starken",6900],
-  ["retiro","Retiro en el taller",0]
+/* despacho por comuna: propio en Coyhaique y Puerto Aysén, Chilexpress al resto (tarifas de ejemplo) */
+const REGIONS = [
+  {id:"aysen", name:"Aysén", chx:4900, days:"2 a 4", comunas:["Coyhaique","Aysén (Puerto Aysén y Chacabuco)","Cisnes","Cochrane","Chile Chico","Guaitecas","Lago Verde","O'Higgins","Río Ibáñez","Tortel"]},
+  {id:"arica", name:"Arica y Parinacota", chx:8900, days:"4 a 6", comunas:["Arica","Putre"]},
+  {id:"tarapaca", name:"Tarapacá", chx:8900, days:"4 a 6", comunas:["Iquique","Alto Hospicio","Pozo Almonte"]},
+  {id:"antofagasta", name:"Antofagasta", chx:8400, days:"3 a 5", comunas:["Antofagasta","Calama","Tocopilla","Mejillones"]},
+  {id:"atacama", name:"Atacama", chx:7900, days:"3 a 5", comunas:["Copiapó","Vallenar","Caldera"]},
+  {id:"coquimbo", name:"Coquimbo", chx:7400, days:"3 a 5", comunas:["La Serena","Coquimbo","Ovalle","Illapel"]},
+  {id:"valparaiso", name:"Valparaíso", chx:6900, days:"2 a 4", comunas:["Valparaíso","Viña del Mar","Quilpué","Villa Alemana","San Antonio","Los Andes","Quillota"]},
+  {id:"rm", name:"Metropolitana", chx:6900, days:"2 a 4", comunas:["Santiago","Providencia","Las Condes","Ñuñoa","La Florida","Maipú","Puente Alto","Vitacura","San Miguel","Peñalolén"]},
+  {id:"ohiggins", name:"O'Higgins", chx:6900, days:"3 a 5", comunas:["Rancagua","San Fernando","Pichilemu"]},
+  {id:"maule", name:"Maule", chx:6900, days:"3 a 5", comunas:["Talca","Curicó","Linares","Constitución"]},
+  {id:"nuble", name:"Ñuble", chx:6900, days:"3 a 5", comunas:["Chillán","San Carlos"]},
+  {id:"biobio", name:"Biobío", chx:6900, days:"3 a 5", comunas:["Concepción","Talcahuano","Los Ángeles","San Pedro de la Paz","Coronel"]},
+  {id:"araucania", name:"Araucanía", chx:6400, days:"2 a 4", comunas:["Temuco","Padre Las Casas","Villarrica","Pucón","Angol"]},
+  {id:"losrios", name:"Los Ríos", chx:6400, days:"2 a 4", comunas:["Valdivia","La Unión","Panguipulli"]},
+  {id:"loslagos", name:"Los Lagos", chx:5900, days:"2 a 4", comunas:["Puerto Montt","Osorno","Puerto Varas","Castro","Ancud","Chaitén"]},
+  {id:"magallanes", name:"Magallanes", chx:7900, days:"3 a 5", comunas:["Punta Arenas","Puerto Natales","Porvenir"]}
 ];
+const OWN_DELIVERY = {"Coyhaique":[3500,"1 a 2"], "Aysén (Puerto Aysén y Chacabuco)":[4500,"2 a 3"]};
+/* opciones de entrega para una comuna: [id, nombre, costo base, plazo] */
+function shipOptions(regionId, comuna){
+  const r = REGIONS.find(x=>x.id===regionId); if(!r || !comuna) return [];
+  const own = OWN_DELIVERY[comuna], o = [];
+  if(own) o.push(["propio", `Despacho propio a ${comuna.split(" (")[0]}`, own[0], own[1]+" días hábiles"]);
+  else o.push(["chx", "Chilexpress a domicilio", r.chx, r.days+" días hábiles"]);
+  o.push(["retiro", "Retiro en el taller, Coyhaique", 0, "Coordinamos la hora"]);
+  return o;
+}
 
 /* ---------- ilustraciones de producto ---------- */
 let uid = 0;
@@ -694,10 +803,10 @@ function viewHome(){
     <div class="sec-head"><h2>Preguntas frecuentes</h2></div>
     <div class="rows">
       <details><summary>¿Cuánto demora mi pedido?</summary><div class="body"><p>Las piezas en stock salen en 1 a 2 días hábiles. Si eliges una tela que hay que cortar y coser, el taller demora entre 3 y 5 días hábiles.</p></div></details>
-      <details><summary>¿Cuánto cuesta el despacho?</summary><div class="body"><p>Coyhaique $3.500 con despacho propio, Puerto Aysén y Chacabuco $4.500, resto de Chile por Starken $6.900. Retiro gratis en el taller. En Coyhaique y Puerto Aysén el despacho es gratis sobre $40.000.</p></div></details>
+      <details><summary>¿Cuánto cuesta el despacho?</summary><div class="body"><p>Coyhaique $3.500 con despacho propio, Puerto Aysén y Chacabuco $4.500, resto de Chile por Chilexpress desde $4.900 según la comuna. Retiro gratis en el taller. En Coyhaique y Puerto Aysén el despacho es gratis sobre $40.000. El valor exacto aparece al poner tu comuna en el pago.</p></div></details>
       <details><summary>¿Puedo pedir una tela que no aparece?</summary><div class="body"><p>Sí. Escríbenos por WhatsApp y te mostramos las telas que hay en el taller esa semana.</p></div></details>
       <details><summary>¿Cómo funcionan los cambios?</summary><div class="body"><p>Tienes 30 días para cambiar un producto sin uso. El despacho de vuelta es por nuestra cuenta en Coyhaique.</p></div></details>
-      <details><summary>¿Cómo puedo pagar?</summary><div class="body"><p>Débito, crédito o transferencia. En la tienda real el pago se hace con Webpay o Mercado Pago.</p></div></details>
+      <details><summary>¿Cómo puedo pagar?</summary><div class="body"><p>Con Mercado Pago: tarjeta de crédito (hasta 3 cuotas sin interés), débito, prepago o saldo de Mercado Pago. También con Webpay. La tienda nunca ve ni guarda los datos de tu tarjeta.</p></div></details>
     </div>
   </section>`;
 }
@@ -764,7 +873,7 @@ function viewProduct(p){
           <details open><summary>Detalles del producto</summary><div class="body"><p>${p.material}</p></div></details>
           ${p.cm?`<details open><summary>Medidas</summary><div class="body"><svg class="tape" id="tape" viewBox="0 0 820 54" role="img" aria-label="Cinta métrica"></svg><p id="tapeCap"></p><p>${p.medidas}</p></div></details>`:`<details><summary>Medidas</summary><div class="body"><p>${p.medidas}</p></div></details>`}
           <details><summary>Cuidados</summary><div class="body"><p>${p.cuidado}</p></div></details>
-          <details><summary>Despacho y cambios</summary><div class="body"><p>Coyhaique $3.500 · Puerto Aysén $4.500 · Resto de Chile por Starken $6.900 · Retiro gratis en el taller. Gratis en Coyhaique y Puerto Aysén sobre $40.000. Cambios dentro de 30 días.</p><p><a href="#despachos">Ver despachos y cambios</a></p></div></details>
+          <details><summary>Despacho y cambios</summary><div class="body"><p>Coyhaique $3.500 · Puerto Aysén $4.500 · Resto de Chile por Chilexpress desde $4.900 · Retiro gratis en el taller. Gratis en Coyhaique y Puerto Aysén sobre $40.000. Cambios dentro de 30 días.</p><p><a href="#despachos">Ver despachos y cambios</a></p></div></details>
         </div>
       </div>
     </div>
@@ -860,11 +969,15 @@ function viewDespachos(){
       <tbody>
         <tr><td>Coyhaique, despacho propio</td><td class="num">$3.500 · gratis sobre $40.000</td><td>1 a 2 días hábiles</td></tr>
         <tr><td>Puerto Aysén y Puerto Chacabuco</td><td class="num">$4.500 · gratis sobre $40.000</td><td>2 a 3 días hábiles</td></tr>
-        <tr><td>Resto de Chile, por Starken</td><td class="num">$6.900</td><td>3 a 6 días hábiles</td></tr>
+        <tr><td>Otras comunas de Aysén, por Chilexpress</td><td class="num">$4.900</td><td>2 a 4 días hábiles</td></tr>
+        <tr><td>Resto de Chile, por Chilexpress</td><td class="num">$5.900 a $8.900 según región</td><td>2 a 6 días hábiles</td></tr>
         <tr><td>Retiro en el taller</td><td class="num">Gratis</td><td>Coordinamos la hora</td></tr>
       </tbody>
     </table></div>
-    <p>Las piezas hechas a pedido suman 3 a 5 días hábiles de confección antes del despacho. Te avisamos por correo cuando sale tu pedido, con el número de seguimiento.</p>
+    <p>Las piezas hechas a pedido suman 3 a 5 días hábiles de confección antes del despacho. Te avisamos por correo cuando sale tu pedido, con el número de seguimiento de Chilexpress.</p>
+    <h2>Tarifas Chilexpress por región</h2>
+    <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Región</th><th>Costo</th><th>Plazo</th></tr></thead><tbody>${REGIONS.filter(r=>r.chx).map(r=>`<tr><td>${r.name}</td><td class="num">${clp(r.chx)}</td><td>${r.days} días hábiles</td></tr>`).join("")}</tbody></table></div>
+    <p>Despachamos a todas las comunas donde llega Chilexpress. El valor exacto se calcula en el pago con tu comuna; en la tienda real se cotiza en línea con Chilexpress según el peso del paquete.</p>
     <h2 id="cambios">Cambios y devoluciones</h2>
     <ul>
       <li>Tienes 30 días desde que recibes tu pedido para cambiar un producto sin uso y con su etiqueta.</li>
@@ -954,12 +1067,203 @@ ${$("#encName").value.trim()} · ${$("#encMail").value.trim()}`;
   out.innerHTML = `<p class="form-msg">Encargo recibido. Te respondemos con el valor final y el plazo en menos de 24 horas hábiles.</p><p class="hint" style="margin:12px 0 0">Así le llega al taller:</p><pre class="preview">${esc(text)}</pre>`;
   out.hidden = false;
 }
-const PAGES = {nosotros:viewNosotros, contacto:viewContacto, despachos:viewDespachos, legal:viewLegal, encargo:viewEncargo};
+/* ---------- integraciones: Pixel de Meta + registro de la demo ---------- */
+const PIXEL_ID = ""; // ID del píxel de Meta del negocio; vacío en la demo, no se envía nada a Meta
+if(PIXEL_ID){
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq("init", PIXEL_ID);
+}
+const DEV_TAG = {"Meta Pixel":"meta", "Mercado Pago":"mp", "Webpay":"mp", "Chilexpress":"chx", "Correo":"mail"};
+let devSeen = 0, devTotal = 0;
+function devLog(src, title, detail=""){
+  const ol = $("#devLog"); ol.querySelector(".empty-log")?.remove();
+  const now = new Date().toLocaleTimeString("es-CL", {hour:"2-digit", minute:"2-digit", second:"2-digit"});
+  ol.insertAdjacentHTML("afterbegin", `<li><span class="tag ${DEV_TAG[src]}">${src}</span><b>${esc(title)}</b><time>${now}</time>${detail?`<small>${esc(detail)}</small>`:""}</li>`);
+  devTotal++; if(!$("#devPanel").hidden) devSeen = devTotal;
+  $("#devCount").textContent = devTotal - devSeen || "";
+}
+function px(ev, data={}, detail=""){
+  if(window.fbq) fbq("track", ev, {currency:"CLP", ...data});
+  devLog("Meta Pixel", ev, detail || (data.value ? clp(data.value) : ""));
+}
+const itemsData = list => ({content_type:"product", content_ids:list.map(it=>it.id), num_items:list.reduce((a,it)=>a+it.qty,0)});
+
+/* ---------- pago ---------- */
+function coLines(){
+  return cart.map(it=>{ const p = byId(it.id);
+    return `<div class="line"><div class="ph">${photo(p,it.fabric)}</div><div style="min-width:0"><h3>${p.name}</h3><div class="var">${FABRICS[it.fabric].name}${p.sizes.length>1?" · "+p.sizes[it.size][0]:""} · ${it.qty} u.</div></div><div class="price" style="margin:0">${clp(unitPrice(it)*it.qty)}</div></div>`; }).join("");
+}
+function viewCheckout(){
+  if(!cart.length) return `<div class="wrap page">${crumbs("Pago")}<h1>Tu carro está vacío</h1><p><a class="pill black" href="#tienda">Ir a la tienda</a></p></div>`;
+  const regs = REGIONS.map(r=>`<option value="${r.id}" ${r.id===co.region?"selected":""}>${r.name}</option>`).join("");
+  return `<div class="wrap page">${crumbs("Pago")}
+    <h1>Finalizar compra</h1>
+    <div class="co">
+      <form class="form co-form" id="coForm" novalidate>
+        <fieldset><legend><span>1</span>Tus datos</legend>
+          <label>Nombre y apellido<input id="coName" required autocomplete="name" value="${esc(co.name)}"><span class="err" hidden>Escribe tu nombre.</span></label>
+          <div class="two">
+            <label>Correo <span class="hint">Aquí llega la confirmación</span><input id="coMail" type="email" required autocomplete="email" value="${esc(co.mail)}"><span class="err" hidden>Revisa el correo.</span></label>
+            <label>Teléfono<input id="coTel" type="tel" required autocomplete="tel" placeholder="+56 9 1234 5678" value="${esc(co.tel)}"><span class="err" hidden>Escribe tu teléfono.</span></label>
+          </div>
+        </fieldset>
+        <fieldset><legend><span>2</span>Entrega</legend>
+          <div class="two">
+            <label>Región<select id="coRegion">${regs}</select></label>
+            <label>Comuna<select id="coComuna"></select></label>
+          </div>
+          <div class="opts" id="coShip" role="radiogroup" aria-label="Forma de entrega"></div>
+          <label id="coDirWrap">Dirección<input id="coDir" autocomplete="street-address" placeholder="Calle, número, depto." value="${esc(co.dir)}"><span class="err" hidden>Escribe la dirección de despacho.</span></label>
+        </fieldset>
+        <fieldset><legend><span>3</span>Pago</legend>
+          <div class="opts" role="radiogroup" aria-label="Medio de pago">
+            <label class="opt"><input type="radio" name="coPay" value="mp" ${co.pay==="mp"?"checked":""}><span><b>Mercado Pago</b><small>Crédito hasta 3 cuotas sin interés, débito, prepago o saldo en Mercado Pago</small></span><span></span></label>
+            <label class="opt"><input type="radio" name="coPay" value="webpay" ${co.pay==="webpay"?"checked":""}><span><b>Webpay</b><small>Tarjeta de débito, crédito o prepago</small></span><span></span></label>
+          </div>
+        </fieldset>
+        <button class="pill black block btn-big" id="coSubmit"></button>
+        <p class="hint" style="margin:-12px 0 0">Al pagar aceptas los <a href="#legal">términos</a> y la <a href="#legal-privacidad">política de privacidad</a>. La tienda no ve ni guarda los datos de tu tarjeta.</p>
+      </form>
+      <aside class="co-sum" id="coSum" aria-label="Resumen del pedido"></aside>
+    </div>
+  </div>`;
+}
+let quoted = "";
+function paintCheckout(){
+  if(!$("#coForm")) return;
+  const r = REGIONS.find(x=>x.id===co.region);
+  if(!r.comunas.includes(co.comuna)) co.comuna = r.comunas[0];
+  $("#coComuna").innerHTML = r.comunas.map(c=>`<option ${c===co.comuna?"selected":""}>${c}</option>`).join("");
+  const opts = shipOptions(co.region, co.comuna);
+  if(!opts.find(o=>o[0]===co.method)) co.method = opts[0][0];
+  const T = totals();
+  $("#coShip").innerHTML = opts.map(o=>{
+    const free = o[0]==="propio" && T.sub >= FREE_SHIP;
+    return `<label class="opt"><input type="radio" name="coShip" value="${o[0]}" ${o[0]===co.method?"checked":""}><span><b>${o[1]}</b><small>${o[3]}${o[0]==="chx"?" · seguimiento en línea":""}</small></span><span class="num">${o[2] && !free ? clp(o[2]) : "Gratis"}</span></label>`;
+  }).join("");
+  $("#coDirWrap").hidden = co.method === "retiro";
+  $("#coDir").required = co.method !== "retiro";
+  const key = co.comuna + co.method;
+  if(co.method==="chx" && quoted !== key){ quoted = key; devLog("Chilexpress", `Cotización Coyhaique → ${co.comuna}`, `${clp(r.chx)} · ${r.days} días hábiles`); }
+  const opt = opts.find(o=>o[0]===co.method);
+  $("#coSum").innerHTML = `<h2>Tu pedido</h2>${coLines()}
+    <div class="row"><span>Subtotal</span><span>${clp(T.sub)}</span></div>
+    ${T.disc ? `<div class="row disc"><span>Descuento (${coupon})</span><span>−${clp(T.disc)}</span></div>` : ""}
+    ${T.giftCost ? `<div class="row"><span>Envoltorio de regalo</span><span>${clp(T.giftCost)}</span></div>` : ""}
+    <div class="row"><span>${opt[0]==="retiro"?"Retiro en el taller":opt[0]==="chx"?"Chilexpress":"Despacho propio"}</span><span>${T.shipCost?clp(T.shipCost):"Gratis"}</span></div>
+    <div class="row total"><span>Total</span><span>${clp(T.total)}</span></div>
+    <p class="secure"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="10.5" width="14" height="9.5" rx="2"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/></svg>Pago protegido. Los datos de la tarjeta van directo a ${payLabel()}.</p>`;
+  $("#coSubmit").textContent = `Pagar ${clp(T.total)} con ${payLabel()}`;
+}
+function payLabel(){ return co.pay==="mp" ? "Mercado Pago" : "Webpay"; }
+let pending = null;
+function openPay(){
+  const T = totals();
+  pending = {id:"TR-" + (1000 + Math.floor(Math.random()*9000)), total:T.total};
+  $("#payModal").hidden = false;
+  $("#payBox").innerHTML = `<div class="center"><div class="spin" aria-hidden="true"></div><h2 id="payTitle">Conectando con ${payLabel()}…</h2><p class="hint">Pedido ${pending.id}</p></div>`;
+  devLog(payLabel(), "Orden de pago creada", `${pending.id} · ${clp(T.total)}`);
+  setTimeout(()=>{
+    if(!pending) return;
+    const c3 = Math.round(T.total/3), c2 = Math.round(T.total/2);
+    $("#payBox").innerHTML = `
+      <div class="who"><b>${payLabel()}</b><span>Pago a Trama · ${pending.id}</span></div>
+      <div><div class="hint">Total a pagar</div><div class="amount">${clp(T.total)}</div></div>
+      <form class="form" id="cardForm" novalidate>
+        <label>Número de tarjeta<input id="cardNum" inputmode="numeric" autocomplete="cc-number" value="4509 9535 6623 3704"></label>
+        <div class="two" style="grid-template-columns:1fr 1fr">
+          <label>Vencimiento<input autocomplete="cc-exp" value="11/30"></label>
+          <label>Código de seguridad<input inputmode="numeric" autocomplete="cc-csc" value="123"></label>
+        </div>
+        <label>Nombre del titular<input autocomplete="cc-name" value="${esc(co.name)}"></label>
+        <label>Cuotas<select id="cardCuotas">
+          <option value="1">1 cuota de ${clp(T.total)}</option>
+          <option value="2">2 cuotas sin interés de ${clp(c2)}</option>
+          <option value="3">3 cuotas sin interés de ${clp(c3)}</option>
+        </select></label>
+        <button class="pill black block btn-big" id="payNow">Pagar ${clp(T.total)}</button>
+        <button type="button" class="link-btn" id="payCancel" style="justify-self:center">Cancelar y volver a la tienda</button>
+      </form>
+      <p class="note-ex" style="border-radius:8px">Simulación con tarjeta de prueba: no se cobra nada. En la tienda real esta es la pantalla oficial de ${payLabel()}.</p>`;
+    $("#cardNum").focus();
+  }, 900);
+}
+function processPay(){
+  const cuotas = +$("#cardCuotas").value, last4 = $("#cardNum").value.replace(/\D/g,"").slice(-4) || "3704";
+  $("#payBox").innerHTML = `<div class="center"><div class="spin" aria-hidden="true"></div><h2 id="payTitle">Procesando el pago…</h2></div>`;
+  setTimeout(()=>{
+    $("#payBox").innerHTML = `<div class="center"><div class="ok-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div><h2 id="payTitle">Pago aprobado</h2><p class="hint">Te llevamos de vuelta a la tienda…</p></div>`;
+    devLog(payLabel(), "Pago aprobado", `${pending.id} · ${clp(pending.total)} · Visa ****${last4}${cuotas>1?` · ${cuotas} cuotas sin interés`:""}`);
+    setTimeout(()=>finishOrder(cuotas, last4), 1100);
+  }, 1300);
+}
+function finishOrder(cuotas, last4){
+  const T = totals(), opt = shipOptions(co.region, co.comuna).find(o=>o[0]===co.method);
+  const items = cart.map(it=>{ const p = byId(it.id); return {id:p.id, name:p.name, var:FABRICS[it.fabric].name + (p.sizes.length>1?" · "+p.sizes[it.size][0]:""), qty:it.qty, total:unitPrice(it)*it.qty}; });
+  lastOrder = {id:pending.id, date:Date.now(), items, T, coupon, co:{...co}, ship:opt, pay:payLabel(), cuotas, last4,
+    ot: co.method==="chx" ? String(Math.floor(1e9 + Math.random()*9e9)) : ""};
+  px("Purchase", {...itemsData(cart), value:T.total}, `${lastOrder.id} · ${clp(T.total)}`);
+  if(lastOrder.ot) devLog("Chilexpress", "Orden de transporte creada", `OT ${lastOrder.ot} · ${co.comuna}, ${REGIONS.find(r=>r.id===co.region).name}`);
+  devLog("Correo", "Confirmación enviada", `A ${co.mail} · “Recibimos tu pedido ${lastOrder.id}”`);
+  try { localStorage.setItem("trama-order", JSON.stringify(lastOrder)); } catch(e) {}
+  cart = []; coupon = null; couponMsg = ""; gift = {on:false, msg:""}; saveCart(); paintCart();
+  $("#payModal").hidden = true; pending = null;
+  location.hash = "#pedido";
+}
+function viewPedido(){
+  const o = lastOrder;
+  if(!o) return `<div class="wrap page">${crumbs("Pedido")}<h1>No hay pedidos recientes</h1><p><a class="pill black" href="#tienda">Ir a la tienda</a></p></div>`;
+  const first = o.co.name.trim().split(" ")[0], reg = REGIONS.find(r=>r.id===o.co.region).name;
+  const when = new Date(o.date).toLocaleString("es-CL", {day:"numeric", month:"long", hour:"2-digit", minute:"2-digit"});
+  const steps = o.ship[0]==="retiro"
+    ? [["Pago aprobado", when, 1], ["En preparación en el taller", "1 a 2 días hábiles", 0], ["Listo para retirar", "Te escribimos por WhatsApp para coordinar la hora", 0]]
+    : o.ship[0]==="chx"
+    ? [["Pago aprobado", when, 1], ["En preparación en el taller", "1 a 2 días hábiles", 0], ["Entregado a Chilexpress", `Orden de transporte ${o.ot}`, 0], ["En reparto", `${o.co.comuna}, ${reg}`, 0], ["Entregado", o.ship[3], 0]]
+    : [["Pago aprobado", when, 1], ["En preparación en el taller", "1 a 2 días hábiles", 0], ["En camino con nuestro despacho", o.co.dir, 0], ["Entregado", o.ship[3], 0]];
+  const rows = o.items.map(i=>`<div class="row"><span>${i.qty} × ${i.name} · ${i.var}</span><span>${clp(i.total)}</span></div>`).join("");
+  const T = o.T;
+  return `<div class="wrap page">${crumbs("Pedido " + o.id)}
+    <h1>Gracias, ${esc(first)}</h1>
+    <p style="margin:-12px 0 28px;font-size:18px">Tu pago fue aprobado. Tu número de pedido es <b>${o.id}</b> y te enviamos el detalle a <b>${esc(o.co.mail)}</b>.</p>
+    <div class="split">
+      <div>
+        <h2 style="margin-top:0">Estado del pedido</h2>
+        <ol class="track-list">${steps.map(s=>`<li class="${s[2]?"done":""}"><b>${s[0]}</b><span>${esc(s[1])}</span></li>`).join("")}</ol>
+        <div class="facts3" style="grid-template-columns:1fr 1fr;margin-top:24px">
+          <div><b>Entrega</b><span>${o.ship[1]}<br>${o.ship[0]==="retiro" ? "Taller en Coyhaique" : esc(o.co.dir) + "<br>" + esc(o.co.comuna) + ", " + reg}</span></div>
+          <div><b>Pago</b><span>${o.pay} · Visa ****${o.last4}<br>${o.cuotas>1 ? o.cuotas + " cuotas sin interés de " + clp(Math.round(T.total/o.cuotas)) : "1 cuota"}</span></div>
+        </div>
+        <p style="margin-top:28px"><a class="pill black" href="#tienda">Seguir comprando</a></p>
+      </div>
+      <div>
+        <h2 style="margin-top:0">El correo que te llega</h2>
+        <div class="mail">
+          <div class="hdr"><span>De: <b>Trama</b> &lt;pedidos@trama.cl&gt;</span><span>Para: ${esc(o.co.mail)}</span><span>Asunto: <b>Recibimos tu pedido ${o.id}</b></span></div>
+          <div class="bd">
+            <span class="logo">Trama</span>
+            <p>Hola ${esc(first)}, gracias por tu compra. Ya estamos preparando tu pedido en el taller.</p>
+            ${rows}
+            ${T.disc ? `<div class="row disc"><span>Descuento (${o.coupon})</span><span>−${clp(T.disc)}</span></div>` : ""}
+            ${T.giftCost ? `<div class="row"><span>Envoltorio de regalo</span><span>${clp(T.giftCost)}</span></div>` : ""}
+            <div class="row"><span>${o.ship[1]}</span><span>${T.shipCost?clp(T.shipCost):"Gratis"}</span></div>
+            <div class="row total"><span>Total pagado</span><span>${clp(T.total)}</span></div>
+            <p>${o.ot ? `Cuando entreguemos el paquete a Chilexpress te llega otro correo con el seguimiento de la orden <b>${o.ot}</b>.` : o.ship[0]==="retiro" ? "Te escribimos por WhatsApp cuando esté listo para retirar." : "Te avisamos por WhatsApp el día que salimos a entregarlo."}</p>
+            <p class="hint">¿Dudas? Responde este correo o escríbenos por WhatsApp.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+const PAGES = {nosotros:viewNosotros, contacto:viewContacto, despachos:viewDespachos, legal:viewLegal, encargo:viewEncargo, checkout:viewCheckout, pedido:viewPedido};
 
 /* ---------- carro ---------- */
 let cart = [];
-let ship = "coyhaique";
-const FREE_SHIP = 40000, FREE_ZONES = ["coyhaique","aysen"], GIFT_PRICE = 1500, EMB_PRICE = 3000;
+/* datos del pago; la entrega se elige con la comuna */
+const co = {name:"", mail:"", tel:"", region:"aysen", comuna:"Coyhaique", dir:"", method:"propio", pay:"mp"};
+let lastOrder = null;
+try { lastOrder = JSON.parse(localStorage.getItem("trama-order")); } catch(e) {}
+const FREE_SHIP = 40000, GIFT_PRICE = 1500, EMB_PRICE = 3000;
 const COUPONS = {
   BIENVENIDA10: {pct:10, label:"10% de bienvenida"},
   TALLER5000:   {amt:5000, min:30000, label:"$5.000 en compras sobre $30.000"}
@@ -973,6 +1277,8 @@ function unitPrice(it){ const p = byId(it.id); return p.price + p.sizes[it.size]
 function addToCart(id, fabric, size, qty){
   const ex = cart.find(it=>it.id===id && it.fabric===fabric && it.size===size);
   if(ex) ex.qty += qty; else cart.push({id, fabric, size, qty});
+  const ap = byId(id), av = (ap.price + ap.sizes[size][1]) * qty;
+  px("AddToCart", {content_type:"product", content_ids:[id], content_name:ap.name, value:av}, `${ap.name} · ${FABRICS[fabric].name} · ${clp(av)}`);
   saveCart(); paintCart();
 }
 function totals(){
@@ -983,9 +1289,8 @@ function totals(){
     if(cp.min && sub < cp.min) cpNote = `Este código es para compras sobre ${clp(cp.min)}.`;
     else disc = cp.pct ? Math.round(sub*cp.pct/100) : cp.amt;
   }
-  const s = SHIPPING.find(x=>x[0]===ship);
-  const freeZone = FREE_ZONES.includes(ship);
-  const shipCost = freeZone && sub >= FREE_SHIP ? 0 : s[2];
+  const opt = shipOptions(co.region, co.comuna).find(x=>x[0]===co.method);
+  const shipCost = !opt ? 0 : opt[0]==="propio" && sub >= FREE_SHIP ? 0 : opt[2];
   const giftCost = gift.on ? GIFT_PRICE : 0;
   return {sub, disc, cpNote, shipCost, giftCost, total: Math.max(0, sub - disc) + shipCost + giftCost};
 }
@@ -1019,16 +1324,13 @@ function paintCart(){
     </div>`;
   $("#cartBody").innerHTML = bar + lines + extras;
   $("#cartFoot").innerHTML = `
-    <label for="ship">Despacho
-      <select id="ship">${SHIPPING.map(x=>`<option value="${x[0]}" ${x[0]===ship?"selected":""}>${x[1]} · ${x[2]?clp(x[2]):"gratis"}</option>`).join("")}</select>
-    </label>
     <div class="row"><span>Subtotal</span><span>${clp(T.sub)}</span></div>
     ${T.disc ? `<div class="row disc"><span>Descuento (${coupon})</span><span>−${clp(T.disc)}</span></div>` : ""}
-    <div class="row"><span>Despacho</span><span>${T.shipCost?clp(T.shipCost):"Gratis"}</span></div>
     ${T.giftCost ? `<div class="row"><span>Envoltorio de regalo</span><span>${clp(T.giftCost)}</span></div>` : ""}
-    <div class="row total"><span>Total</span><span>${clp(T.total)}</span></div>
-    <button class="pill black block" id="payBtn">Ir a pagar</button>
-    <div class="checkout-msg" id="payMsg" hidden>Esto es una demo. En la tienda real aquí se paga con Webpay o Mercado Pago y llega el correo de confirmación.</div>`;
+    <div class="row"><span>Despacho</span><span class="mute">Se calcula con tu comuna</span></div>
+    <div class="row total"><span>Total sin despacho</span><span>${clp(T.total - T.shipCost)}</span></div>
+    <a class="pill black block" href="#checkout">Ir a pagar</a>
+    <p class="pay-logos">Mercado Pago · Webpay · hasta 3 cuotas sin interés</p>`;
 }
 function openCart(){ $("#overlay").hidden = false; requestAnimationFrame(()=>{ $("#overlay").classList.add("on"); $("#cart").classList.add("on"); }); $("#cart").setAttribute("aria-hidden","false"); $("#closeCart").focus(); }
 function closeAll(){
@@ -1080,13 +1382,17 @@ function route(){
     const pg = h.split("-")[0]; nav = pg;
     app.innerHTML = PAGES[pg]();
     if(pg==="encargo") paintEncargo(true);
+    if(pg==="checkout" && cart.length){ paintCheckout(); const T = totals(); px("InitiateCheckout", {...itemsData(cart), value:T.total}, `${itemsData(cart).num_items} productos · ${clp(T.total)}`); }
     const anchor = {"despachos-cambios":"cambios", "legal-privacidad":"privacidad"}[h];
     if(anchor){ requestAnimationFrame(()=>document.getElementById(anchor)?.scrollIntoView()); }
   } else if(h.startsWith("p-") && byId(h.slice(2))){
-    app.innerHTML = viewProduct(byId(h.slice(2))); paintProduct(); nav = "tienda-" + byId(h.slice(2)).col;
+    const vp = byId(h.slice(2));
+    app.innerHTML = viewProduct(vp); paintProduct(); nav = "tienda-" + vp.col;
+    px("ViewContent", {content_type:"product", content_ids:[vp.id], content_name:vp.name, value:vp.price}, `${vp.name} · ${clp(vp.price)}`);
   } else { location.hash = "#inicio"; return; }
   document.querySelectorAll("nav.main a").forEach(a=>{ if(a.dataset.nav===nav) a.setAttribute("aria-current","page"); else a.removeAttribute("aria-current"); });
   if(h!=="inicio-faq" && h!=="despachos-cambios" && h!=="legal-privacidad") window.scrollTo(0,0);
+  px("PageView", {}, "#" + h);
 }
 
 /* ---------- eventos ---------- */
@@ -1103,7 +1409,8 @@ document.addEventListener("click", e=>{
   else if(t.id==="waAsk" || t.id==="waBtn"){ $("#waPop").hidden = !$("#waPop").hidden; }
   else if(t.dataset.cq){ const [i,d] = t.dataset.cq.split(":").map(Number); cart[i].qty += d; if(cart[i].qty<1) cart.splice(i,1); saveCart(); paintCart(); }
   else if(t.dataset.rm){ cart.splice(+t.dataset.rm,1); saveCart(); paintCart(); }
-  else if(t.id==="payBtn"){ $("#payMsg").hidden = false; }
+  else if(t.id==="payCancel"){ $("#payModal").hidden = true; pending = null; }
+  else if(t.id==="devBtn"){ const p = $("#devPanel"); p.hidden = !p.hidden; t.setAttribute("aria-expanded", !p.hidden); if(!p.hidden){ devSeen = devTotal; $("#devCount").textContent = ""; } }
   else if(t.id==="couponRm"){ coupon = null; couponMsg = ""; paintCart(); }
   else if(t.id==="openCart"){ openCart(); }
   else if(t.id==="burger"){ openNav(); }
@@ -1112,17 +1419,21 @@ document.addEventListener("click", e=>{
 });
 document.addEventListener("change", e=>{
   if(e.target.id==="sort"){ shopState.sort = e.target.value; fillShop(curCol()); }
-  if(e.target.id==="ship"){ ship = e.target.value; paintCart(); }
+  if(e.target.id==="coRegion"){ co.region = e.target.value; co.comuna = ""; paintCheckout(); }
+  if(e.target.id==="coComuna"){ co.comuna = e.target.value; paintCheckout(); }
+  if(e.target.name==="coShip"){ co.method = e.target.value; paintCheckout(); }
+  if(e.target.name==="coPay"){ co.pay = e.target.value; paintCheckout(); }
   if(e.target.id==="giftOn"){ gift.on = e.target.checked; paintCart(); }
   if(e.target.id==="encProd"){ paintEncargo(true); }
   if(e.target.id==="encFab"){ paintEncargo(false); }
   if(e.target.dataset.ffab){ const k = e.target.dataset.ffab; e.target.checked ? shopState.fabs.add(k) : shopState.fabs.delete(k); fillShop(curCol()); }
 });
 $("#navq").addEventListener("keydown", e=>{
-  if(e.key==="Enter"){ shopState.q = e.target.value; if(location.hash.startsWith("#tienda")) fillShop(curCol()); else location.hash = "#tienda"; }
+  if(e.key==="Enter"){ shopState.q = e.target.value; if(e.target.value.trim()) px("Search", {search_string:e.target.value.trim()}, `“${e.target.value.trim()}”`); if(location.hash.startsWith("#tienda")) fillShop(curCol()); else location.hash = "#tienda"; }
 });
 document.addEventListener("input", e=>{
   if(e.target.id==="giftMsg") gift.msg = e.target.value;
+  const cf = {coName:"name", coMail:"mail", coTel:"tel", coDir:"dir"}[e.target.id]; if(cf) co[cf] = e.target.value;
   if(e.target.id==="encQty" || e.target.id==="encBord") paintEncargo(false);
   if(e.target.getAttribute("aria-invalid")==="true"){ e.target.setAttribute("aria-invalid","false"); const m = e.target.parentElement.querySelector(".err"); if(m) m.hidden = true; }
 });
@@ -1139,6 +1450,7 @@ document.addEventListener("submit", e=>{
   else if(f.id==="newsForm"){
     const m = $("#newsMail"), out = $("#newsMsg");
     if(!EMAIL.test(m.value.trim())){ m.setAttribute("aria-invalid","true"); out.textContent = "Revisa el correo."; out.className = "form-msg bad"; out.hidden = false; m.focus(); return; }
+    px("Lead", {}, "Suscripción al newsletter");
     out.className = "form-msg"; out.innerHTML = "Listo. Tu código de 10% para la primera compra es <b>BIENVENIDA10</b>."; out.hidden = false; f.reset();
   }
   else if(f.id==="stockForm"){
@@ -1150,13 +1462,19 @@ document.addEventListener("submit", e=>{
     const out = $("#cOut"); out.textContent = `Gracias, ${$("#cName").value.trim().split(" ")[0]}. Recibimos tu mensaje y te respondemos en menos de 24 horas hábiles.`; out.hidden = false;
     f.querySelectorAll("input,textarea").forEach(el=>el.value = "");
   }
+  else if(f.id==="coForm"){
+    if(!check(f)) return;
+    px("AddPaymentInfo", {...itemsData(cart), value:totals().total}, `${payLabel()} · ${clp(totals().total)}`);
+    openPay();
+  }
+  else if(f.id==="cardForm"){ processPay(); }
   else if(f.id==="encargoForm"){
     if(!check(f)) return;
     sendEncargo();
   }
 });
 $("#overlay").addEventListener("click", closeAll);
-document.addEventListener("keydown", e=>{ if(e.key==="Escape"){ closeAll(); $("#waPop").hidden = true; } });
+document.addEventListener("keydown", e=>{ if(e.key==="Escape"){ closeAll(); $("#waPop").hidden = true; $("#devPanel").hidden = true; $("#devBtn").setAttribute("aria-expanded", false); } });
 window.addEventListener("hashchange", route);
 paintCart();
 route();

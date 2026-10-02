@@ -28,7 +28,7 @@
 
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:17px;line-height:1.6;margin:0}
-.doc{max-width:780px;margin-inline:auto;padding-inline:clamp(16px,5vw,40px);padding-block:40px 64px;display:grid;gap:52px}
+.doc{max-width:780px;margin-inline:auto;padding-inline:clamp(16px,5vw,40px);padding-block:40px 64px;display:grid;grid-template-columns:minmax(0,1fr);gap:52px}
 h1,h2,h3{font-family:var(--display);font-weight:800;font-stretch:125%;letter-spacing:-.01em;line-height:1.08;margin:0;text-wrap:balance}
 h1{font-size:clamp(2.1rem,6vw,3.2rem)}
 h2{font-size:clamp(1.45rem,3.6vw,1.9rem);margin-bottom:16px}
@@ -71,6 +71,8 @@ tbody th{font-weight:400}
 td{font-family:var(--display);font-stretch:87%;white-space:nowrap}
 tr.sect th{font-family:var(--display);font-weight:700;font-stretch:100%;background:var(--bg);padding-top:16px}
 tr.extra th{font-weight:600}
+table{table-layout:fixed}thead th:nth-child(1){width:44%}thead th:nth-child(2){width:15%}td:last-child{white-space:normal}
+td.y + td.y{font-weight:500}
 .y{color:var(--ok);font-weight:700}
 .n{color:var(--muted)}
 .plus{color:var(--accent);font-weight:700}
@@ -110,8 +112,8 @@ footer.sign .name{font-family:var(--display);font-weight:800;font-stretch:125%;f
   <header class="cover">
     <span class="lbl">Propuesta comercial</span>
     <h1>Tienda en línea para los textiles hechos a mano de tu señora</h1>
-    <div class="meta"><span>De <b>Fernando Becker</b>, Coyhaique</span><span>Fecha <b>30 de septiembre de 2026</b></span><span>Válida por <b>15 días</b></span></div>
-    <p class="lead">Todo lo que incluye el Plan Start de la agencia, más diez cosas que ese plan no trae, por $50.000 menos. Y antes de pagar nada, ya puedes ver cómo se vería tu tienda.</p>
+    <div class="meta"><span>De <b>Fernando Becker</b>, Coyhaique</span><span>Fecha <b>2 de octubre de 2026</b></span><span>Válida por <b>15 días</b></span></div>
+    <p class="lead">Cada punto del Plan Start de la agencia, más diez cosas que ese plan no trae, entre ellas el Pixel de Meta, por $50.000 menos. Y antes de pagar nada, ya puedes ver cómo se vería tu tienda.</p>
   </header>
 
   <section class="price-box" aria-label="Precio">
@@ -125,45 +127,76 @@ footer.sign .name{font-family:var(--display);font-weight:800;font-stretch:125%;f
   <section class="demo" aria-label="Demo">
     <span class="lbl">Ya está hecha la primera propuesta visual</span>
     <h2>Mira la demo navegable</h2>
-    <p>La armé con lo que pediste en el audio y con el mismo estilo de las grandes tiendas de ropa como Nike: fotos protagonistas a todo el ancho, carrusel en el inicio, colecciones destacadas, packs para regalar con precio rebajado, reseñas y fichas donde se elige la tela de cada producto. Tiene catálogo con filtros por tela, páginas de contacto, despachos y términos, cupones de descuento, encargos a medida con valor estimado y carro con despacho por comuna. Funciona en el celular.</p>
+    <p>La armé con lo que pediste en el audio y con el mismo estilo de las grandes tiendas de ropa como Nike: fotos protagonistas a todo el ancho, carrusel en el inicio, colecciones destacadas, packs para regalar con precio rebajado, reseñas y fichas donde se elige la tela de cada producto. Tiene catálogo con filtros por tela, páginas de contacto, despachos y términos, cupones de descuento y encargos a medida con valor estimado. Ya puedes hacer una compra completa: eliges región y comuna, la tienda calcula el despacho propio o Chilexpress, pagas con Mercado Pago (hasta 3 cuotas sin interés) o Webpay, y llega el correo de confirmación con el número de seguimiento. El botón “Integraciones” muestra en vivo lo que se le avisa al Pixel de Meta, a Mercado Pago y a Chilexpress. Funciona en el celular.</p>
     <a href="https://5egaloz.github.io/tienda-trama/">5egaloz.github.io/tienda-trama</a>
     <p class="note" style="color:inherit;opacity:.8">Las fotos de la demo son de referencia, para mostrar cómo se verá la tienda. El nombre, los productos y los precios también son de ejemplo. En la tienda real van las fotos y productos de ustedes, tomados en la sesión de fotos incluida.</p>
   </section>
 
   <section aria-labelledby="cmp">
     <h2 id="cmp">Lo mismo que la agencia, punto por punto</h2>
+    <p class="muted" style="margin-bottom:14px">La columna de la agencia copia, línea por línea, lo que trae su documento del Plan Start.</p>
     <div class="tbl-wrap">
       <table>
         <thead><tr><th scope="col">Qué incluye</th><th scope="col">Agencia</th><th scope="col" class="me">Esta propuesta</th></tr></thead>
         <tbody>
           <tr class="sect"><th colspan="3" scope="colgroup">Configuración</th></tr>
-          <tr><th scope="row">Dominio, datos comerciales, impuestos y moneda</th><td class="y">Sí</td><td class="y">Sí</td></tr>
-          <tr><th scope="row">Correos automáticos de compra personalizados</th><td class="y">Sí</td><td class="y">Sí</td></tr>
-          <tr><th scope="row">SEO inicial y optimización de rendimiento</th><td class="y">Sí</td><td class="y">Sí</td></tr>
-          <tr class="sect"><th colspan="3" scope="colgroup">Diseño</th></tr>
-          <tr><th scope="row">Diseño a medida con tu logo y colores</th><td class="y">Sí</td><td class="y">Sí</td></tr>
-          <tr><th scope="row">Propuesta visual antes de construir</th><td class="y">Sí</td><td class="y">Ya hecha</td></tr>
-          <tr><th scope="row">Inicio con carrusel, banners y secciones destacadas</th><td class="y">Sí</td><td class="y">Sí</td></tr>
-          <tr><th scope="row">Hasta 5 páginas internas y preguntas frecuentes</th><td class="y">Sí</td><td class="y">Sí</td></tr>
-          <tr><th scope="row">Computador, tablet y celular</th><td class="y">Sí</td><td class="y">Sí</td></tr>
-          <tr class="sect"><th colspan="3" scope="colgroup">Productos</th></tr>
-          <tr><th scope="row">Carga completa del catálogo por categorías</th><td class="y">Sí</td><td class="y">Sí</td></tr>
-          <tr><th scope="row">Variantes por tela y medida</th><td class="y">Sí</td><td class="y">Sí, con muestras de tela visibles</td></tr>
-          <tr><th scope="row">Precios, promociones, stock, buscador y filtros</th><td class="y">Sí</td><td class="y">Sí</td></tr>
-          <tr class="sect"><th colspan="3" scope="colgroup">Venta y despacho</th></tr>
-          <tr><th scope="row">Medios de pago, checkout y pruebas de compra</th><td class="y">Sí</td><td class="y">Sí</td></tr>
-          <tr><th scope="row">Descuentos y códigos promocionales</th><td class="y">Sí</td><td class="y">Sí</td></tr>
-          <tr><th scope="row">Despacho propio, Starken/Chilexpress y tarifas por comuna</th><td class="y">Sí</td><td class="y">Sí</td></tr>
-          <tr class="sect"><th colspan="3" scope="colgroup">Confianza y entrega</th></tr>
-          <tr><th scope="row">WhatsApp, redes sociales, contacto y reseñas</th><td class="y">Sí</td><td class="y">Sí</td></tr>
-          <tr><th scope="row">Páginas legales y políticas de privacidad</th><td class="y">Sí</td><td class="y">Sí</td></tr>
-          <tr><th scope="row">Tienda autoadministrable, accesos y respaldo</th><td class="y">Sí</td><td class="y">Sí</td></tr>
+          <tr><th scope="row">Conexión y configuración de dominio</th><td class="y">Sí</td><td class="y">Sí</td></tr>
+          <tr><th scope="row">Personalización de correos automáticos de compra</th><td class="y">Sí</td><td class="y">Sí</td></tr>
+          <tr><th scope="row">Configuración de datos comerciales, impuestos y moneda</th><td class="y">Sí</td><td class="y">Sí</td></tr>
+          <tr><th scope="row">SEO inicial</th><td class="y">Sí</td><td class="y">Sí, más registro en Google Search Console</td></tr>
+          <tr><th scope="row">Optimización de rendimiento</th><td class="y">Sí</td><td class="y">Sí</td></tr>
+          <tr class="sect"><th colspan="3" scope="colgroup">Diseño y estructura</th></tr>
+          <tr><th scope="row">Diseño 100% personalizado según su identidad de marca</th><td class="y">Sí</td><td class="y">Sí</td></tr>
+          <tr><th scope="row">Propuesta visual inicial antes del desarrollo</th><td class="y">Sí</td><td class="y">Ya hecha: la demo</td></tr>
+          <tr><th scope="row">Aplicación de logo, colores y línea gráfica existente</th><td class="y">Sí</td><td class="y">Sí</td></tr>
+          <tr><th scope="row">Banners y recursos gráficos personalizados</th><td class="y">Sí</td><td class="y">Sí, con carrusel en el inicio</td></tr>
+          <tr><th scope="row">Diseño responsive para computador, tablet y móvil</th><td class="y">Sí</td><td class="y">Sí</td></tr>
+          <tr><th scope="row">Diseño de página de inicio</th><td class="y">Sí</td><td class="y">Sí</td></tr>
+          <tr><th scope="row">Hasta 5 páginas internas adicionales</th><td class="y">Sí</td><td class="y">Sí: quiénes somos, contacto, despachos, encargos y términos</td></tr>
+          <tr><th scope="row">Tienda y catálogo de productos</th><td class="y">Sí</td><td class="y">Sí</td></tr>
+          <tr><th scope="row">Fichas de producto personalizadas</th><td class="y">Sí</td><td class="y">Sí, con muestras de tela y medidas</td></tr>
+          <tr><th scope="row">Menús, categorías y navegación personalizada</th><td class="y">Sí</td><td class="y">Sí</td></tr>
+          <tr><th scope="row">Secciones destacadas para promociones o packs</th><td class="y">Sí</td><td class="y">Sí, packs para regalar con precio rebajado</td></tr>
+          <tr><th scope="row">Preguntas frecuentes</th><td class="y">Sí</td><td class="y">Sí</td></tr>
+          <tr class="sect"><th colspan="3" scope="colgroup">Productos y catálogo</th></tr>
+          <tr><th scope="row">Carga completa de productos</th><td class="y">Sí</td><td class="y">Sí</td></tr>
+          <tr><th scope="row">Organización del catálogo por categorías</th><td class="y">Sí</td><td class="y">Sí</td></tr>
+          <tr><th scope="row">Configuración de variantes, formatos o tallas</th><td class="y">Sí</td><td class="y">Sí, por tela y medida</td></tr>
+          <tr><th scope="row">Configuración de precios y promociones</th><td class="y">Sí</td><td class="y">Sí</td></tr>
+          <tr><th scope="row">Gestión de inventario y stock</th><td class="y">Sí</td><td class="y">Sí, con aviso de stock bajo</td></tr>
+          <tr><th scope="row">Buscador de productos</th><td class="y">Sí</td><td class="y">Sí</td></tr>
+          <tr><th scope="row">Filtros de navegación</th><td class="y">Sí</td><td class="y">Sí, por categoría y tela</td></tr>
+          <tr><th scope="row">Productos relacionados</th><td class="y">Sí</td><td class="y">Sí</td></tr>
+          <tr class="sect"><th colspan="3" scope="colgroup">Pagos y compra</th></tr>
+          <tr><th scope="row">Integración de medios de pago</th><td class="y">Sí</td><td class="y">Sí: Mercado Pago y Webpay</td></tr>
+          <tr><th scope="row">Configuración del checkout</th><td class="y">Sí</td><td class="y">Sí, en una sola página</td></tr>
+          <tr><th scope="row">Pruebas completas del flujo de compra</th><td class="y">Sí</td><td class="y">Sí</td></tr>
+          <tr><th scope="row">Correos automáticos de confirmación</th><td class="y">Sí</td><td class="y">Sí</td></tr>
+          <tr><th scope="row">Configuración de descuentos y códigos promocionales</th><td class="y">Sí</td><td class="y">Sí</td></tr>
+          <tr class="sect"><th colspan="3" scope="colgroup">Despachos</th></tr>
+          <tr><th scope="row">Integración de proveedores de despacho</th><td class="y">Sí</td><td class="y">Sí: Chilexpress con seguimiento</td></tr>
+          <tr><th scope="row">Configuración de despacho propio</th><td class="y">Sí</td><td class="y">Sí: Coyhaique y Puerto Aysén</td></tr>
+          <tr><th scope="row">Tarifas personalizadas por comuna</th><td class="y">Sí</td><td class="y">Sí</td></tr>
+          <tr><th scope="row">Configuración de zonas de cobertura</th><td class="y">Sí</td><td class="y">Sí, todo Chile</td></tr>
+          <tr class="sect"><th colspan="3" scope="colgroup">Contacto y confianza</th></tr>
+          <tr><th scope="row">Botón flotante de WhatsApp</th><td class="y">Sí</td><td class="y">Sí</td></tr>
+          <tr><th scope="row">Integración con redes sociales</th><td class="y">Sí</td><td class="y">Sí</td></tr>
+          <tr><th scope="row">Formulario de contacto</th><td class="y">Sí</td><td class="y">Sí</td></tr>
+          <tr><th scope="row">Sección de opiniones/reseñas</th><td class="y">Sí</td><td class="y">Sí</td></tr>
+          <tr><th scope="row">Datos comerciales y medios de contacto</th><td class="y">Sí</td><td class="y">Sí</td></tr>
+          <tr><th scope="row">Páginas legales y políticas de privacidad</th><td class="y">Sí</td><td class="y">Sí, al día con la Ley 21.719</td></tr>
+          <tr class="sect"><th colspan="3" scope="colgroup">Administración y entrega</th></tr>
+          <tr><th scope="row">Tienda 100% autoadministrable</th><td class="y">Sí</td><td class="y">Sí</td></tr>
+          <tr><th scope="row">Entrega de accesos y credenciales del proyecto</th><td class="y">Sí</td><td class="y">Sí</td></tr>
+          <tr><th scope="row">Revisión final y pruebas antes de publicación</th><td class="y">Sí</td><td class="y">Sí</td></tr>
+          <tr><th scope="row">Respaldo final del proyecto</th><td class="y">Sí</td><td class="y">Sí</td></tr>
+          <tr><th scope="row">Soporte post entrega</th><td class="y">Sí</td><td class="y">Sí, 2 meses de mantención</td></tr>
           <tr class="sect"><th colspan="3" scope="colgroup">Lo que la agencia no incluye</th></tr>
+          <tr class="extra"><th scope="row">Pixel de Meta con eventos de compra</th><td class="n">No</td><td class="plus">Incluido</td></tr>
           <tr class="extra"><th scope="row">Fotos de producto en Coyhaique</th><td class="n">No</td><td class="plus">Incluido</td></tr>
           <tr class="extra"><th scope="row">Capacitación en persona</th><td class="n">No</td><td class="plus">Incluido</td></tr>
-          <tr class="extra"><th scope="row">2 meses de mantención</th><td class="n">Soporte post entrega</td><td class="plus">Incluido</td></tr>
           <tr class="extra"><th scope="row">Catálogo en Instagram y Facebook</th><td class="n">No</td><td class="plus">Incluido</td></tr>
-          <tr class="extra"><th scope="row">Ficha en Google Maps y Search Console</th><td class="n">No</td><td class="plus">Incluido</td></tr>
+          <tr class="extra"><th scope="row">Ficha en Google Maps</th><td class="n">No</td><td class="plus">Incluido</td></tr>
           <tr class="extra"><th scope="row">Encargos a medida con valor estimado</th><td class="n">No</td><td class="plus">Incluido</td></tr>
           <tr class="extra"><th scope="row">Barra de despacho gratis en el carro</th><td class="n">No</td><td class="plus">Incluido</td></tr>
           <tr class="extra"><th scope="row">Envoltorio de regalo con tarjeta</th><td class="n">No</td><td class="plus">Incluido</td></tr>
@@ -178,11 +211,11 @@ footer.sign .name{font-family:var(--display);font-weight:800;font-stretch:125%;f
   <section aria-labelledby="ext">
     <h2 id="ext">Los diez extras, en detalle</h2>
     <div class="extras">
+      <div class="extra-card"><h3>Pixel de Meta</h3><p>Queda instalado y midiendo cada visita, producto visto, carro, pago y compra. Así los avisos de Instagram y Facebook se muestran a quien de verdad compra, y se sabe cuánto vendió cada peso invertido.</p></div>
       <div class="extra-card"><h3>Fotos de producto</h3><p>Una sesión en tu casa o taller, hasta 15 productos, con fondo limpio y edición. Las telas se ven con su color real, que es lo que más vende en textiles.</p></div>
       <div class="extra-card"><h3>Capacitación en persona</h3><p>Una sesión de 1 hora para que tu señora aprenda a subir productos, cambiar precios y despachar pedidos desde el celular.</p></div>
-      <div class="extra-card"><h3>2 meses de mantención</h3><p>Cambios de textos, banners y carga de productos nuevos durante los dos meses después de publicar, sin costo extra.</p></div>
       <div class="extra-card"><h3>Catálogo en Instagram y Facebook</h3><p>Los productos de la tienda aparecen en Instagram y Facebook con su precio, y se actualizan solos cuando cambias algo.</p></div>
-      <div class="extra-card"><h3>Ficha en Google</h3><p>Perfil de negocio en Google Maps y registro en Search Console, para que te encuentren al buscar "delantales Coyhaique".</p></div>
+      <div class="extra-card"><h3>Ficha en Google</h3><p>Perfil de negocio en Google Maps, para que te encuentren al buscar "delantales Coyhaique".</p></div>
       <div class="extra-card"><h3>Encargos a medida</h3><p>Un formulario donde la clienta elige producto, tela, medida especial y bordado con nombre, y ve el valor estimado al instante. El pedido llega ordenado al taller.</p></div>
       <div class="extra-card"><h3>Despacho gratis que vende más</h3><p>El carro muestra cuánto falta para el despacho gratis en Coyhaique y Puerto Aysén. Es la forma más simple de subir el valor de cada compra.</p></div>
       <div class="extra-card"><h3>Envoltorio de regalo</h3><p>Opción de envolver con tarjeta y mensaje por $1.500. Ideal para el Día de la Madre y Navidad.</p></div>
@@ -195,7 +228,7 @@ footer.sign .name{font-family:var(--display);font-weight:800;font-stretch:125%;f
     <h2 id="pasos">Cómo trabajamos</h2>
     <ol class="steps">
       <li><h3>Ajuste del diseño</h3><span class="when">Semana 1</span><p>Partimos de la demo y la ajustamos con tu logo, tus colores y tus comentarios.</p></li>
-      <li><h3>Fotos y construcción</h3><span class="when">Semanas 1 y 2</span><p>Sesión de fotos y armado de la tienda en Shopify con pagos y despachos.</p></li>
+      <li><h3>Fotos y construcción</h3><span class="when">Semanas 1 y 2</span><p>Sesión de fotos y armado de la tienda en Shopify con Mercado Pago, Webpay, Chilexpress y el Pixel de Meta.</p></li>
       <li><h3>Carga de productos</h3><span class="when">Semana 3</span><p>Todo el catálogo con sus telas, medidas, precios y stock.</p></li>
       <li><h3>Pruebas y publicación</h3><span class="when">Semana 3</span><p>Compras de prueba completas, revisión contigo y salida al aire.</p></li>
       <li><h3>Capacitación y mantención</h3><span class="when">Semana 4 en adelante</span><p>Sesión en persona y dos meses de cambios incluidos.</p></li>
@@ -218,6 +251,7 @@ footer.sign .name{font-family:var(--display);font-weight:800;font-stretch:125%;f
         <li>Lista de productos con precios y medidas</li>
         <li>Las telas disponibles para cada producto</li>
         <li>Datos comerciales para la boleta y los pagos</li>
+        <li>Acceso a su cuenta de Mercado Pago y a su página de Facebook o Instagram, para conectar pagos y el Pixel</li>
       </ul>
     </div>
   </section>
@@ -228,7 +262,8 @@ footer.sign .name{font-family:var(--display);font-weight:800;font-stretch:125%;f
     <div class="costs">
       <div class="cost"><span>Plan Basic de Shopify</span><span>entre US$29 y US$39 al mes</span></div>
       <div class="cost"><span>Dominio .cl en NIC Chile</span><span>cerca de $10.000 al año</span></div>
-      <div class="cost"><span>Comisión de Webpay o Mercado Pago</span><span>cerca de 3% por venta</span></div>
+      <div class="cost"><span>Comisión de Mercado Pago o Webpay</span><span>cerca de 3% por venta</span></div>
+      <div class="cost"><span>Envíos por Chilexpress</span><span>los paga la clienta en el carro</span></div>
     </div>
     <p class="note" style="margin-top:12px">El valor exacto de Shopify depende de si se paga mensual o anual. Lo revisamos juntos al momento de contratar.</p>
   </section>
