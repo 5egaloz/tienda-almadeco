@@ -466,6 +466,59 @@ table.tbl{width:100%;border-collapse:collapse;min-width:540px}
 .page h1{font-size:clamp(40px,5.4vw,70px);line-height:1.05;max-width:20ch}
 .ph img,.main-ph img,.cat img,.rev img{object-fit:cover}
 .tile .prod{object-fit:cover}
+/* ---- Layout de tienda de muebles y deco (estilo retail chileno tipo Amoblé):
+   anuncio en verde, hero a todo el ancho con texto encima, franja de beneficios,
+   categorías en círculo, tarjetas con botón visible, misión de la marca y footer oscuro. */
+.utility{background:var(--accent);color:#fff}
+.utility .links a+a::before{color:rgba(255,255,255,.5)}
+header.nav{background:#fff}
+nav.main a{font-size:14px;font-weight:500;letter-spacing:.06em;text-transform:uppercase}
+.tile{min-height:clamp(480px,78vh,760px)}
+.tile .prod{inset:0;right:0;top:0;width:100%;height:100%;max-width:none;aspect-ratio:auto;object-fit:cover;object-position:center 40%;transform:none}
+.tile::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(20,24,20,.62) 0%,rgba(20,24,20,.28) 45%,transparent 75%);pointer-events:none}
+.tile .copy{z-index:2;color:#fff}
+.tile .kicker{letter-spacing:.14em;text-transform:uppercase;font-size:13px}
+.tile .pill.black{background:#fff;color:var(--ink)}
+.tile .pill.black:hover{background:var(--cloud)}
+.tile .pill.cloud{background:transparent;color:#fff;box-shadow:inset 0 0 0 1.5px #fff}
+.dots button{color:#fff}
+@media (max-width:720px){
+  .tile{min-height:600px}
+  .tile .prod{top:0;right:0;transform:none;height:100%}
+  .tile::after{background:linear-gradient(0deg,rgba(20,24,20,.78) 0%,rgba(20,24,20,.35) 50%,transparent 80%)}
+  .tile .copy{bottom:92px}
+  .paddles{bottom:24px}
+}
+.perks{background:var(--cloud);border-bottom:1px solid var(--hair-soft)}
+.perks .wrap{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;padding-block:22px}
+.perk{display:flex;gap:12px;align-items:center;min-width:0}
+.perk svg{width:30px;height:30px;flex:0 0 30px;color:var(--accent)}
+.perk b{display:block;font-size:14px;font-weight:600}
+.perk span{font-size:13px;color:var(--mute)}
+@media (max-width:900px){.perks .wrap{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:420px){.perks .wrap{grid-template-columns:1fr}}
+.sec-head h2{font-family:var(--display);font-weight:500;font-size:clamp(26px,3vw,38px)}
+.circles{display:flex;justify-content:center;gap:clamp(16px,4vw,56px);flex-wrap:wrap}
+.circle{display:grid;justify-items:center;gap:12px;text-decoration:none;width:clamp(130px,18vw,200px)}
+.circle img{width:100%;aspect-ratio:1;border-radius:50%;object-fit:cover;background:var(--cloud);transition:transform .3s}
+.circle:hover img{transform:scale(1.04)}
+.circle span{font-weight:500;letter-spacing:.08em;text-transform:uppercase;font-size:14px}
+@media (max-width:600px){.circles{gap:12px;flex-wrap:nowrap}.circle{width:calc((100% - 24px)/3)}.circle span{font-size:12px}}
+.card .ph{border-radius:2px}
+.card .ph .quick{opacity:1;transform:none;position:static;margin-top:10px;width:100%}
+.card .ph{overflow:visible;aspect-ratio:auto;background:none}
+.card .ph-link{aspect-ratio:1;height:auto;overflow:hidden;background:var(--cloud)}
+.card .price{font-size:17px;color:var(--accent);font-weight:600}
+.card a.name{font-size:15px}
+.mision{background:var(--accent);color:#fff;text-align:center;padding-block:clamp(56px,8vw,96px)}
+.mision .wrap{display:grid;justify-items:center;gap:20px;max-width:880px}
+.mision img{height:44px;width:auto;filter:brightness(0) invert(1)}
+.mision p{font-family:var(--display);font-size:clamp(20px,2.4vw,28px);line-height:1.45;margin:0}
+.mision small{letter-spacing:.14em;text-transform:uppercase;font-size:12px;opacity:.8}
+.foot{background:var(--accent);color:#fff}
+.foot a,.foot h4,.foot .fine{color:#fff}
+.foot .fine{border-top-color:rgba(255,255,255,.2)!important}
+.newsband{background:var(--cloud)}
 </style>
 </head>
 <body>
@@ -735,7 +788,7 @@ function viewHome(){
     </div>`).join("");
   const dots = TILES.map((_,i)=>`<button data-dot="${i}" aria-label="Ir a la diapositiva ${i+1}"></button>`).join("");
   const top = ["delantal","individuales","cojin","panera","mandil","pechera"].map(id=>cardHTML(byId(id))).join("");
-  const cats = CATS.map(([k,id])=>`<a class="cat" href="#tienda-${k}" style="--cat-bg:#f3eee8"><img src="img/${id}.jpg?v=20261002c" alt="" loading="lazy"><span class="pill white">${COLS[k].name}</span></a>`).join("");
+  const circles = CATS.map(([k,id])=>`<a class="circle" href="#tienda-${k}"><img src="img/${id}.jpg?v=20261002c" alt="" loading="lazy"><span>${COLS[k].name}</span></a>`).join("");
   const rest = ["mantel","flores","pechera","mandil"].map(id=>cardHTML(byId(id))).join("");
   return `
   <section class="campaign" id="carousel" aria-label="Destacados">
@@ -743,16 +796,18 @@ function viewHome(){
     <div class="dots" id="dots">${dots}</div>
     <div class="paddles"><button class="circ" data-step="-1" aria-label="Anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 5l-7 7 7 7"/></svg></button><button class="circ" data-step="1" aria-label="Siguiente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg></button></div>
   </section>
+  <section class="perks" aria-label="Beneficios"><div class="wrap"><div class="perk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 21c-4-3-7-6.5-7-10a7 7 0 0 1 14 0c0 3.5-3 7-7 10z"/><path d="M12 14c0-3 1.5-5 3-6"/><path d="M12 14c0-2-1-3.5-2.5-4.5"/></svg><div><b>Hecho a mano</b><span>En la Patagonia chilena</span></div></div><div class="perk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h11v9H3z"/><path d="M14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.6"/><circle cx="17" cy="17.5" r="1.6"/></svg><div><b>Despacho a todo Chile</b><span>Con seguimiento Chilexpress</span></div></div><div class="perk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3c3 4 6 7 6 11a6 6 0 0 1-12 0c0-4 3-7 6-11z"/><path d="M9 15a3 3 0 0 0 3 3"/></svg><div><b>Tela repelente</b><span>A líquidos y manchas</span></div></div><div class="perk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/><path d="M7 15h4"/></svg><div><b>Pago seguro</b><span>Mercado Pago o Webpay</span></div></div></div></section>
+
+  <section class="sec wrap">
+    <div class="sec-head" style="justify-content:center"><h2>Compra por categoría</h2></div>
+    <div class="circles">${circles}</div>
+  </section>
 
   <section class="sec wrap">
     <div class="sec-head"><h2>Lo más pedido</h2><div class="tools"><a class="link" href="#tienda">Ver todo</a></div></div>
     <div class="rail">${top}</div>
   </section>
 
-  <section class="sec wrap">
-    <div class="sec-head"><h2>Compra por categoría</h2></div>
-    <div class="rail">${cats}</div>
-  </section>
 
   <section class="sec">
     <div class="feature" style="--feat-bg:#f3eee8">
@@ -765,6 +820,12 @@ function viewHome(){
     <div class="sec-head"><h2>También en Almadeco</h2><div class="tools"><a class="link" href="#tienda">Ver todo</a></div></div>
     <div class="grid">${rest}</div>
   </section>
+
+  <section class="sec"><div class="mision"><div class="wrap">
+    <img src="img/logo.png?v=20261002c" alt="Almadeco">
+    <p>Creamos objetos de decoración y hogar hechos a mano, inspirados en la naturaleza del sur y en la calma de los espacios patagónicos.</p>
+    <small>Almadeco Patagonia</small>
+  </div></div></section>
 
   <section class="sec wrap" id="faq">
     <div class="sec-head"><h2>Preguntas frecuentes</h2></div>
