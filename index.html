@@ -466,55 +466,83 @@ table.tbl{width:100%;border-collapse:collapse;min-width:540px}
 .page h1{font-size:clamp(40px,5.4vw,70px);line-height:1.05;max-width:20ch}
 .ph img,.main-ph img,.cat img,.rev img{object-fit:cover}
 .tile .prod{object-fit:cover}
-/* ---- Layout de tienda de muebles y deco (estilo retail chileno tipo Amoblé):
-   anuncio en verde, hero a todo el ancho con texto encima, franja de beneficios,
-   categorías en círculo, tarjetas con botón visible, misión de la marca y footer oscuro. */
-.utility{background:var(--accent);color:#fff}
-.utility .links a+a::before{color:rgba(255,255,255,.5)}
+/* ---- Layout estilo Amoblé (amoble.cl) con la marca Almadeco:
+   fondo blanco y aireado, botones rectangulares, títulos de sección centrados,
+   banners de ambiente a todo el ancho con título en minúscula espaciado,
+   banners divididos (panel crema + foto) y "Shop the look". */
+.utility{background:var(--cloud);color:var(--ink)}
 header.nav{background:#fff}
-nav.main a{font-size:14px;font-weight:500;letter-spacing:.06em;text-transform:uppercase}
-.tile{min-height:clamp(480px,78vh,760px)}
+body{background:#fff}
+nav.main a{font-size:13px;font-weight:500;letter-spacing:.08em;text-transform:uppercase}
+.pill{border-radius:0}
+.pill.black:hover{background:#24402f}
+.circ{border-radius:50%}
+.search{border-radius:0}
+/* hero: foto a todo el ancho con texto encima */
+.tile{min-height:clamp(480px,80vh,780px)}
 .tile .prod{inset:0;right:0;top:0;width:100%;height:100%;max-width:none;aspect-ratio:auto;object-fit:cover;object-position:center 40%;transform:none}
-.tile::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(20,24,20,.62) 0%,rgba(20,24,20,.28) 45%,transparent 75%);pointer-events:none}
+.tile::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(20,24,20,.55) 0%,rgba(20,24,20,.2) 45%,transparent 75%);pointer-events:none}
 .tile .copy{z-index:2;color:#fff}
-.tile .kicker{letter-spacing:.14em;text-transform:uppercase;font-size:13px}
+.tile .kicker{letter-spacing:.2em;text-transform:uppercase;font-size:12px}
 .tile .pill.black{background:#fff;color:var(--ink)}
 .tile .pill.black:hover{background:var(--cloud)}
-.tile .pill.cloud{background:transparent;color:#fff;box-shadow:inset 0 0 0 1.5px #fff}
+.tile .pill.cloud{background:transparent;color:#fff;box-shadow:inset 0 0 0 1px #fff}
 .dots button{color:#fff}
 @media (max-width:720px){
   .tile{min-height:600px}
   .tile .prod{top:0;right:0;transform:none;height:100%}
-  .tile::after{background:linear-gradient(0deg,rgba(20,24,20,.78) 0%,rgba(20,24,20,.35) 50%,transparent 80%)}
+  .tile::after{background:linear-gradient(0deg,rgba(20,24,20,.75) 0%,rgba(20,24,20,.3) 50%,transparent 80%)}
   .tile .copy{bottom:92px}
   .paddles{bottom:24px}
 }
-.perks{background:var(--cloud);border-bottom:1px solid var(--hair-soft)}
-.perks .wrap{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;padding-block:22px}
-.perk{display:flex;gap:12px;align-items:center;min-width:0}
-.perk svg{width:30px;height:30px;flex:0 0 30px;color:var(--accent)}
-.perk b{display:block;font-size:14px;font-weight:600}
-.perk span{font-size:13px;color:var(--mute)}
-@media (max-width:900px){.perks .wrap{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:420px){.perks .wrap{grid-template-columns:1fr}}
-.sec-head h2{font-family:var(--display);font-weight:500;font-size:clamp(26px,3vw,38px)}
-.circles{display:flex;justify-content:center;gap:clamp(16px,4vw,56px);flex-wrap:wrap}
-.circle{display:grid;justify-items:center;gap:12px;text-decoration:none;width:clamp(130px,18vw,200px)}
-.circle img{width:100%;aspect-ratio:1;border-radius:50%;object-fit:cover;background:var(--cloud);transition:transform .3s}
-.circle:hover img{transform:scale(1.04)}
-.circle span{font-weight:500;letter-spacing:.08em;text-transform:uppercase;font-size:14px}
-@media (max-width:600px){.circles{gap:12px;flex-wrap:nowrap}.circle{width:calc((100% - 24px)/3)}.circle span{font-size:12px}}
-.card .ph{border-radius:2px}
-.card .ph .quick{opacity:1;transform:none;position:static;margin-top:10px;width:100%}
+/* títulos de sección centrados y botón de borde */
+.am-sec{padding-block:clamp(48px,7vw,88px) 0}
+.am-head{text-align:center;display:grid;gap:10px;justify-items:center;margin-bottom:clamp(24px,3vw,36px)}
+.am-head h2{font-family:var(--display);font-weight:500;font-size:clamp(24px,3vw,36px)}
+.am-head p{margin:0;color:var(--mute);max-width:56ch;font-size:15px}
+.am-cta{display:flex;justify-content:center;margin-top:clamp(24px,3vw,36px)}
+.btn-line{display:inline-flex;align-items:center;min-height:46px;padding:10px 26px;border:1px solid var(--ink);color:var(--ink);text-decoration:none;font-weight:600;font-size:14px;letter-spacing:.02em;background:#fff}
+.btn-line:hover{background:var(--ink);color:#fff}
+.btn-sq{display:inline-flex;align-items:center;justify-content:center;min-height:32px;padding:6px 22px;background:#fff;color:var(--ink);text-decoration:none;font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase}
+.btn-sq:hover{background:var(--cloud)}
+/* dos banners lado a lado */
+.duo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(10px,1.6vw,20px)}
+/* banners de ambiente */
+.rooms{display:grid;gap:clamp(10px,1.6vw,20px)}
+.room{position:relative;display:block;overflow:hidden;aspect-ratio:16/7;background:var(--cloud);color:#fff;text-decoration:none}
+.duo .room{aspect-ratio:4/3}
+.room img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s}
+.room:hover img{transform:scale(1.03)}
+.room::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(20,24,20,.45),transparent 60%)}
+.room.r::after{background:linear-gradient(270deg,rgba(20,24,20,.45),transparent 60%)}
+.room .tx{position:absolute;z-index:2;left:clamp(20px,5vw,72px);top:clamp(24px,5vw,64px);display:grid;gap:6px;justify-items:start}
+.room.r .tx{left:auto;right:clamp(20px,5vw,72px);justify-items:end;text-align:right}
+.room.b .tx{top:auto;bottom:clamp(24px,5vw,64px)}
+.room b{font-family:var(--ui);font-weight:300;font-size:clamp(28px,4.6vw,64px);letter-spacing:.24em;line-height:1;text-transform:lowercase}
+.room small{font-size:clamp(10px,1vw,13px);letter-spacing:.24em;text-transform:uppercase;margin-bottom:10px}
+.duo .room b{font-size:clamp(18px,2.6vw,36px)}
+@media (max-width:720px){.room{aspect-ratio:4/5}.duo .room{aspect-ratio:4/5}}
+/* shop the look */
+.look img{width:100%;aspect-ratio:21/9;object-fit:cover;display:block}
+@media (max-width:720px){.look img{aspect-ratio:4/5}}
+/* banners divididos: panel crema + foto */
+.am-splits{display:grid;gap:clamp(10px,1.6vw,20px)}
+.am-split{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,3fr);background:var(--cloud);min-height:clamp(260px,32vw,420px)}
+.am-split .pane{display:grid;align-content:center;justify-items:center;gap:8px;padding:24px;text-align:center}
+.am-split .pane i{font-family:var(--display);font-style:italic;font-size:clamp(32px,4.6vw,64px);line-height:1}
+.am-split .pane b{font-family:var(--display);font-weight:500;letter-spacing:.2em;text-transform:uppercase;font-size:clamp(24px,3.4vw,44px);line-height:1}
+.am-split .pane small{letter-spacing:.24em;text-transform:uppercase;font-size:11px;color:var(--mute);margin-bottom:12px}
+.am-split .pane .btn-line{min-height:36px;padding:6px 20px;font-size:12px;background:transparent}
+.am-split .ph2{position:relative;overflow:hidden}
+.am-split .ph2 img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+@media (max-width:600px){.am-split{grid-template-columns:1fr}.am-split .ph2{aspect-ratio:4/3}.am-split .pane{padding:36px 20px}}
+/* tarjetas: botón visible y rectangular */
 .card .ph{overflow:visible;aspect-ratio:auto;background:none}
 .card .ph-link{aspect-ratio:1;height:auto;overflow:hidden;background:var(--cloud)}
-.card .price{font-size:17px;color:var(--accent);font-weight:600}
+.card .ph .quick{opacity:1;transform:none;position:static;margin-top:10px;width:100%;min-height:42px}
 .card a.name{font-size:15px}
-.mision{background:var(--accent);color:#fff;text-align:center;padding-block:clamp(56px,8vw,96px)}
-.mision .wrap{display:grid;justify-items:center;gap:20px;max-width:880px}
-.mision img{height:44px;width:auto;filter:brightness(0) invert(1)}
-.mision p{font-family:var(--display);font-size:clamp(20px,2.4vw,28px);line-height:1.45;margin:0}
-.mision small{letter-spacing:.14em;text-transform:uppercase;font-size:12px;opacity:.8}
+.card .price{font-size:16px;color:var(--accent);font-weight:600}
+.badge{border-radius:0}
 .foot{background:var(--accent);color:#fff}
 .foot a,.foot h4,.foot .fine{color:#fff}
 .foot .fine{border-top-color:rgba(255,255,255,.2)!important}
@@ -776,7 +804,6 @@ const TILES = [
   {img:"individuales", bg:"#e9ece6", fg:"#1f1f1f", kicker:"Para la mesa", title:"Disfruta sin preocuparte de las manchas", text:"Individuales y paneras hechos a mano con tela repelente a líquidos.", ctas:[["Comprar individuales","#p-individuales","black"],["Ver mesa","#tienda-mesa","cloud"]], alt:"Individuales con flores sobre una mesa"},
   {img:"mantel", bg:"#f3eee8", fg:"#1f1f1f", kicker:"A medida", title:"Mantel antiderrame", text:"Confeccionado a la medida de tu mesa. Cuéntanos las medidas y te cotizamos.", ctas:[["Cotizar mi mantel","#encargo","black"],["Ver mesa","#tienda-mesa","cloud"]], alt:"Mantel antiderrame a medida sobre una mesa servida"}
 ];
-const CATS = [["cocina","delantal"],["mesa","individuales"],["hogar","cojin"]];
 
 function inner(svg){ return svg.replace(/^<svg[^>]*>|<\/svg>$/g,""); }
 
@@ -788,44 +815,56 @@ function viewHome(){
     </div>`).join("");
   const dots = TILES.map((_,i)=>`<button data-dot="${i}" aria-label="Ir a la diapositiva ${i+1}"></button>`).join("");
   const top = ["delantal","individuales","cojin","panera","mandil","pechera"].map(id=>cardHTML(byId(id))).join("");
-  const circles = CATS.map(([k,id])=>`<a class="circle" href="#tienda-${k}"><img src="img/${id}.jpg?v=20261002c" alt="" loading="lazy"><span>${COLS[k].name}</span></a>`).join("");
   const rest = ["mantel","flores","pechera","mandil"].map(id=>cardHTML(byId(id))).join("");
+  const room = (href,img,title,sub,btn,cls="")=>`<a class="room ${cls}" href="${href}"><img src="img/${img}.jpg?v=20261002c" alt="" loading="lazy"><span class="tx"><b>${title}</b>${sub?`<small>${sub}</small>`:""}<span class="btn-sq">${btn}</span></span></a>`;
   return `
   <section class="campaign" id="carousel" aria-label="Destacados">
     <div class="track" id="track">${tiles}</div>
     <div class="dots" id="dots">${dots}</div>
     <div class="paddles"><button class="circ" data-step="-1" aria-label="Anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 5l-7 7 7 7"/></svg></button><button class="circ" data-step="1" aria-label="Siguiente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg></button></div>
   </section>
-  <section class="perks" aria-label="Beneficios"><div class="wrap"><div class="perk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 21c-4-3-7-6.5-7-10a7 7 0 0 1 14 0c0 3.5-3 7-7 10z"/><path d="M12 14c0-3 1.5-5 3-6"/><path d="M12 14c0-2-1-3.5-2.5-4.5"/></svg><div><b>Hecho a mano</b><span>En la Patagonia chilena</span></div></div><div class="perk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h11v9H3z"/><path d="M14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.6"/><circle cx="17" cy="17.5" r="1.6"/></svg><div><b>Despacho a todo Chile</b><span>Con seguimiento Chilexpress</span></div></div><div class="perk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3c3 4 6 7 6 11a6 6 0 0 1-12 0c0-4 3-7 6-11z"/><path d="M9 15a3 3 0 0 0 3 3"/></svg><div><b>Tela repelente</b><span>A líquidos y manchas</span></div></div><div class="perk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/><path d="M7 15h4"/></svg><div><b>Pago seguro</b><span>Mercado Pago o Webpay</span></div></div></div></section>
 
-  <section class="sec wrap">
-    <div class="sec-head" style="justify-content:center"><h2>Compra por categoría</h2></div>
-    <div class="circles">${circles}</div>
-  </section>
-
-  <section class="sec wrap">
-    <div class="sec-head"><h2>Lo más pedido</h2><div class="tools"><a class="link" href="#tienda">Ver todo</a></div></div>
-    <div class="rail">${top}</div>
-  </section>
-
-
-  <section class="sec">
-    <div class="feature" style="--feat-bg:#f3eee8">
-      <div class="sw"><img src="img/panera.jpg?v=20261002c" alt="Panera e individuales en tela repelente a líquidos sobre la mesa" loading="lazy"></div>
-      <div class="copy"><span class="kicker" style="font-weight:500">Nuestra tela</span><h2>Repelente a líquidos</h2><p>Artículos textiles para tu hogar, hechos a mano en la Patagonia chilena con telas repelentes a líquidos. Para la mesa y para la cocina.</p><a class="pill black" href="#tienda-mesa">Ver la mesa</a></div>
+  <section class="am-sec wrap">
+    <div class="duo">
+      ${room("#tienda-mesa","individuales","para la mesa","sin miedo a las manchas","Ver más","b")}
+      ${room("#tienda-cocina","delantal","para la cocina","delantales y mandiles","Ver más","b")}
     </div>
   </section>
 
-  <section class="sec wrap">
-    <div class="sec-head"><h2>También en Almadeco</h2><div class="tools"><a class="link" href="#tienda">Ver todo</a></div></div>
-    <div class="grid">${rest}</div>
+  <section class="am-sec wrap">
+    <div class="am-head"><h2>Los favoritos de Almadeco</h2></div>
+    <div class="rail">${top}</div>
+    <div class="am-cta"><a class="btn-line" href="#tienda">Comprar todo</a></div>
   </section>
 
-  <section class="sec"><div class="mision"><div class="wrap">
-    <img src="img/logo.png?v=20261002c" alt="Almadeco">
-    <p>Creamos objetos de decoración y hogar hechos a mano, inspirados en la naturaleza del sur y en la calma de los espacios patagónicos.</p>
-    <small>Almadeco Patagonia</small>
-  </div></div></section>
+  <section class="am-sec wrap">
+    <div class="am-head"><p>Un textil para cada rincón de tu casa</p></div>
+    <div class="rooms">
+      ${room("#tienda-cocina","pechera","cocina","delantales, mandiles y pecheras","Ver más")}
+      ${room("#tienda-mesa","panera","mesa","individuales y paneras","Comprar","r")}
+      ${room("#tienda-hogar","cojin","hogar","cojines y deco","Ver más")}
+      ${room("#encargo","mantel","a medida","manteles antiderrame","Cotizar","r")}
+    </div>
+  </section>
+
+  <section class="am-sec wrap">
+    <div class="am-head"><h2>Novedades de temporada</h2></div>
+    <div class="grid">${rest}</div>
+    <div class="am-cta"><a class="btn-line" href="#tienda">Descubre lo nuevo</a></div>
+  </section>
+
+  <section class="am-sec">
+    <div class="am-head wrap"><h2>Hecho a mano en la Patagonia</h2><p>Creamos objetos de decoración y hogar hechos a mano, inspirados en la naturaleza del sur y en la calma de los espacios patagónicos.</p></div>
+    <a class="look" href="#tienda-mesa" aria-label="Ver la mesa"><img src="img/mantel.jpg?v=20261002c" alt="Mesa servida con mantel antiderrame Almadeco" loading="lazy"></a>
+  </section>
+
+  <section class="am-sec wrap">
+    <div class="am-head"><p>Descubre lo nuevo en Almadeco</p></div>
+    <div class="splits">
+      <div class="am-split"><div class="pane"><b>Recién llegado</b><small>Set de flores</small><a class="btn-line" href="#p-flores">Descubrir</a></div><div class="ph2"><img src="img/flores.jpg?v=20261002c" alt="Set de flores para difusores" loading="lazy"></div></div>
+      <div class="am-split"><div class="pane"><i>a medida</i><small>Manteles antiderrame</small><a class="btn-line" href="#encargo">Cotizar</a></div><div class="ph2"><img src="img/individuales.jpg?v=20261002c" alt="Individuales y mantel sobre la mesa" loading="lazy"></div></div>
+    </div>
+  </section>
 
   <section class="sec wrap" id="faq">
     <div class="sec-head"><h2>Preguntas frecuentes</h2></div>
