@@ -9,16 +9,20 @@
 <title>Almadeco | Deco textil</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@400;500;600&display=swap">
 <style>
 /* Tienda Almadeco. Un solo tema claro con la paleta de la marca (verde salvia y crema).
    Layout: barra utilitaria, nav blanca, campaña a todo el ancho, catálogo en grilla plana sobre gris "soft cloud". */
 :root{
-  --canvas:#fbfbf6; --cloud:#e8ead8; --ink:#2f3a22; --charcoal:#4a5538; --mute:#6b7560; --stone:#8f9c79;
-  --hair:#c9cfb8; --hair-soft:#dde1cf; --sale:#9a3b2e; --success:#4d6a2f; --on-ink:#ffffff;
-  --photo:#e8ead8; --tape:#c8d1a8; --tape-ink:#2f3a22; --accent:#667047; --wa:#1f8a50;
-  --display:"Dancing Script", "Segoe Script", cursive;
-  --ui:"Helvetica Neue", Helvetica, Arial, sans-serif;
+  /* Paleta del Manual de Marca Almadeco 2025: verde bosque #2F4F3E, salvia #6B7F6A,
+     madera #7A5C45, crema #F3EEE8, carbón #1F1F1F. Lo demás son tintes de esos cinco. */
+  --canvas:#fbf9f6; --cloud:#f3eee8; --ink:#1f1f1f; --charcoal:#2f4f3e; --mute:#5c5650; --stone:#6b7f6a;
+  --hair:#d8cfc5; --hair-soft:#e8e1d9; --sale:#7a5c45; --success:#2f4f3e; --on-ink:#ffffff;
+  --photo:#f3eee8; --tape:#c9d2c6; --tape-ink:#1f1f1f; --accent:#2f4f3e; --wa:#1f8a50;
+  /* Halidary (titulos) y Gistela (script) no estan en Google Fonts: Playfair Display hace de
+     serif de titulos y el script queda solo en el logo, que es imagen. Montserrat es la del manual. */
+  --display:"Playfair Display", Georgia, "Times New Roman", serif;
+  --ui:"Montserrat", "Helvetica Neue", Arial, sans-serif;
   --max:1440px; --gut:clamp(16px,3.5vw,48px);
   color-scheme:light;
 }
@@ -35,8 +39,8 @@ h1,h2,h3{margin:0;font-weight:500;line-height:1.2;text-wrap:balance}
 /* botones: píldora o círculo, nada más */
 .pill{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:12px 28px;border-radius:30px;border:0;font-weight:500;text-decoration:none;white-space:nowrap;transition:transform .12s,opacity .12s}
 .pill:active{transform:scale(.97);opacity:.8}
-.pill.black{background:var(--ink);color:var(--on-ink)}
-.pill.black:hover{background:#3a3a3a}
+.pill.black{background:var(--accent);color:var(--on-ink)}
+.pill.black:hover{background:#24402f}
 .pill.cloud{background:var(--cloud);color:var(--ink)}
 .pill.cloud:hover{background:var(--hair-soft)}
 .pill.white{background:var(--canvas);color:var(--ink);min-height:40px;padding:8px 22px}
@@ -453,8 +457,8 @@ table.tbl{width:100%;border-collapse:collapse;min-width:540px}
 @media (max-width:600px){.dev-btn{left:12px;bottom:calc(14px + env(safe-area-inset-bottom,0px))}.dev{left:12px;width:calc(100% - 24px)}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 
-/* ---- Almadeco: titulos en letra manuscrita como la marca, sin mayusculas forzadas */
-.logo,.tile h1,.tile h2,.feature h2,.newsband h2,.page h1{text-transform:none!important;letter-spacing:0!important;font-weight:700}
+/* ---- Almadeco: titulos en serif de la marca, sin mayusculas forzadas */
+.logo,.tile h1,.tile h2,.feature h2,.newsband h2,.page h1{text-transform:none!important;letter-spacing:0!important;font-weight:500}
 .logo{font-size:40px}
 .tile h1,.tile h2{font-size:clamp(46px,7vw,96px);line-height:1.02}
 .feature h2{font-size:clamp(44px,6vw,84px);line-height:1.02}
@@ -531,9 +535,9 @@ table.tbl{width:100%;border-collapse:collapse;min-width:540px}
 <script>
 /* ---------- datos de ejemplo ---------- */
 const FABRICS = {
-  rep:  {name:"Tela repelente a líquidos", note:"Hecha a mano en la Patagonia", bg:"#e8ead8", w:16, h:16,
-         d:'<path d="M0 8Q4 3 8 8T16 8" fill="none" stroke="#8f9c79" stroke-width="1.4"/>'},
-  culla:{name:"Lino Culla", note:"Fundas de cojín", bg:"#e4e1d4", w:16, h:16,
+  rep:  {name:"Tela repelente a líquidos", note:"Hecha a mano en la Patagonia", bg:"#f3eee8", w:16, h:16,
+         d:'<path d="M0 8Q4 3 8 8T16 8" fill="none" stroke="#6b7f6a" stroke-width="1.4"/>'},
+  culla:{name:"Lino Culla", note:"Fundas de cojín", bg:"#ede6dc", w:16, h:16,
          d:'<rect y="3" width="16" height="1.2" fill="#9b9a8c"/><rect y="11" width="16" height="1.2" fill="#9b9a8c"/>'}
 };
 const COLS = {
@@ -715,9 +719,9 @@ function cardHTML(p, fab){
 }
 
 const TILES = [
-  {img:"delantal", bg:"#e8ead8", fg:"#2f3a22", kicker:"Hecho a mano en la Patagonia chilena", title:"Deco textil para tu hogar", text:"Artículos textiles para tu hogar, con telas repelentes a líquidos. Para amantes del diseño y la funcionalidad.", ctas:[["Ver el delantal","#p-delantal","black"],["Ver la tienda","#tienda","cloud"]], alt:"Delantal estilo japonés de Almadeco"},
-  {img:"individuales", bg:"#e4e8d3", fg:"#2f3a22", kicker:"Para la mesa", title:"Disfruta sin preocuparte de las manchas", text:"Individuales y paneras hechos a mano con tela repelente a líquidos.", ctas:[["Comprar individuales","#p-individuales","black"],["Ver mesa","#tienda-mesa","cloud"]], alt:"Individuales con flores sobre una mesa"},
-  {img:"mantel", bg:"#e8ead8", fg:"#2f3a22", kicker:"A medida", title:"Mantel antiderrame", text:"Confeccionado a la medida de tu mesa. Cuéntanos las medidas y te cotizamos.", ctas:[["Cotizar mi mantel","#encargo","black"],["Ver mesa","#tienda-mesa","cloud"]], alt:"Mantel antiderrame a medida sobre una mesa servida"}
+  {img:"delantal", bg:"#f3eee8", fg:"#1f1f1f", kicker:"Hecho a mano en la Patagonia chilena", title:"Deco textil para tu hogar", text:"Artículos textiles para tu hogar, con telas repelentes a líquidos. Para amantes del diseño y la funcionalidad.", ctas:[["Ver el delantal","#p-delantal","black"],["Ver la tienda","#tienda","cloud"]], alt:"Delantal estilo japonés de Almadeco"},
+  {img:"individuales", bg:"#e9ece6", fg:"#1f1f1f", kicker:"Para la mesa", title:"Disfruta sin preocuparte de las manchas", text:"Individuales y paneras hechos a mano con tela repelente a líquidos.", ctas:[["Comprar individuales","#p-individuales","black"],["Ver mesa","#tienda-mesa","cloud"]], alt:"Individuales con flores sobre una mesa"},
+  {img:"mantel", bg:"#f3eee8", fg:"#1f1f1f", kicker:"A medida", title:"Mantel antiderrame", text:"Confeccionado a la medida de tu mesa. Cuéntanos las medidas y te cotizamos.", ctas:[["Cotizar mi mantel","#encargo","black"],["Ver mesa","#tienda-mesa","cloud"]], alt:"Mantel antiderrame a medida sobre una mesa servida"}
 ];
 const CATS = [["cocina","delantal"],["mesa","individuales"],["hogar","cojin"]];
 
@@ -731,7 +735,7 @@ function viewHome(){
     </div>`).join("");
   const dots = TILES.map((_,i)=>`<button data-dot="${i}" aria-label="Ir a la diapositiva ${i+1}"></button>`).join("");
   const top = ["delantal","individuales","cojin","panera","mandil","pechera"].map(id=>cardHTML(byId(id))).join("");
-  const cats = CATS.map(([k,id])=>`<a class="cat" href="#tienda-${k}" style="--cat-bg:#e8ead8"><img src="img/${id}.jpg?v=20261002c" alt="" loading="lazy"><span class="pill white">${COLS[k].name}</span></a>`).join("");
+  const cats = CATS.map(([k,id])=>`<a class="cat" href="#tienda-${k}" style="--cat-bg:#f3eee8"><img src="img/${id}.jpg?v=20261002c" alt="" loading="lazy"><span class="pill white">${COLS[k].name}</span></a>`).join("");
   const rest = ["mantel","flores","pechera","mandil"].map(id=>cardHTML(byId(id))).join("");
   return `
   <section class="campaign" id="carousel" aria-label="Destacados">
@@ -751,7 +755,7 @@ function viewHome(){
   </section>
 
   <section class="sec">
-    <div class="feature" style="--feat-bg:#e8ead8">
+    <div class="feature" style="--feat-bg:#f3eee8">
       <div class="sw"><img src="img/panera.jpg?v=20261002c" alt="Panera e individuales en tela repelente a líquidos sobre la mesa" loading="lazy"></div>
       <div class="copy"><span class="kicker" style="font-weight:500">Nuestra tela</span><h2>Repelente a líquidos</h2><p>Artículos textiles para tu hogar, hechos a mano en la Patagonia chilena con telas repelentes a líquidos. Para la mesa y para la cocina.</p><a class="pill black" href="#tienda-mesa">Ver la mesa</a></div>
     </div>
@@ -1199,7 +1203,7 @@ function viewPedido(){
         <div class="mail">
           <div class="hdr"><span>De: <b>Almadeco</b> &lt;pedidos@almadeco.cl&gt;</span><span>Para: ${esc(o.co.mail)}</span><span>Asunto: <b>Recibimos tu pedido ${o.id}</b></span></div>
           <div class="bd">
-            <span class="logo">Almadeco</span>
+            <img src="img/logo.png?v=20261002c" alt="Almadeco" style="height:30px;width:auto;display:block;margin-bottom:8px">
             <p>Hola ${esc(first)}, gracias por tu compra. Ya estamos preparando tu pedido en el taller.</p>
             ${rows}
             ${T.disc ? `<div class="row disc"><span>Descuento (${o.coupon})</span><span>−${clp(T.disc)}</span></div>` : ""}
