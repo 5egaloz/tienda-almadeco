@@ -9,16 +9,20 @@
 <title>Almadeco | Deco textil</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:wght@400;500;600&display=swap">
 <style>
 /* Tienda Almadeco. Un solo tema claro con la paleta de la marca (verde salvia y crema).
    Layout: barra utilitaria, nav blanca, campaña a todo el ancho, catálogo en grilla plana sobre gris "soft cloud". */
 :root{
-  --canvas:#fbfbf6; --cloud:#e8ead8; --ink:#2f3a22; --charcoal:#4a5538; --mute:#6b7560; --stone:#8f9c79;
-  --hair:#c9cfb8; --hair-soft:#dde1cf; --sale:#9a3b2e; --success:#4d6a2f; --on-ink:#ffffff;
-  --photo:#e8ead8; --tape:#c8d1a8; --tape-ink:#2f3a22; --accent:#667047; --wa:#1f8a50;
-  --display:"Dancing Script", "Segoe Script", cursive;
-  --ui:"Helvetica Neue", Helvetica, Arial, sans-serif;
+  /* Paleta del Manual de Marca Almadeco 2025: verde bosque #2F4F3E, salvia #6B7F6A,
+     madera #7A5C45, crema #F3EEE8, carbón #1F1F1F. Lo demás son tintes de esos cinco. */
+  --canvas:#fbf9f6; --cloud:#f3eee8; --ink:#1f1f1f; --charcoal:#2f4f3e; --mute:#5c5650; --stone:#6b7f6a;
+  --hair:#d8cfc5; --hair-soft:#e8e1d9; --sale:#7a5c45; --success:#2f4f3e; --on-ink:#ffffff;
+  --photo:#f3eee8; --tape:#c9d2c6; --tape-ink:#1f1f1f; --accent:#2f4f3e; --wa:#1f8a50;
+  /* Halidary (titulos) y Gistela (script) no estan en Google Fonts: Playfair Display hace de
+     serif de titulos y el script queda solo en el logo, que es imagen. Montserrat es la del manual. */
+  --display:"Playfair Display", Georgia, "Times New Roman", serif;
+  --ui:"Montserrat", "Helvetica Neue", Arial, sans-serif;
   --max:1440px; --gut:clamp(16px,3.5vw,48px);
   color-scheme:light;
 }
@@ -35,8 +39,8 @@ h1,h2,h3{margin:0;font-weight:500;line-height:1.2;text-wrap:balance}
 /* botones: píldora o círculo, nada más */
 .pill{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:12px 28px;border-radius:30px;border:0;font-weight:500;text-decoration:none;white-space:nowrap;transition:transform .12s,opacity .12s}
 .pill:active{transform:scale(.97);opacity:.8}
-.pill.black{background:var(--ink);color:var(--on-ink)}
-.pill.black:hover{background:#3a3a3a}
+.pill.black{background:var(--accent);color:var(--on-ink)}
+.pill.black:hover{background:#24402f}
 .pill.cloud{background:var(--cloud);color:var(--ink)}
 .pill.cloud:hover{background:var(--hair-soft)}
 .pill.white{background:var(--canvas);color:var(--ink);min-height:40px;padding:8px 22px}
@@ -453,8 +457,8 @@ table.tbl{width:100%;border-collapse:collapse;min-width:540px}
 @media (max-width:600px){.dev-btn{left:12px;bottom:calc(14px + env(safe-area-inset-bottom,0px))}.dev{left:12px;width:calc(100% - 24px)}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 
-/* ---- Almadeco: titulos en letra manuscrita como la marca, sin mayusculas forzadas */
-.logo,.tile h1,.tile h2,.feature h2,.newsband h2,.page h1{text-transform:none!important;letter-spacing:0!important;font-weight:700}
+/* ---- Almadeco: titulos en serif de la marca, sin mayusculas forzadas */
+.logo,.tile h1,.tile h2,.feature h2,.newsband h2,.page h1{text-transform:none!important;letter-spacing:0!important;font-weight:500}
 .logo{font-size:40px}
 .tile h1,.tile h2{font-size:clamp(46px,7vw,96px);line-height:1.02}
 .feature h2{font-size:clamp(44px,6vw,84px);line-height:1.02}
@@ -462,6 +466,87 @@ table.tbl{width:100%;border-collapse:collapse;min-width:540px}
 .page h1{font-size:clamp(40px,5.4vw,70px);line-height:1.05;max-width:20ch}
 .ph img,.main-ph img,.cat img,.rev img{object-fit:cover}
 .tile .prod{object-fit:cover}
+/* ---- Layout estilo Amoblé (amoble.cl) con la marca Almadeco:
+   fondo blanco y aireado, botones rectangulares, títulos de sección centrados,
+   banners de ambiente a todo el ancho con título en minúscula espaciado,
+   banners divididos (panel crema + foto) y "Shop the look". */
+.utility{background:var(--cloud);color:var(--ink)}
+header.nav{background:#fff}
+body{background:#fff}
+nav.main a{font-size:13px;font-weight:500;letter-spacing:.08em;text-transform:uppercase}
+.pill{border-radius:0}
+.pill.black:hover{background:#24402f}
+.circ{border-radius:50%}
+.search{border-radius:0}
+/* hero: foto a todo el ancho con texto encima */
+.tile{min-height:clamp(480px,80vh,780px)}
+.tile .prod{inset:0;right:0;top:0;width:100%;height:100%;max-width:none;aspect-ratio:auto;object-fit:cover;object-position:center 40%;transform:none}
+.tile::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(20,24,20,.55) 0%,rgba(20,24,20,.2) 45%,transparent 75%);pointer-events:none}
+.tile .copy{z-index:2;color:#fff}
+.tile .kicker{letter-spacing:.2em;text-transform:uppercase;font-size:12px}
+.tile .pill.black{background:#fff;color:var(--ink)}
+.tile .pill.black:hover{background:var(--cloud)}
+.tile .pill.cloud{background:transparent;color:#fff;box-shadow:inset 0 0 0 1px #fff}
+.dots button{color:#fff}
+@media (max-width:720px){
+  .tile{min-height:600px}
+  .tile .prod{top:0;right:0;transform:none;height:100%}
+  .tile::after{background:linear-gradient(0deg,rgba(20,24,20,.75) 0%,rgba(20,24,20,.3) 50%,transparent 80%)}
+  .tile .copy{bottom:92px}
+  .paddles{bottom:24px}
+}
+/* títulos de sección centrados y botón de borde */
+.am-sec{padding-block:clamp(48px,7vw,88px) 0}
+.am-head{text-align:center;display:grid;gap:10px;justify-items:center;margin-bottom:clamp(24px,3vw,36px)}
+.am-head h2{font-family:var(--display);font-weight:500;font-size:clamp(24px,3vw,36px)}
+.am-head p{margin:0;color:var(--mute);max-width:56ch;font-size:15px}
+.am-cta{display:flex;justify-content:center;margin-top:clamp(24px,3vw,36px)}
+.btn-line{display:inline-flex;align-items:center;min-height:46px;padding:10px 26px;border:1px solid var(--ink);color:var(--ink);text-decoration:none;font-weight:600;font-size:14px;letter-spacing:.02em;background:#fff}
+.btn-line:hover{background:var(--ink);color:#fff}
+.btn-sq{display:inline-flex;align-items:center;justify-content:center;min-height:32px;padding:6px 22px;background:#fff;color:var(--ink);text-decoration:none;font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase}
+.btn-sq:hover{background:var(--cloud)}
+/* dos banners lado a lado */
+.duo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(10px,1.6vw,20px)}
+/* banners de ambiente */
+.rooms{display:grid;gap:clamp(10px,1.6vw,20px)}
+.room{position:relative;display:block;overflow:hidden;aspect-ratio:16/7;background:var(--cloud);color:#fff;text-decoration:none}
+.duo .room{aspect-ratio:4/3}
+.room img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s}
+.room:hover img{transform:scale(1.03)}
+.room::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(20,24,20,.45),transparent 60%)}
+.room.r::after{background:linear-gradient(270deg,rgba(20,24,20,.45),transparent 60%)}
+.room .tx{position:absolute;z-index:2;left:clamp(20px,5vw,72px);top:clamp(24px,5vw,64px);display:grid;gap:6px;justify-items:start}
+.room.r .tx{left:auto;right:clamp(20px,5vw,72px);justify-items:end;text-align:right}
+.room.b .tx{top:auto;bottom:clamp(24px,5vw,64px)}
+.room b{font-family:var(--ui);font-weight:300;font-size:clamp(28px,4.6vw,64px);letter-spacing:.24em;line-height:1;text-transform:lowercase}
+.room small{font-size:clamp(10px,1vw,13px);letter-spacing:.24em;text-transform:uppercase;margin-bottom:10px}
+.duo .room b{font-size:clamp(18px,2.6vw,36px)}
+@media (max-width:720px){.room{aspect-ratio:4/5}.duo .room{aspect-ratio:4/5}}
+/* shop the look */
+.look img{width:100%;aspect-ratio:21/9;object-fit:cover;display:block}
+@media (max-width:720px){.look img{aspect-ratio:4/5}}
+/* banners divididos: panel crema + foto */
+.am-splits{display:grid;gap:clamp(10px,1.6vw,20px)}
+.am-split{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,3fr);background:var(--cloud);min-height:clamp(260px,32vw,420px)}
+.am-split .pane{display:grid;align-content:center;justify-items:center;gap:8px;padding:24px;text-align:center}
+.am-split .pane i{font-family:var(--display);font-style:italic;font-size:clamp(32px,4.6vw,64px);line-height:1}
+.am-split .pane b{font-family:var(--display);font-weight:500;letter-spacing:.2em;text-transform:uppercase;font-size:clamp(24px,3.4vw,44px);line-height:1}
+.am-split .pane small{letter-spacing:.24em;text-transform:uppercase;font-size:11px;color:var(--mute);margin-bottom:12px}
+.am-split .pane .btn-line{min-height:36px;padding:6px 20px;font-size:12px;background:transparent}
+.am-split .ph2{position:relative;overflow:hidden}
+.am-split .ph2 img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+@media (max-width:600px){.am-split{grid-template-columns:1fr}.am-split .ph2{aspect-ratio:4/3}.am-split .pane{padding:36px 20px}}
+/* tarjetas: botón visible y rectangular */
+.card .ph{overflow:visible;aspect-ratio:auto;background:none}
+.card .ph-link{aspect-ratio:1;height:auto;overflow:hidden;background:var(--cloud)}
+.card .ph .quick{opacity:1;transform:none;position:static;margin-top:10px;width:100%;min-height:42px}
+.card a.name{font-size:15px}
+.card .price{font-size:16px;color:var(--accent);font-weight:600}
+.badge{border-radius:0}
+.foot{background:var(--accent);color:#fff}
+.foot a,.foot h4,.foot .fine{color:#fff}
+.foot .fine{border-top-color:rgba(255,255,255,.2)!important}
+.newsband{background:var(--cloud)}
 </style>
 </head>
 <body>
@@ -531,9 +616,9 @@ table.tbl{width:100%;border-collapse:collapse;min-width:540px}
 <script>
 /* ---------- datos de ejemplo ---------- */
 const FABRICS = {
-  rep:  {name:"Tela repelente a líquidos", note:"Hecha a mano en la Patagonia", bg:"#e8ead8", w:16, h:16,
-         d:'<path d="M0 8Q4 3 8 8T16 8" fill="none" stroke="#8f9c79" stroke-width="1.4"/>'},
-  culla:{name:"Lino Culla", note:"Fundas de cojín", bg:"#e4e1d4", w:16, h:16,
+  rep:  {name:"Tela repelente a líquidos", note:"Hecha a mano en la Patagonia", bg:"#f3eee8", w:16, h:16,
+         d:'<path d="M0 8Q4 3 8 8T16 8" fill="none" stroke="#6b7f6a" stroke-width="1.4"/>'},
+  culla:{name:"Lino Culla", note:"Fundas de cojín", bg:"#ede6dc", w:16, h:16,
          d:'<rect y="3" width="16" height="1.2" fill="#9b9a8c"/><rect y="11" width="16" height="1.2" fill="#9b9a8c"/>'}
 };
 const COLS = {
@@ -715,11 +800,10 @@ function cardHTML(p, fab){
 }
 
 const TILES = [
-  {img:"delantal", bg:"#e8ead8", fg:"#2f3a22", kicker:"Hecho a mano en la Patagonia chilena", title:"Deco textil para tu hogar", text:"Artículos textiles para tu hogar, con telas repelentes a líquidos. Para amantes del diseño y la funcionalidad.", ctas:[["Ver el delantal","#p-delantal","black"],["Ver la tienda","#tienda","cloud"]], alt:"Delantal estilo japonés de Almadeco"},
-  {img:"individuales", bg:"#e4e8d3", fg:"#2f3a22", kicker:"Para la mesa", title:"Disfruta sin preocuparte de las manchas", text:"Individuales y paneras hechos a mano con tela repelente a líquidos.", ctas:[["Comprar individuales","#p-individuales","black"],["Ver mesa","#tienda-mesa","cloud"]], alt:"Individuales con flores sobre una mesa"},
-  {img:"mantel", bg:"#e8ead8", fg:"#2f3a22", kicker:"A medida", title:"Mantel antiderrame", text:"Confeccionado a la medida de tu mesa. Cuéntanos las medidas y te cotizamos.", ctas:[["Cotizar mi mantel","#encargo","black"],["Ver mesa","#tienda-mesa","cloud"]], alt:"Mantel antiderrame a medida sobre una mesa servida"}
+  {img:"delantal", bg:"#f3eee8", fg:"#1f1f1f", kicker:"Hecho a mano en la Patagonia chilena", title:"Deco textil para tu hogar", text:"Artículos textiles para tu hogar, con telas repelentes a líquidos. Para amantes del diseño y la funcionalidad.", ctas:[["Ver el delantal","#p-delantal","black"],["Ver la tienda","#tienda","cloud"]], alt:"Delantal estilo japonés de Almadeco"},
+  {img:"individuales", bg:"#e9ece6", fg:"#1f1f1f", kicker:"Para la mesa", title:"Disfruta sin preocuparte de las manchas", text:"Individuales y paneras hechos a mano con tela repelente a líquidos.", ctas:[["Comprar individuales","#p-individuales","black"],["Ver mesa","#tienda-mesa","cloud"]], alt:"Individuales con flores sobre una mesa"},
+  {img:"mantel", bg:"#f3eee8", fg:"#1f1f1f", kicker:"A medida", title:"Mantel antiderrame", text:"Confeccionado a la medida de tu mesa. Cuéntanos las medidas y te cotizamos.", ctas:[["Cotizar mi mantel","#encargo","black"],["Ver mesa","#tienda-mesa","cloud"]], alt:"Mantel antiderrame a medida sobre una mesa servida"}
 ];
-const CATS = [["cocina","delantal"],["mesa","individuales"],["hogar","cojin"]];
 
 function inner(svg){ return svg.replace(/^<svg[^>]*>|<\/svg>$/g,""); }
 
@@ -731,8 +815,8 @@ function viewHome(){
     </div>`).join("");
   const dots = TILES.map((_,i)=>`<button data-dot="${i}" aria-label="Ir a la diapositiva ${i+1}"></button>`).join("");
   const top = ["delantal","individuales","cojin","panera","mandil","pechera"].map(id=>cardHTML(byId(id))).join("");
-  const cats = CATS.map(([k,id])=>`<a class="cat" href="#tienda-${k}" style="--cat-bg:#e8ead8"><img src="img/${id}.jpg?v=20261002c" alt="" loading="lazy"><span class="pill white">${COLS[k].name}</span></a>`).join("");
   const rest = ["mantel","flores","pechera","mandil"].map(id=>cardHTML(byId(id))).join("");
+  const room = (href,img,title,sub,btn,cls="")=>`<a class="room ${cls}" href="${href}"><img src="img/${img}.jpg?v=20261002c" alt="" loading="lazy"><span class="tx"><b>${title}</b>${sub?`<small>${sub}</small>`:""}<span class="btn-sq">${btn}</span></span></a>`;
   return `
   <section class="campaign" id="carousel" aria-label="Destacados">
     <div class="track" id="track">${tiles}</div>
@@ -740,26 +824,46 @@ function viewHome(){
     <div class="paddles"><button class="circ" data-step="-1" aria-label="Anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 5l-7 7 7 7"/></svg></button><button class="circ" data-step="1" aria-label="Siguiente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg></button></div>
   </section>
 
-  <section class="sec wrap">
-    <div class="sec-head"><h2>Lo más pedido</h2><div class="tools"><a class="link" href="#tienda">Ver todo</a></div></div>
-    <div class="rail">${top}</div>
-  </section>
-
-  <section class="sec wrap">
-    <div class="sec-head"><h2>Compra por categoría</h2></div>
-    <div class="rail">${cats}</div>
-  </section>
-
-  <section class="sec">
-    <div class="feature" style="--feat-bg:#e8ead8">
-      <div class="sw"><img src="img/panera.jpg?v=20261002c" alt="Panera e individuales en tela repelente a líquidos sobre la mesa" loading="lazy"></div>
-      <div class="copy"><span class="kicker" style="font-weight:500">Nuestra tela</span><h2>Repelente a líquidos</h2><p>Artículos textiles para tu hogar, hechos a mano en la Patagonia chilena con telas repelentes a líquidos. Para la mesa y para la cocina.</p><a class="pill black" href="#tienda-mesa">Ver la mesa</a></div>
+  <section class="am-sec wrap">
+    <div class="duo">
+      ${room("#tienda-mesa","individuales","para la mesa","sin miedo a las manchas","Ver más","b")}
+      ${room("#tienda-cocina","delantal","para la cocina","delantales y mandiles","Ver más","b")}
     </div>
   </section>
 
-  <section class="sec wrap">
-    <div class="sec-head"><h2>También en Almadeco</h2><div class="tools"><a class="link" href="#tienda">Ver todo</a></div></div>
+  <section class="am-sec wrap">
+    <div class="am-head"><h2>Los favoritos de Almadeco</h2></div>
+    <div class="rail">${top}</div>
+    <div class="am-cta"><a class="btn-line" href="#tienda">Comprar todo</a></div>
+  </section>
+
+  <section class="am-sec wrap">
+    <div class="am-head"><p>Un textil para cada rincón de tu casa</p></div>
+    <div class="rooms">
+      ${room("#tienda-cocina","pechera","cocina","delantales, mandiles y pecheras","Ver más")}
+      ${room("#tienda-mesa","panera","mesa","individuales y paneras","Comprar","r")}
+      ${room("#tienda-hogar","cojin","hogar","cojines y deco","Ver más")}
+      ${room("#encargo","mantel","a medida","manteles antiderrame","Cotizar","r")}
+    </div>
+  </section>
+
+  <section class="am-sec wrap">
+    <div class="am-head"><h2>Novedades de temporada</h2></div>
     <div class="grid">${rest}</div>
+    <div class="am-cta"><a class="btn-line" href="#tienda">Descubre lo nuevo</a></div>
+  </section>
+
+  <section class="am-sec">
+    <div class="am-head wrap"><h2>Hecho a mano en la Patagonia</h2><p>Creamos objetos de decoración y hogar hechos a mano, inspirados en la naturaleza del sur y en la calma de los espacios patagónicos.</p></div>
+    <a class="look" href="#tienda-mesa" aria-label="Ver la mesa"><img src="img/mantel.jpg?v=20261002c" alt="Mesa servida con mantel antiderrame Almadeco" loading="lazy"></a>
+  </section>
+
+  <section class="am-sec wrap">
+    <div class="am-head"><p>Descubre lo nuevo en Almadeco</p></div>
+    <div class="splits">
+      <div class="am-split"><div class="pane"><b>Recién llegado</b><small>Set de flores</small><a class="btn-line" href="#p-flores">Descubrir</a></div><div class="ph2"><img src="img/flores.jpg?v=20261002c" alt="Set de flores para difusores" loading="lazy"></div></div>
+      <div class="am-split"><div class="pane"><i>a medida</i><small>Manteles antiderrame</small><a class="btn-line" href="#encargo">Cotizar</a></div><div class="ph2"><img src="img/individuales.jpg?v=20261002c" alt="Individuales y mantel sobre la mesa" loading="lazy"></div></div>
+    </div>
   </section>
 
   <section class="sec wrap" id="faq">
@@ -1199,7 +1303,7 @@ function viewPedido(){
         <div class="mail">
           <div class="hdr"><span>De: <b>Almadeco</b> &lt;pedidos@almadeco.cl&gt;</span><span>Para: ${esc(o.co.mail)}</span><span>Asunto: <b>Recibimos tu pedido ${o.id}</b></span></div>
           <div class="bd">
-            <span class="logo">Almadeco</span>
+            <img src="img/logo.png?v=20261002c" alt="Almadeco" style="height:30px;width:auto;display:block;margin-bottom:8px">
             <p>Hola ${esc(first)}, gracias por tu compra. Ya estamos preparando tu pedido en el taller.</p>
             ${rows}
             ${T.disc ? `<div class="row disc"><span>Descuento (${o.coupon})</span><span>−${clp(T.disc)}</span></div>` : ""}
